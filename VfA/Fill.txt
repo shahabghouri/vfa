@@ -1,0 +1,128 @@
+new Product {
+Id =1,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+}
+/*
+new Product {
+Id = 2,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+new Product {
+Id =3,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  = True ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =4,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  = True ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =5,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =6,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+new Product {
+Id =7,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =8,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =9,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+},
+
+new Product {
+Id =10,
+Name = ,
+Category = ,
+Description =  ,
+ProductionCapacity =  ,
+CapacityUnit =  ,
+IsCertified  =  ,
+NumberOfCertificates  =  ,
+Certificates =  ,
+}
+*/
+
+
+Name
+Category 
+Description 
+ProductionCapacity
+CapacityUnit
+IsCertified 
+NumberOfCertificates 
+Certificates 

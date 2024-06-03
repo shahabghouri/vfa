@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Requests";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>this page display Requests.</p>
+@model IEnumerable<Request>
+
+<div class="row pb-3">
+    @foreach (var request in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded"> 
+                        @if(request.RequestImages!=null && request.RequestImages.Count() > 0) {
+                            <img src="@request.RequestImages.FirstOrDefault().ImageUrl" class="card-img-top rounded" />
+                        }
+                        else {
+                            <img src="https://placehold.co/500x600/png" class="card-img-top rounded" />
+                        }
+                        
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@request.Name</p>
+                                <p class="card-title text-warning text-center">Category: <b>@request.Category</b></p>
+                            </div>
+                            
+                           
+                        </div>
+
+                       
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
