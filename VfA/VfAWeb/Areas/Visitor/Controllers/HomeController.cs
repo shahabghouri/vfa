@@ -28,9 +28,6 @@ namespace VfAWeb.Areas.Visitor.Controllers
             return View(productList);
             
         }
-
-       
-        
         
         public IActionResult Services()
         {
@@ -45,10 +42,12 @@ namespace VfAWeb.Areas.Visitor.Controllers
             IEnumerable<Request> requestList = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages");
             return View(requestList);
         }
-        
-        [HttpPost]
-        [Authorize]
-       
+
+        public IActionResult Products()
+        {
+            IEnumerable<Product> requestList = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages");
+            return View(requestList);
+        }
         public IActionResult About()
         {
             return View();
@@ -61,7 +60,14 @@ namespace VfAWeb.Areas.Visitor.Controllers
         {
             return View();
         }
-
+        public IActionResult Partner()
+        {
+            return View();
+        }
+        public IActionResult Trust()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

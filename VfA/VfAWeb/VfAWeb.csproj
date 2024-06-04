@@ -7,10 +7,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Basic\**" />
+    <Compile Remove="Areas\Gold\**" />
+    <Compile Remove="Areas\Importer\**" />
+    <Compile Remove="Areas\Silver\**" />
+    <Compile Remove="ViewComponents\**" />
+    <Compile Remove="Views\Shared\Components\**" />
+    <Content Remove="Areas\Basic\**" />
+    <Content Remove="Areas\Gold\**" />
+    <Content Remove="Areas\Importer\**" />
+    <Content Remove="Areas\Silver\**" />
+    <Content Remove="ViewComponents\**" />
+    <Content Remove="Views\Shared\Components\**" />
+    <EmbeddedResource Remove="Areas\Basic\**" />
+    <EmbeddedResource Remove="Areas\Gold\**" />
+    <EmbeddedResource Remove="Areas\Importer\**" />
+    <EmbeddedResource Remove="Areas\Silver\**" />
+    <EmbeddedResource Remove="ViewComponents\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\**" />
+    <None Remove="Areas\Basic\**" />
+    <None Remove="Areas\Gold\**" />
+    <None Remove="Areas\Importer\**" />
+    <None Remove="Areas\Silver\**" />
+    <None Remove="ViewComponents\**" />
+    <None Remove="Views\Shared\Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
@@ -28,16 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Basic\Controllers\" />
-    <Folder Include="Areas\Basic\Views\" />
-    <Folder Include="Areas\Importer\Controllers\" />
-    <Folder Include="Areas\Importer\Views\" />
-    <Folder Include="Areas\Gold\Controllers\" />
-    <Folder Include="Areas\Gold\Views\" />
-    <Folder Include="Areas\Silver\Controllers\" />
-    <Folder Include="Areas\Silver\Views\" />
-    <Folder Include="ViewComponents\" />
-    <Folder Include="Views\Shared\Components\" />
     <Folder Include="wwwroot\images\abouts\" />
     <Folder Include="wwwroot\images\infos\" />
     <Folder Include="wwwroot\images\privacies\" />
