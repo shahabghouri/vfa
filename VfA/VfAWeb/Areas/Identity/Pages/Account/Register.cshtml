@@ -260,6 +260,27 @@
     .displaySteptext {
         cursor: pointer;
     }
+
+    /* Ensure higher specificity to override Bootstrap's default styles */
+    .btn {
+        border-color: #ffc107 !important; /* Warning border color */
+        /* color: #ffc107 !important; /* Warning text color */ */
+    }
+
+        .btn:focus,
+        .btn:active,
+        .btn:focus:active {
+            border-color: #ffc107 !important; /* Warning border color on focus and active */
+            color: #ffc107 !important; /* Warning text color on focus and active */
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25) !important; /* Optional: custom box-shadow */
+        }
+
+        /* Remove the default Bootstrap focus outline if desired */
+        .btn:focus {
+            outline: none !important;
+        }
+
+
 </style>
 
 
@@ -423,7 +444,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="radio" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
+                                <input type="checkbox" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
                                 <label for="female">I agree to the terms and conditions and the privacy policy</label>
                             </div>
                             <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>

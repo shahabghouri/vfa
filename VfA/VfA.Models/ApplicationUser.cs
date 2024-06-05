@@ -8,15 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VfA.Models {
-	public class ApplicationUser:IdentityUser {
-		[Required]
+namespace VfA.Models
+{
+    public class ApplicationUser : IdentityUser
+    {
+        [Required]
         public string Name { get; set; }
+        public string? MiddleName { get; set; }
+        public string? Gender { get; set; }
+        public int? CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        [ValidateNever]
+        public Country? Country { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Job { get; set; }
 
-		public string? StreetAddress { get; set; }
-		public string? City { get; set; }
-		public string? State { get; set; }
-		public string? PostalCode { get; set; }
+        public string? StreetAddress { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? PostalCode { get; set; }
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [ValidateNever]
