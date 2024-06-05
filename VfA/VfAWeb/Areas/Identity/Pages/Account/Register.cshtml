@@ -257,8 +257,8 @@
         padding: 10px;
     }
 
-    .displaySteptext{
-        cursor:pointer;
+    .displaySteptext {
+        cursor: pointer;
     }
 </style>
 
@@ -346,30 +346,89 @@
                                 <label for="field1" class="form-label">Job <span class="text-primary">*</span></label>
                                 <input type="text" class="form-control" id="field1" name="field1">
                             </div>
-                            <button type="button" class="btn  border-warning text-warning next-step">Next -></button>
-                            <button type="button" class="btn  border-warning text-warning next-step">Reset</button>
+                            <button type="button" class="btn border-warning text-warning next-step">Next -></button>
+                            <button type="button" class="btn border-warning text-warning">Reset</button>
                         </div>
 
                         <div class="step step-2">
                             <!-- Step 2 form fields here -->
-                            <h3>Step 2</h3>
                             <div class="mb-3">
-                                <label for="field2" class="form-label">Field 2:</label>
-                                <input type="text" class="form-control" id="field2" name="field2">
+                                <label for="field1" class="form-label">Company Name<span class="text-primary">*</span></label>
+                                <input type="text" class="form-control" id="field1" name="field1">
                             </div>
-                            <button type="button" class="btn btn-primary prev-step">Previous</button>
-                            <button type="button" class="btn btn-primary next-step">Next</button>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">Company CEO (Cheif Executive Officer)</label>
+                                <input type="text" class="form-control" id="field1" name="field1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">Company Activity <span class="text-primary">*</span></label>
+                                <select class="form-select">
+                                    <option>-Service Provider-</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">Country <span class="text-primary">*</span></label>
+                                <select class="form-select">
+                                    <option>-Select-</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">Address <span class="text-primary">*</span></label>
+                                <input type="text" class="form-control" id="field1" name="field1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">City/Town <span class="text-primary">*</span></label>
+                                <input type="text" class="form-control" id="field1" name="field1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">State/Province <span class="text-primary">*</span></label>
+                                <select class="form-select">
+                                    <option>-Select-</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">ZIP/Postal Code <span class="text-primary">*</span></label>
+                                <input type="text" class="form-control" id="field1" name="field1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="field1" class="form-label">Category <span class="text-primary">*</span></label>
+                                <select class="form-select">
+                                    <option>-Select-</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
+                            <button type="button" class="btn border-warning text-warning next-step">Next -></button>
+                            <button type="button" class="btn border-warning text-warning">Reset</button>
                         </div>
 
                         <div class="step step-3">
                             <!-- Step 3 form fields here -->
-                            <h3>Step 3</h3>
                             <div class="mb-3">
-                                <label for="field3" class="form-label">Field 3:</label>
+                                <label for="field3" class="form-label">User Name <span class="text-primary">*</span></label>
                                 <input type="text" class="form-control" id="field3" name="field3">
                             </div>
-                            <button type="button" class="btn btn-primary prev-step">Previous</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <div class="mb-3">
+                                <div class="input-border">
+                                    <div class="full-width-grey">
+                                        <label for="field1" class="form-label text-light">Password <span class="text-light">*</span></label>
+                                    </div>
+                                    <div class="mx-2 my-3">
+                                        <label for="field3" class="form-label">Password <span class="text-primary">*</span></label>
+                                        <input type="password" class="form-control" id="field3" name="field3">
+                                    </div>
+                                    <div class="mx-2 mb-3">
+                                        <label for="field3" class="form-label">Confirm Password <span class="text-primary">*</span></label>
+                                        <input type="password" class="form-control" id="field3" name="field3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="radio" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
+                                <label for="female">I agree to the terms and conditions and the privacy policy</label>
+                            </div>
+                            <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
+                            <button type="submit" class="btn btn-warning text-light">Submit</button>
+                            <button type="button" class="btn border-warning text-warning">Reset</button>
                         </div>
                     </form>
                 </div>
