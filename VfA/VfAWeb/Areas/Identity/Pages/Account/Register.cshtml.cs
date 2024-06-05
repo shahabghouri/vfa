@@ -115,16 +115,39 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
             public string Name { get; set; }
-            public string? StreetAddress { get; set; }
-            public string? City { get; set; }
-            public string? State { get; set; }
-            public string? PostalCode { get; set; }
+            public string? LastName { get; set; }
+            public string? MiddleName { get; set; }
+            public string? Gender { get; set; }
+            public int? CountryId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CountryList { get; set; }
+
+            public string? Job { get; set; }
+
             public string? PhoneNumber { get; set; }
             public int? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
-
+            //CompanyInformation
+            public string? CompanyName { get; set; }
+            public string? CompanyCEOName { get; set; }
+            public int? CompanyActivityId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyActivityList { get; set; }
+            public int? CompanyCountryId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyCountryList { get; set; }
+            public string? StreetAddress { get; set; }
+            public string? City { get; set; }
+            public string? State { get; set; }
+            public string? PostalCode { get; set; }
+            public int? CompanyCategoryId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> Categories { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> States { get; set; }
         }
 
 
@@ -183,16 +206,35 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.StreetAddress = Input.StreetAddress;
                 user.City = Input.City;
-                user.Name = Input.Name;
                 user.State = Input.State;
                 user.PostalCode = Input.PostalCode;
+
+                //Other Properties Start Here
+                //personal-info
+                user.Name = Input.Name;
+                user.Gender = Input.Gender;
+                user.CountryId = Input.CountryId;
                 user.PhoneNumber = Input.PhoneNumber;
+                user.Job = Input.Job;
+
+                //company-info
+                user.CompanyId = 0;//after adding company
+                Company company = new Company();
+                company.Name = Input.CompanyName;
+                company.CEOName = Input.CompanyCEOName;
+                company.CompanyActivityId = Input.CompanyActivityId;
+                company.CountryId = Input.CompanyCountryId;
+                company.StreetAddress = Input.StreetAddress;
+                company.City = Input.City;
+                company.State = Input.State;
+                company.PostalCode = Input.PostalCode;
+                company.CategoryId = Input.CompanyCategoryId;
+                //Ends
 
                 if (Input.Role == SD.Role_Company)
                 {
                     user.CompanyId = Input.CompanyId;
                 }
-
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
