@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VfA.DataAcess.Data;
 
@@ -11,9 +12,11 @@ using VfA.DataAcess.Data;
 namespace VfA.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240605184018_updateApplicationUser")]
+    partial class updateApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,20 +308,8 @@ namespace VfA.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CEOName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CompanyActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -333,40 +324,12 @@ namespace VfA.DataAccess.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StateProvinceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("CompanyActivityId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("StateProvinceId");
-
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("VfA.Models.CompanyActivity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CompanyActivites");
                 });
 
             modelBuilder.Entity("VfA.Models.Country", b =>
@@ -377,8 +340,7 @@ namespace VfA.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ISO")
-                        .IsRequired()
+                    b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -698,26 +660,6 @@ namespace VfA.DataAccess.Migrations
                     b.ToTable("ServiceImages");
                 });
 
-            modelBuilder.Entity("VfA.Models.StateProvince", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long>("CountryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StateProvince");
-                });
-
             modelBuilder.Entity("VfA.Models.Trust", b =>
                 {
                     b.Property<int>("Id")
@@ -859,33 +801,6 @@ namespace VfA.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("About");
-                });
-
-            modelBuilder.Entity("VfA.Models.Company", b =>
-                {
-                    b.HasOne("VfA.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("VfA.Models.CompanyActivity", "CompanyActivity")
-                        .WithMany()
-                        .HasForeignKey("CompanyActivityId");
-
-                    b.HasOne("VfA.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId");
-
-                    b.HasOne("VfA.Models.StateProvince", "StateProvince")
-                        .WithMany()
-                        .HasForeignKey("StateProvinceId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("CompanyActivity");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("StateProvince");
                 });
 
             modelBuilder.Entity("VfA.Models.InfoImage", b =>
