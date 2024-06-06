@@ -89,6 +89,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+            [Required]
+            public string UserName { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -216,6 +218,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 user.CountryId = Input.CountryId;
                 user.PhoneNumber = Input.PhoneNumber;
                 user.Job = Input.Job;
+                user.UserName = Input.UserName;
 
                 //company-info
                 user.CompanyId = 0;//after adding company
@@ -229,6 +232,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 company.State = Input.State;
                 company.PostalCode = Input.PostalCode;
                 company.CategoryId = Input.CompanyCategoryId;
+
                 //Ends
 
                 if (Input.Role == SD.Role_Company)
