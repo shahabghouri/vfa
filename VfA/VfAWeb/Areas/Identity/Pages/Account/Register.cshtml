@@ -444,21 +444,21 @@
                             <!-- Step 3 form fields here -->
                             <div class="mb-3">
                                 <label asp-for="Input.Name" class="form-label">User Name <span class="text-primary">*</span></label>
-                                <input asp-for="Input.Name" type="text" class="form-control" id="field3" name="field3">
+                                <input asp-for="Input.Name" type="text" class="form-control">
                                 <span asp-validation-for="Input.Name" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <div class="input-border">
                                     <div class="full-width-grey">
-                                        <label asp-for="Input.Password" class="form-label text-light">Password <span class="text-light">*</span></label>
+                                        <label class="form-label text-light">Password <span class="text-light">*</span></label>
                                     </div>
                                     <div class="mx-2 my-3">
                                         <label asp-for="Input.Password" class="form-label">Password <span class="text-primary">*</span></label>
-                                        <input asp-for="Input.Password" class="form-control" id="field3" name="field3">
+                                        <input asp-for="Input.Password" class="form-control" >
                                     </div>
                                     <div class="mx-2 mb-3">
                                         <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password <span class="text-primary">*</span></label>
-                                        <input asp-for="Input.ConfirmPassword" class="form-control" id="field3" name="field3">
+                                        <input asp-for="Input.ConfirmPassword" class="form-control">
                                     </div>
                                 </div>
                             </div>
