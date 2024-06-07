@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VfA.Models", "VfA.Models\Vf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VfA.Utility", "VfA.Utility\VfA.Utility.csproj", "{501F23EF-74DB-49BC-A3BC-E992B652D8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVfA", "TestVfA\TestVfA.csproj", "{1A14DF00-49FB-4C4E-A710-172E2FCEE87B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestVfA", "TestVfA\TestVfA.csproj", "{1A14DF00-49FB-4C4E-A710-172E2FCEE87B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VfA.Services", "VfA.Services\VfA.Services.csproj", "{0F4BDD5D-D974-499A-98CD-7C3257E9CA50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VfA.Common", "VfA.Common\VfA.Common.csproj", "{3A2B0C98-F06F-41BA-B3A6-A582E46A85A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{1A14DF00-49FB-4C4E-A710-172E2FCEE87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A14DF00-49FB-4C4E-A710-172E2FCEE87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A14DF00-49FB-4C4E-A710-172E2FCEE87B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F4BDD5D-D974-499A-98CD-7C3257E9CA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4BDD5D-D974-499A-98CD-7C3257E9CA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4BDD5D-D974-499A-98CD-7C3257E9CA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4BDD5D-D974-499A-98CD-7C3257E9CA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2B0C98-F06F-41BA-B3A6-A582E46A85A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2B0C98-F06F-41BA-B3A6-A582E46A85A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2B0C98-F06F-41BA-B3A6-A582E46A85A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2B0C98-F06F-41BA-B3A6-A582E46A85A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
