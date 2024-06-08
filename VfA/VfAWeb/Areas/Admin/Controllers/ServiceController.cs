@@ -66,14 +66,10 @@ namespace VfAWeb.Areas.Admin.Controllers
                 {
                     _unitOfWork.Service.Update(serviceVM.Service);
                 }
-
                 _unitOfWork.Save();
-
-
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (files != null)
                 {
-
                     foreach (IFormFile file in files)
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);

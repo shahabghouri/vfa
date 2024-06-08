@@ -32,7 +32,9 @@ namespace VfA.Models
         
         [DisplayName("Certificates")]
         public string Certificates { get; set; }
+
         [Required]
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever]

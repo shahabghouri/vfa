@@ -10,7 +10,6 @@ function loadDataTable() {
         "columns": [
             { data: 'name', "width": "25%" },
             { data: 'category.name', "width": "10%" },
-            { data: 'description', "width": "25%" },
             {
                 data: 'id',
                 "render": function (data) {

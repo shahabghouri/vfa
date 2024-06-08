@@ -17,21 +17,21 @@ namespace VfA.Models
         public int Id { get; set; }
 
         [Required]
-
         [MaxLength(30)]
         [DisplayName("Service Name")]
         public string Name { get; set; }
-
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever]
         public Category Category { get; set; }
 
+        [Required]
         [MinLength(100)]
         [DisplayName("Description")]
         public string Description { get; set; }
 
-		
-		public List<ServiceImage> ServiceImages { get; set; }
+        [ValidateNever]
+        public List<ServiceImage> ServiceImages { get; set; }
 	}
 }
