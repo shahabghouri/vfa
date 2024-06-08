@@ -28,6 +28,7 @@ namespace VfA.Models
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
+        public int? StateProvinceId { get; set; }
         public string? PostalCode { get; set; }
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]

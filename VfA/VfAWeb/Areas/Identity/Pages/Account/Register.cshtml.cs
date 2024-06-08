@@ -157,10 +157,12 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public int? CompanyCountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyCountryList { get; set; }
+            public IEnumerable<SelectListItem> WiliyaList { get; set; }
+            public int? WilayaID { get; set; }
             public string? StreetAddress { get; set; }
             public string? City { get; set; }
             [AllowNull]
-            public string? State { get; set; }
+            public int? StateProvinceId { get; set; }
             public string? PostalCode { get; set; }
             [AllowNull]
             public int? CompanyCategoryId { get; set; }
@@ -213,7 +215,16 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
-
+            Input.CompanyActivityList = _unitOfWork.CompanyActivity.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            Input.WiliyaList = _unitOfWork.Wilaya.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             //    CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem {
             //        Text = i.Name,
             //        Value = i.Id.ToString()
@@ -237,7 +248,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.StreetAddress = Input.StreetAddress;
                 user.City = Input.City;
-                user.State = Input.State;
+                user.StateProvinceId = Input.StateProvinceId;
                 user.PostalCode = Input.PostalCode;
 
                 //Other Properties Start Here
@@ -259,10 +270,11 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 company.CountryId = Input.CompanyCountryId;
                 company.StreetAddress = Input.StreetAddress;
                 company.City = Input.City;
-                company.State = Input.State;
+                company.StateProvinceId = Input.StateProvinceId;
                 company.PostalCode = Input.PostalCode;
                 company.CategoryId = Input.CompanyCategoryId;
-
+                company.WilayaId = Input.WilayaID;
+                user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
                 //Ends
 
                 if (Input.Role == SD.Role_Company)

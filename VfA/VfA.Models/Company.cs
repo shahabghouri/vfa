@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace VfA.Models {
     public class Company {
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? CEOName { get; set; }
         public string? StreetAddress { get; set; }
         public string? City { get; set; }
@@ -34,5 +33,6 @@ namespace VfA.Models {
         [ForeignKey("CategoryId")]
         [ValidateNever]
         public Category? Category { get; set; }
+        public int? WilayaId { get; set; }
     }
 }

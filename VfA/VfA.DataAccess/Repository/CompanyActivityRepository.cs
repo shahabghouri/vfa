@@ -9,16 +9,16 @@ using VfA.Models;
 
 namespace VfA.DataAccess.Repository
 {
-    public class StateProvinceRepository : Repository<StateProvince>, IStateProvinceRepository
+    public class CompanyActivityRepository : Repository<CompanyActivity>, ICompanyActivityRepository
     {
         private ApplicationDbContext _db;
-        public StateProvinceRepository(ApplicationDbContext db) : base(db)
+        public CompanyActivityRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public List<StateProvince> GetAll(long countryId)
+        public List<CompanyActivity> GetAll()
         {
-            return _db.StateProvinces.Where(x=>x.CountryId == countryId).ToList();
+            return _db.CompanyActivites.ToList();
         }
     }
 }

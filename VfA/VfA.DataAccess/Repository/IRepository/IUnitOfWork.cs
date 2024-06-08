@@ -23,7 +23,9 @@ namespace VfA.DataAccess.Repository.IRepository
 
 		ICategoryRepository Category { get; }
 		ICountryRepository Country { get; }
+		ICompanyActivityRepository CompanyActivity { get; }
 		IStateProvinceRepository StateProvince { get; }
+		IWilayaRepository Wilaya { get; }
         
         IServiceImageRepository ServiceImage { get; }
         IRequestImageRepository RequestImage { get; }

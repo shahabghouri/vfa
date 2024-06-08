@@ -48,7 +48,8 @@ namespace VfA.DataAcess.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<CompanyActivity> CompanyActivites { get; set; }
-        public DbSet<StateProvince> StateProvince { get; set; }
+        public DbSet<StateProvince> StateProvinces { get; set; }
+        public DbSet<Wilaya> Wilayas { get; set; }
         
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

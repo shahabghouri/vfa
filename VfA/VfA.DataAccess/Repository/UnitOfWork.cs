@@ -38,8 +38,10 @@ namespace VfA.DataAccess.Repository
         public ICategoryRepository Category { get; private set; }
         public ICountryRepository Country { get; private set; }
         public IStateProvinceRepository StateProvince { get; private set; }
+        public ICompanyActivityRepository CompanyActivity { get; private set; }
         public ICompanyRepository Company { get; private set; }
         public IProductRepository Product { get; private set; }
+        public IWilayaRepository Wilaya { get; private set; }
          
         public IApplicationUserRepository ApplicationUser { get; private set; }
         
@@ -75,8 +77,9 @@ namespace VfA.DataAccess.Repository
             Company = new CompanyRepository(_db);   
             
             Country = new CountryRepository(_db);   
-            StateProvince = new StateProvinceRepository(_db);   
-             
+            StateProvince = new StateProvinceRepository(_db);
+            CompanyActivity = new CompanyActivityRepository(_db);
+            Wilaya = new WilayaRepository(_db);
         }
 
         public void Save()
