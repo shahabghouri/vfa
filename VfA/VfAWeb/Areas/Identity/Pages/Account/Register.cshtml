@@ -199,6 +199,40 @@
                 $(".progress-bar").css("width", progressPercentage + "%");
             }
         });
+        function loadStates(countryId) {
+            $.ajax({
+                url: '@Url.Action("GetStates", "StateProvince")',
+                type: 'GET',
+                data: { countryId: countryId },
+                success: function (data) {
+                    var stateSelect = $('select[name="Input.State"]');
+                    stateSelect.empty();
+                    stateSelect.append('<option value="">-Select-</option>');
+                    $.each(data, function (index, state) {
+                        stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Error retrieving states.');
+                }
+            });
+        }
+
+        $("#importerBtn").click(function () {
+            $("#formTitle").text("Register - Importer");
+            $("input[name='Input.IsImporter']").val("true");
+            $("input[name='Input.IsExporter']").val("false");
+            $("#formContainer").show();
+            $("#btnContainer").hide();
+        });
+
+        $("#exporterBtn").click(function () {
+            $("#formTitle").text("Register - Exporter");
+            $("input[name='Input.IsImporter']").val("false");
+            $("input[name='Input.IsExporter']").val("true");
+            $("#formContainer").show();
+            $("#btnContainer").hide();
+        });
     </script>
 }
 <style>
@@ -279,198 +313,245 @@
         }
 
 </style>
+<style>
 
+    /* CSS */
+    .button-59 {
+        align-items: center;
+        background-color: #fff;
+        border: 2px solid #000;
+        box-sizing: border-box;
+        color: #000;
+        cursor: pointer;
+        display: inline-flex;
+        fill: #000;
+        font-family: Inter,sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: -.8px;
+        line-height: 24px;
+        min-width: 140px;
+        outline: 0;
+        padding: 0 17px;
+        text-align: center;
+        text-decoration: none;
+        transition: all .3s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-4">
-        <div class="row">
-            <div class="col-12 text-center">
-                @if (true)
-                {
-                    <h2 class="py-2 text-white">Register - Importer</h2>
-                }
-                else
-                {
-                    <h2 class="py-2 text-white">Register - Exporter</h2>
-                }
+        .button-59:focus {
+            color: #171e29;
+        }
+
+        .button-59:hover {
+            border-color: #06f;
+            color: #06f;
+            fill: #06f;
+        }
+
+        .button-59:active {
+            border-color: #06f;
+            color: #06f;
+            fill: #06f;
+        }
+
+    @@media (min-width: 768px) {
+        .button-59 {
+            min-width: 500px;
+            min-height: 125px;
+        }
+    }
+</style>
+<div id="btnContainer" class="container mt-5 text-center">
+    <button id="importerBtn" class="button-59 mx-2">Importer</button>
+    <button id="exporterBtn" class="button-59 mx-2">Exporter</button>
+</div>
+<div id="formContainer" class="container mt-4" style="display:none;">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 id="formTitle" class="py-2 text-white"></h2>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body p-4">
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <div id="container" class="container mt-5">
-                    <div class="progress px-1" style="height: 3px;">
-                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="step-container d-flex justify-content-between">
-                        <div class="step-circle" onclick="displayStep(1)">1</div>
-                        <div class="step-circle" onclick="displayStep(2)">2</div>
-                        <div class="step-circle" onclick="displayStep(3)">3</div>
-                    </div>
-                    <div class="step-container d-flex justify-content-between">
-                        <div onclick="displayStep(1)" class="displaySteptext">Personal Informations</div>
-                        <div onclick="displayStep(2)" class="displaySteptext">Company Informations</div>
-                        <div onclick="displayStep(3)" class="displaySteptext">Account Informations</div>
-                    </div>
-                    <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <div class="step step-1">
-                            <!-- Step 1 form fields here -->
-                            @* <h3>Step 1</h3> *@
-                            <div class="mb-3">
-                                <label asp-for="Input.Name" class="form-label">First <span class="text-primary">*</span></label>
-                                <input asp-for="Input.Name" class="form-control">
-                                <span asp-validation-for="Input.Name" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.MiddleName" class="form-label">Middle</label>
-                                <input asp-for="Input.MiddleName" type="text" class="form-control">
-                                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.LastName" class="form-label">Last <span class="text-primary">*</span></label>
-                                <input asp-for="Input.LastName" type="text" class="form-control">
-                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <div class="input-border">
-                                    <div class="full-width-grey">
-                                        <label asp-for="Input.Gender" class="form-label text-light">Gender <span class="text-light">*</span></label>
-                                    </div>
-                                    <div class="input-padding">
-                                        <div>
-                                            <input asp-for="Input.Gender" type="radio" name="gender" value="male">
-                                            <label asp-for="Input.Gender">Male</label>
+        <div class="card-body p-4">
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <div id="container" class="container mt-5">
+                        <div class="progress px-1" style="height: 3px;">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="step-container d-flex justify-content-between">
+                            <div class="step-circle" onclick="displayStep(1)">1</div>
+                            <div class="step-circle" onclick="displayStep(2)">2</div>
+                            <div class="step-circle" onclick="displayStep(3)">3</div>
+                        </div>
+                        <div class="step-container d-flex justify-content-between">
+                            <div onclick="displayStep(1)" class="displaySteptext">Personal Informations</div>
+                            <div onclick="displayStep(2)" class="displaySteptext">Company Informations</div>
+                            <div onclick="displayStep(3)" class="displaySteptext">Account Informations</div>
+                        </div>
+                        <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <input asp-for="Input.IsImporter" type="hidden" value="false" />
+                            <input asp-for="Input.IsExporter" type="hidden" value="false" />
+                            <div class="step step-1">
+                                <!-- Step 1 form fields here -->
+                                @* <h3>Step 1</h3> *@
+                                <div class="mb-3">
+                                    <label asp-for="Input.Name" class="form-label">First <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.Name" class="form-control">
+                                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.MiddleName" class="form-label">Middle</label>
+                                    <input asp-for="Input.MiddleName" type="text" class="form-control">
+                                    <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.LastName" class="form-label">Last <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.LastName" type="text" class="form-control">
+                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-border">
+                                        <div class="full-width-grey">
+                                            <label asp-for="Input.Gender" class="form-label text-light">Gender <span class="text-light">*</span></label>
                                         </div>
-                                        <div>
-                                            <input asp-for="Input.Gender" type="radio" name="gender" value="female">
-                                            <label asp-for="Input.Gender">Female</label>
+                                        <div class="input-padding">
+                                            <div>
+                                                <input asp-for="Input.Gender" type="radio" name="gender" value="male">
+                                                <label asp-for="Input.Gender">Male</label>
+                                            </div>
+                                            <div>
+                                                <input asp-for="Input.Gender" type="radio" name="gender" value="female">
+                                                <label asp-for="Input.Gender">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CountryId" class="form-label">Country <span class="text-primary">*</span></label>
+                                    <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select">
+                                        <option value="">-Select-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.CountryId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-border">
+                                        <div class="full-width-grey">
+                                            <label asp-for="Input.PhoneNumber" class="form-label text-light">Phone Number <span class="text-light">*</span></label>
+                                        </div>
+                                        <input asp-for="Input.PhoneNumber" type="text" class="form-control">
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.Job" class="form-label">Job <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.Job" type="text" class="form-control">
+                                    <span asp-validation-for="Input.Job" class="text-danger"></span>
+                                </div>
+                                <button type="button" class="btn border-warning text-warning next-step">Next -></button>
+                                <button type="button" class="btn border-warning text-warning">Reset</button>
+                            </div>
+
+                            <div class="step step-2">
+                                <!-- Step 2 form fields here -->
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyName" class="form-label">Company Name<span class="text-primary">*</span></label>
+                                    <input asp-for="Input.CompanyName" type="text" class="form-control">
+                                    <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyCEOName" class="form-label">Company CEO (Cheif Executive Officer)</label>
+                                    <input asp-for="Input.CompanyCEOName" type="text" class="form-control">
+                                    <span asp-validation-for="Input.CompanyCEOName" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyActivityId" class="form-label">Company Activity <span class="text-primary">*</span></label>
+                                    <select asp-for="Input.CompanyActivityId" asp-items="@Model.Input.CompanyActivityList" class="form-select">
+                                        <option value="">-Service Provider-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.CompanyActivityId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyCountryId" class="form-label">Country <span class="text-primary">*</span></label>
+                                    <select asp-for="Input.CompanyCountryId" asp-items="@Model.Input.CompanyCountryList" class="form-select" onchange="loadStates(this.value)">
+                                        <option value="">-Select-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.CompanyCountryId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.StreetAddress" class="form-label">Address <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.StreetAddress" type="text" class="form-control">
+                                    <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.City" class="form-label">City/Town <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.City" type="text" class="form-control">
+                                    <span asp-validation-for="Input.City" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.State" class="form-label">State/Province <span class="text-primary">*</span></label>
+                                    <select asp-for="Input.State" asp-items="@Model.Input.States" class="form-select">
+                                        <option value="">-Select-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.State" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.PostalCode" class="form-label">ZIP/Postal Code <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.PostalCode" type="text" class="form-control">
+                                    <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyCategoryId" class="form-label">Category <span class="text-primary">*</span></label>
+                                    <select asp-for="Input.CompanyCategoryId" asp-items="@(new SelectList(Model.Input.Categories, "Id", "Name"))" class="form-select">
+                                        <option value="">-Select-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.CompanyCategoryId" class="text-danger"></span>
+                                </div>
+                                <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
+                                <button type="button" class="btn border-warning text-warning next-step">Next -></button>
+                                <button type="button" class="btn border-warning text-warning">Reset</button>
+                            </div>
+
+                            <div class="step step-3">
+                                <!-- Step 3 form fields here -->
+                                <div class="mb-3">
+                                    <label asp-for="Input.UserName" class="form-label">User Name <span class="text-primary">*</span></label>
+                                    <input asp-for="Input.UserName" type="text" class="form-control">
+                                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-border">
+                                        <div class="full-width-grey">
+                                            <label class="form-label text-light">Password <span class="text-light">*</span></label>
+                                        </div>
+                                        <div class="mx-2 my-3">
+                                            <label asp-for="Input.Password" class="form-label">Password <span class="text-primary">*</span></label>
+                                            <input asp-for="Input.Password" class="form-control">
+                                        </div>
+                                        <div class="mx-2 mb-3">
+                                            <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password <span class="text-primary">*</span></label>
+                                            <input asp-for="Input.ConfirmPassword" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <span asp-validation-for="Input.Gender" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.CountryId" class="form-label">Country <span class="text-primary">*</span></label>
-                                <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select">
-                                    <option>-Select-</option>
-                                    <option value="01">test</option>
-                                </select>
-                                <span asp-validation-for="Input.CountryId" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <div class="input-border">
-                                    <div class="full-width-grey">
-                                        <label asp-for="Input.PhoneNumber" class="form-label text-light">Phone Number <span class="text-light">*</span></label>
-                                    </div>
-                                    <input asp-for="Input.PhoneNumber" type="text" class="form-control">
-                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                <div class="mb-3">
+                                    <input type="checkbox" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
+                                    <label>I agree to the terms and conditions and the privacy policy</label>
                                 </div>
+                                <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
+                                <button type="submit" class="btn btn-warning text-light">Submit</button>
+                                <button type="button" class="btn border-warning text-warning">Reset</button>
                             </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.Job" class="form-label">Job <span class="text-primary">*</span></label>
-                                <input asp-for="Input.Job" type="text" class="form-control">
-                                <span asp-validation-for="Input.Job" class="text-danger"></span>
-                            </div>
-                            <button type="button" class="btn border-warning text-warning next-step">Next -></button>
-                            <button type="button" class="btn border-warning text-warning">Reset</button>
-                        </div>
-
-                        <div class="step step-2">
-                            <!-- Step 2 form fields here -->
-                            <div class="mb-3">
-                                <label asp-for="Input.CompanyName" class="form-label">Company Name<span class="text-primary">*</span></label>
-                                <input asp-for="Input.CompanyName" type="text" class="form-control">
-                                <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.CompanyCEOName" class="form-label">Company CEO (Cheif Executive Officer)</label>
-                                <input asp-for="Input.CompanyCEOName" type="text" class="form-control">
-                                <span asp-validation-for="Input.CompanyCEOName" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.CompanyActivityId" class="form-label">Company Activity <span class="text-primary">*</span></label>
-                                <select asp-for="Input.CompanyActivityId" asp-items="@Model.Input.CompanyActivityList" class="form-select">
-                                    <option>-Service Provider-</option>
-                                    <option value="01">test</option>
-                                </select>
-                                <span asp-validation-for="Input.CompanyActivityId" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.CompanyCountryId" class="form-label">Country <span class="text-primary">*</span></label>
-                                <select asp-for="Input.CompanyCountryId" asp-items="@Model.Input.CompanyCountryList" class="form-select">
-                                    <option>-Select-</option>
-                                    <option value="01">test</option>
-                                </select>
-                                <span asp-validation-for="Input.CompanyCountryId" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.StreetAddress" class="form-label">Address <span class="text-primary">*</span></label>
-                                <input asp-for="Input.StreetAddress" type="text" class="form-control">
-                                <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.City" class="form-label">City/Town <span class="text-primary">*</span></label>
-                                <input asp-for="Input.City" type="text" class="form-control">
-                                <span asp-validation-for="Input.City" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.State" class="form-label">State/Province <span class="text-primary">*</span></label>
-                                <select asp-for="Input.State" asp-items="@Model.Input.States" class="form-select">
-                                    <option>-Select-</option>
-                                    <option value="01">test</option>
-                                </select>
-                                <span asp-validation-for="Input.State" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.PostalCode" class="form-label">ZIP/Postal Code <span class="text-primary">*</span></label>
-                                <input asp-for="Input.PostalCode" type="text" class="form-control">
-                                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Input.CompanyCategoryId" class="form-label">Category <span class="text-primary">*</span></label>
-                                <select asp-for="Input.CompanyCategoryId" asp-items="@Model.Input.Categories" class="form-select">
-                                    <option>-Select-</option>
-                                    <option value="01">test</option>
-                                </select>
-                                <span asp-validation-for="Input.CompanyCategoryId" class="text-danger"></span>
-                            </div>
-                            <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
-                            <button type="button" class="btn border-warning text-warning next-step">Next -></button>
-                            <button type="button" class="btn border-warning text-warning">Reset</button>
-                        </div>
-
-                        <div class="step step-3">
-                            <!-- Step 3 form fields here -->
-                            <div class="mb-3">
-                                <label asp-for="Input.UserName" class="form-label">User Name <span class="text-primary">*</span></label>
-                                <input asp-for="Input.UserName" type="text" class="form-control">
-                                <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
-                                <div class="input-border">
-                                    <div class="full-width-grey">
-                                        <label class="form-label text-light">Password <span class="text-light">*</span></label>
-                                    </div>
-                                    <div class="mx-2 my-3">
-                                        <label asp-for="Input.Password" class="form-label">Password <span class="text-primary">*</span></label>
-                                        <input asp-for="Input.Password" class="form-control" >
-                                    </div>
-                                    <div class="mx-2 mb-3">
-                                        <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password <span class="text-primary">*</span></label>
-                                        <input asp-for="Input.ConfirmPassword" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="checkbox" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
-                                <label>I agree to the terms and conditions and the privacy policy</label>
-                            </div>
-                            <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
-                            <button type="submit" class="btn btn-warning text-light">Submit</button>
-                            <button type="button" class="btn border-warning text-warning">Reset</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

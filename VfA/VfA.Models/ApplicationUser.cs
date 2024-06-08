@@ -12,6 +12,8 @@ namespace VfA.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public bool IsImporter { get; set; }
+        public bool IsExporter { get; set; }
         [Required]
         public string Name { get; set; }
         public string? MiddleName { get; set; }

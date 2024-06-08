@@ -10,5 +10,6 @@ namespace VfA.DataAccess.Repository.IRepository
     public interface ICategoryRepository : IRepository<Category>
     {
         void Update(Category obj);
+        List<Category> GetAll();
     }
 }

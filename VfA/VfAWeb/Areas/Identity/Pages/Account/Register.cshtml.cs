@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -81,11 +82,15 @@ namespace VfAWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            public bool IsImporter { get; set; }
+            public bool IsExporter { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             //[Required]
+            [AllowNull]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -116,38 +121,51 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
-            [Required]
             [Display(Name = "First Name")]
+            [AllowNull]
             public string Name { get; set; }
+            [AllowNull]
             public string? LastName { get; set; }
+            [AllowNull]
             public string? MiddleName { get; set; }
+            [AllowNull]
             public string? Gender { get; set; }
+            [AllowNull]
             public int? CountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CountryList { get; set; }
 
+            [AllowNull]
             public string? Job { get; set; }
 
+            [AllowNull]
             public string? PhoneNumber { get; set; }
+            [AllowNull]
             public int? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
             //CompanyInformation
+            [AllowNull]
             public string? CompanyName { get; set; }
+            [AllowNull]
             public string? CompanyCEOName { get; set; }
+            [AllowNull]
             public int? CompanyActivityId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyActivityList { get; set; }
+            [AllowNull]
             public int? CompanyCountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyCountryList { get; set; }
             public string? StreetAddress { get; set; }
             public string? City { get; set; }
+            [AllowNull]
             public string? State { get; set; }
             public string? PostalCode { get; set; }
+            [AllowNull]
             public int? CompanyCategoryId { get; set; }
             [ValidateNever]
-            public IEnumerable<SelectListItem> Categories { get; set; }
+            public List<Category> Categories { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> States { get; set; }
         }
@@ -184,6 +202,17 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                        Value = i
                    }),
             };
+            Input.Categories = _unitOfWork.Category.GetAll();
+            Input.CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            Input.CompanyCountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
 
             //    CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem {
             //        Text = i.Name,
@@ -213,6 +242,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
 
                 //Other Properties Start Here
                 //personal-info
+                user.IsImporter = Input.IsImporter;
+                user.IsExporter = Input.IsExporter;
                 user.Name = Input.Name;
                 user.Gender = Input.Gender;
                 user.CountryId = Input.CountryId;
@@ -221,7 +252,6 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 user.UserName = Input.UserName;
 
                 //company-info
-                user.CompanyId = 0;//after adding company
                 Company company = new Company();
                 company.Name = Input.CompanyName;
                 company.CEOName = Input.CompanyCEOName;

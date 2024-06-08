@@ -36,6 +36,8 @@ namespace VfA.DataAccess.Repository
 
         //Bulky class
         public ICategoryRepository Category { get; private set; }
+        public ICountryRepository Country { get; private set; }
+        public IStateProvinceRepository StateProvince { get; private set; }
         public ICompanyRepository Company { get; private set; }
         public IProductRepository Product { get; private set; }
          
@@ -71,6 +73,9 @@ namespace VfA.DataAccess.Repository
             
             Product = new ProductRepository(_db);
             Company = new CompanyRepository(_db);   
+            
+            Country = new CountryRepository(_db);   
+            StateProvince = new StateProvinceRepository(_db);   
              
         }
 

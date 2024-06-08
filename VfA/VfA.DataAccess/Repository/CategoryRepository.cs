@@ -19,7 +19,10 @@ namespace VfA.DataAccess.Repository
         }
 
         
-
+        public List<Category> GetAll()
+        {
+            return _db.Categories.ToList();
+        }
         public void Update(Category obj)
         {
             _db.Categories.Update(obj);
