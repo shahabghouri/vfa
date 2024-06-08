@@ -22,19 +22,18 @@ namespace VfA.Models
         [MaxLength(30)]
         [DisplayName("Request")]
         public string Name{ get; set; }
-
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever]
         public Category Category { get; set; }
 
-
         [MinLength(100)]
         [DisplayName("Description")]
         public string Description { get; set; }
 
-	
-		public List<RequestImage> RequestImages { get; set; }
+        [ValidateNever]
+        public List<RequestImage> RequestImages { get; set; }
         
 	}
 }

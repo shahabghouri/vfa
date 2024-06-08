@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace VfA.Models
 		public string Title { get; set; }
 		public string Topic { get; set; }
 
+        [ValidateNever]
         public List<PrivacyImage> PrivacyImages { get; set; }
     }
 }

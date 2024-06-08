@@ -1,5 +1,7 @@
 ﻿@model ServiceVM
-
+@{
+    ViewData["Title"] = Model.Service.Id != 0 ? "Update Service" : "Create Service";
+}
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
@@ -9,45 +11,46 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row" enctype="multipart/form-data">
+        <form id="service-form" method="post" class="row" enctype="multipart/form-data">
             <input asp-for="Service.Id" hidden />
 
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
                         @*<div asp-validation-summary="ModelOnly"></div>*@
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Service.Name" class="form-control border-0 shadow" />
-                            <label asp-for="Service.Name" class="ms-2"></label>
+                        <div class="form-floating mb-2">
+                            <input asp-for="Service.Name" class="form-control" />
+                            <label asp-for="Service.Name" class="form-label"></label>
                             <span asp-validation-for="Service.Name" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="@Model.Service.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                        <div class="form-floating">
+                            <select asp-for="@Model.Service.CategoryId" asp-items="@Model.CategoryList" class="form-select">
                                 <option disabled selected>--Select Category--</option>
                             </select>
-                            <label asp-for="Service.CategoryId" class="ms-2"></label>
+                            <label asp-for="Service.CategoryId" class="form-label"></label>
                             <span asp-validation-for="Service.CategoryId" class="text-danger"></span>
                         </div>
 
                         <div class="py-2 col-12">
-                            <label asp-for="Service.Description" class="ms-2 text-muted"></label>
-                            <textarea asp-for="Service.Description" class="form-control border-0 shadow"></textarea>
+                            <label asp-for="Service.Description" class="form-label text-muted"></label>
+                            <textarea asp-for="Service.Description" id="summernote" class="form-control"></textarea>
+                            <span asp-validation-for="Service.Description" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
-                            <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                            <label asp-for="Service.ServiceImages" class="ms-2"></label>
+                        <div class="form-floating">
+                            <input type="file" name="files" class="form-control" multiple />
+                            <label class="form-label">Images</label>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
                                 @if (Model.Service.Id != 0)
                                 {
-                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    <button type="button" id="submit-btn" class="btn btn-primary form-control">Update</button>
                                 }
                                 else
                                 {
-                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                    <button type="button" id="submit-btn" class="btn btn-primary form-control">Create</button>
                                 }
                             </div>
                             <div class="col-6 col-md-3">
@@ -87,10 +90,15 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('textarea').summernote();
+            $('#summernote').summernote();
         });
+        $('#submit-btn').click(function (e) {
+            e.preventDefault();
+            $(this).val($('#summernote').summernote('code'));
+            $('#service-form').submit();
+        })
     </script>
     @{
-        <partial name="_ValidationScriptsPartial" />
+                <partial name="_ValidationScriptsPartial" />
     }
 }

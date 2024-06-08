@@ -64,14 +64,10 @@ namespace VfAWeb.Areas.Admin.Controllers
                 else {
                     _unitOfWork.Request.Update(requestVM.Request);
                 }
-
                 _unitOfWork.Save();
-
-
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (files != null)
                 {
-
                     foreach(IFormFile file in files) 
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -96,16 +92,9 @@ namespace VfAWeb.Areas.Admin.Controllers
                         requestVM.Request.RequestImages.Add(requestImage);
 
                     }
-
                     _unitOfWork.Request.Update(requestVM.Request);
                     _unitOfWork.Save();
-
-
-
-
                 }
-
-                
                 TempData["success"] = "Request created/updated successfully";
                 return RedirectToAction("Index");
             }
