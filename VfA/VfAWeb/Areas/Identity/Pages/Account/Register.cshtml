@@ -205,7 +205,8 @@
                 type: 'GET',
                 data: { countryId: countryId },
                 success: function (data) {
-                    var stateSelect = $('select[name="Input.State"]');
+                    debugger;
+                    var stateSelect = $('select[name="Input.StateProvinceId"]');
                     stateSelect.empty();
                     stateSelect.append('<option value="">-Select-</option>');
                     $.each(data, function (index, state) {
