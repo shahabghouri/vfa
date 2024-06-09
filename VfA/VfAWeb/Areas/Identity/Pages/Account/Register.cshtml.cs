@@ -94,7 +94,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Email is required.")]
+            [EmailAddress]
             public string UserName { get; set; }
 
             /// <summary>
@@ -163,6 +164,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public string? City { get; set; }
             [AllowNull]
             public int? StateProvinceId { get; set; }
+            public string? State { get; set; }
             public string? PostalCode { get; set; }
             [AllowNull]
             public int? CompanyCategoryId { get; set; }
@@ -261,6 +263,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 user.PhoneNumber = Input.PhoneNumber;
                 user.Job = Input.Job;
                 user.UserName = Input.UserName;
+                user.State = Input.State;
 
                 //company-info
                 Company company = new Company();
@@ -274,7 +277,21 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 company.PostalCode = Input.PostalCode;
                 company.CategoryId = Input.CompanyCategoryId;
                 company.WilayaId = Input.WilayaID;
-                user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
+
+                if (!string.IsNullOrEmpty(company.Name) ||
+                !string.IsNullOrEmpty(company.CEOName) ||
+                company.CompanyActivityId != null ||
+                company.CountryId != null ||
+                !string.IsNullOrEmpty(company.StreetAddress) ||
+                !string.IsNullOrEmpty(company.City) ||
+                company.StateProvinceId != null ||
+                !string.IsNullOrEmpty(company.PostalCode) ||
+                company.CategoryId != null ||
+                company.WilayaId != null)
+                {
+                    // Add company if validation passes
+                    user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
+                }
                 //Ends
 
                 if (Input.Role == SD.Role_Company)

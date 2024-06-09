@@ -538,7 +538,7 @@
                             <div class="step step-3">
                                 <!-- Step 3 form fields here -->
                                 <div class="mb-3">
-                                    <label asp-for="Input.UserName" class="form-label">User Name <span class="text-primary">*</span></label>
+                                    <label asp-for="Input.UserName" class="form-label">Email <span class="text-primary">*</span></label>
                                     <input asp-for="Input.UserName" type="text" class="form-control">
                                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                                 </div>
@@ -550,10 +550,12 @@
                                         <div class="mx-2 my-3">
                                             <label asp-for="Input.Password" class="form-label">Password <span class="text-primary">*</span></label>
                                             <input asp-for="Input.Password" class="form-control">
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
                                         </div>
                                         <div class="mx-2 mb-3">
                                             <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password <span class="text-primary">*</span></label>
                                             <input asp-for="Input.ConfirmPassword" class="form-control">
+                                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
