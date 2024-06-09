@@ -56,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\ProductDisplayCarousel\" />
     <Folder Include="wwwroot\images\abouts\" />
     <Folder Include="wwwroot\images\infos\" />
     <Folder Include="wwwroot\images\privacies\" />
