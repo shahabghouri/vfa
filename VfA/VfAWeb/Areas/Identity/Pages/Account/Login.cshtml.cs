@@ -2,18 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using VfA.DataAccess.Repository.IRepository;
+using System.Text.Json;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -21,11 +16,15 @@ namespace VfAWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        public ISession _session;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _unitOfWork = unitOfWork;
+            _session = httpContextAccessor.HttpContext.Session;
         }
 
         /// <summary>
@@ -114,6 +113,10 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    string username = User.Identity.Name;
+                    var user  = _unitOfWork.ApplicationUser.Get(u => u.UserName == username);
+                    _session.SetString("user", JsonSerializer.Serialize(user));
+                    //Console.WriteLine("User Obj is = " + _session.GetString("user") );
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
