@@ -1,6 +1,7 @@
 ﻿@model ProfileViewModel
 @{
     ViewData["Title"] = "Profile";
+    var RequestList = Model.Requests.ToList();
 }
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,21 +24,25 @@
         text-align: left;
         text-transform: uppercase;
         position: relative;
-        margin: 30px 0 60px;
+        margin: 30px 0 15px;
     }
 
-        .h2ProfileCsarousel::after {
-            content: "";
-            width: 150px;
-            position: absolute;
-            margin: 0 0;
-            height: 4px;
-            border-radius: 1px;
-            background: #007bff;
-            left: 0;
-            right: 0;
-            bottom: -20px;
-        }
+    #AddProductBtn, #AddRequestBtn, #AddServiceBtn {
+        margin: 30px 0 15px;
+    }
+
+    .h2ProfileCsarousel::after {
+        content: "";
+        width: 150px;
+        position: absolute;
+        margin: 0 0;
+        height: 4px;
+        border-radius: 1px;
+        background: #007bff;
+        left: 0;
+        right: 0;
+        bottom: -20px;
+    }
 
     .carousel {
         margin: 50px auto;
@@ -223,624 +228,638 @@
             }
             <div><input class="my-2" placeholder="Activity" /></div>
         </div>
-        <div class="row">
-            <div class="col-md-12  d-flex justify-content-end">
-                @* <div><button class="btn btn-light border-dark me-1">Edit</button></div>
-                <div>
-                <button class="btn btn-light border-dark me-1">Delete</button>
-                </div> *@
-                <div>
-                    <button class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+        @if (Model.UserType.ToLower() == "expoter")
+        {
+            <div class="row">
+                <div class="col-md-12  d-flex justify-content-between">
+                    <div>
+                        <h2 class="h2ProfileCsarousel">Products</h2>
+                    </div>
+                    <div>
+                        <button id="AddProductBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @* <h2 class="h2ProfileCsarousel">Products</h2> *@
+                    <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#productCarousel" data-slide-to="1"></li>
+                            <li data-target="#productCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item carousel-item active">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                @* <img src=" " class="img-fluid" alt=""> *@
+                                                <img src="" class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                @* <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                @* <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid" alt="">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                @* <p class="item-price"><strike>$899.00</strike> <b>$649.00</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid" alt="">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                @* <p class="item-price"><strike>$315.00</strike> <b>$250.00</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Product</h4>
+                                                @* <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#productCarousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#productCarousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            @if (Model.UserType.ToLower() == "expoter")
-            {
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="h2ProfileCsarousel">Products</h2>
-                        <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#productCarousel" data-slide-to="1"></li>
-                                <li data-target="#productCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    @* <img src=" " class="img-fluid" alt=""> *@
-                                                    <img src="" class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$899.00</strike> <b>$649.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$315.00</strike> <b>$250.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Product</h4>
-                                                    @* <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#productCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#productCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12  d-flex justify-content-between">
+                    <div>
                         <h2 class="h2ProfileCsarousel">Services</h2>
-                        <div id="serviceCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#serviceCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#serviceCarousel" data-slide-to="1"></li>
-                                <li data-target="#serviceCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                    </div>
+                    <div>
+                        <button id="AddServiceBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id="serviceCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#serviceCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#serviceCarousel" data-slide-to="1"></li>
+                            <li data-target="#serviceCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item carousel-item active">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid" alt="">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                @* <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                @* <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p> *@
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Service</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#serviceCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#serviceCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Service</h4>
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#serviceCarousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#serviceCarousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
                 </div>
-            }
-            @if (Model.UserType.ToLower() == "impoter" || Model.UserType.ToLower() == "expoter")
-            {
-                <div class="row">
-                    <div class="col-md-12">
+            </div>
+        }
+        @if (Model.UserType.ToLower() == "impoter" || Model.UserType.ToLower() == "expoter")
+        {
+            <div class="row">
+                <div class="col-md-12  d-flex justify-content-between">
+                    <div>
                         <h2 class="h2ProfileCsarousel">Requests</h2>
-                        <div id="requestCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#requestCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#requestCarousel" data-slide-to="1"></li>
-                                <li data-target="#requestCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item carousel-item active">
-                                    <div class="row">
+                    </div>
+                    <div>
+                        <button id="AddRequestBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id="requestCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#requestCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#requestCarousel" data-slide-to="1"></li>
+                            <li data-target="#requestCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item carousel-item active">
+                                <div class="row">
+                                    @foreach (var request in Model.Requests)
+                                    {
                                         <div class="col-sm-3">
                                             <div class="thumb-wrapper">
                                                 <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
@@ -848,287 +867,281 @@
                                                     <img src=" " class="img-fluid">
                                                 </div>
                                                 <div class="thumb-content">
-                                                    <h4>Request</h4>
+                                                    <h4>@request.Name</h4>
                                                     <div class="star-rating">
                                                         @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                     </div>
                                                     @* <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p> *@
                                                     <a href="#" class="btn btn-primary">Details</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$899.00</strike> <b>$649.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    @* <p class="item-price"><strike>$315.00</strike> <b>$250.00</b></p> *@
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
                                                 </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
-                                                <div class="img-box">
-                                                    <img src=" " class="img-fluid" >
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Request</h4>
-                                                    @* <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p> *@
-                                                    <div class="star-rating">
-                                                        @*<ul class="list-inline">
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                        </ul>*@
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Details</a>
-                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#requestCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#requestCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                            <div class="item carousel-item">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                            <div class="img-box">
+                                                <img src=" " class="img-fluid">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4>Request</h4>
+                                                @* <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p> *@
+                                                <div class="star-rating">
+                                                    @*<ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>*@
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#requestCarousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#requestCarousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
                 </div>
-            }
+            </div>
+            <!--ENDING HERE-->
+            <div class="row">
+                <div class="col-md-12  d-flex justify-content-between">
+                    <div>
+                        <h2 class="h2ProfileCsarousel">Requests</h2>
+                    </div>
+                    <div>
+                        <button id="AddRequestBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id="requestCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            @for (int i = 0; i < RequestList.Count / 4; i++)
+                            {
+                                <li data-target="#productCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                            }
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            @for (int i = 0; i < RequestList.Count; i += 4)
+                            {
+                                <div class="item carousel-item @(i == 0 ? "active" : "")">
+                                    <div class="row">
+                                        @for (int j = i; j < i + 4 && j < RequestList.Count; j++)
+                                        {
+                                            var requestImgUrl = "";
+                                            if (RequestList[j].RequestImages.Count > 0) {
+                                                requestImgUrl = RequestList[j].RequestImages[0].ImageUrl;
+                                            }
+                                            <div class="col-sm-3">
+                                                    <div class="thumb-wrapper">
+                                                        <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                                        <div class="img-box">
+                                                        <img src="@requestImgUrl" class="img-fluid" alt="@RequestList[j].Name">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>@RequestList[j].Name</h4>
+                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#productCarousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#productCarousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--ENDING HERE-->
+            </div>
+            <!--ENDING HERE-->
+        }
     </div>
 </div>
 
@@ -1137,6 +1150,15 @@
         $(document).ready(function () {
             $(".wish-icon i").click(function () {
                 $(this).toggleClass("fa-heart fa-heart-o");
+            });
+            $('#AddProductBtn').on('click', function () {
+                window.location.href = '@Url.Action("Upsert", "Product", new { area = "Admin" })';
+            });
+            $('#AddServiceBtn').on('click', function () {
+                window.location.href = '@Url.Action("Upsert", "Service", new { area = "Admin" })';
+            });
+            $('#AddRequestBtn').on('click', function () {
+                window.location.href = '@Url.Action("Upsert", "Request", new { area = "Admin" })';
             });
         });
     </script>

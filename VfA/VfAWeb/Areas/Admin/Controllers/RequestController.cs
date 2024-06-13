@@ -12,7 +12,7 @@ using System.Data;
 namespace VfAWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Importer},{SD.Role_Exporter}")]
     public class RequestController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
