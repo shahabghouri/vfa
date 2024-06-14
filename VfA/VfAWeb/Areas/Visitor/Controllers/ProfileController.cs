@@ -28,8 +28,8 @@ namespace VfAWeb.Areas.Visitor.Controllers
             {
                 if (_user != null)
                 {
-                    var products = _unitOfWork.Product.GetAll().ToList();
-                    var services = _unitOfWork.Service.GetAll().ToList();
+                    var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
+                    var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").ToList();
                     var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").ToList();
                     profileViewModel.Products = products;
                     profileViewModel.Services = services;
