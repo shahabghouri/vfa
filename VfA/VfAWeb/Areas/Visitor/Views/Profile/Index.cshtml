@@ -5,14 +5,7 @@
     var ServiceList = Model.Services.ToList();
     var RequestList = Model.Requests.ToList();
 }
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
     body {
         background: #e2eaef;
@@ -226,6 +219,10 @@
             object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
             object-position: center; /* Center the image within the container */
         }
+
+    .fa.fa-trash {
+        color: #ec5959;
+    }
 </style>
 <div class="container-xl">
     <div class="row">
@@ -256,14 +253,17 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
                         <!-- Carousel indicators -->
-                        <ol class="carousel-indicators">
-                            @for (int i = 0; i < ProductList.Count / 4; i++)
-                            {
-                                <li data-target="#productCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                        <div class="carousel-indicators">
+                            @{
+                                int noOdBtnProductCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
                             }
-                        </ol>
+                            @for (int i = 0; i < noOdBtnProductCarousel; i++)
+                            {
+                                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                            }
+                        </div>
                         <!-- Wrapper for carousel items -->
                         <div class="carousel-inner">
                             @for (int i = 0; i < ProductList.Count; i += 4)
@@ -280,8 +280,8 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-product-id="@ProductList[j].Id"></i>
-                                                        @* <i class="DeleteProductBtn fa fa-trash" data-product-id="@ProductList[j].Id"></i> *@
+                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-bs-product-id="@ProductList[j].Id"></i>
+                                                        @* <i class="DeleteProductBtn fa fa-trash" data-bs-product-id="@ProductList[j].Id"></i> *@
                                                         <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -299,12 +299,12 @@
                             }
                         </div>
                         <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#productCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#productCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -318,14 +318,17 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="serviceCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
                         <!-- Carousel indicators -->
-                        <ol class="carousel-indicators">
-                            @for (int i = 0; i < ServiceList.Count / 4; i++)
-                            {
-                                <li data-target="#serviceCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                        <div class="carousel-indicators">
+                            @{
+                                int noOdBtnServiceCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
                             }
-                        </ol>
+                            @for (int i = 0; i < noOdBtnServiceCarousel; i++)
+                            {
+                                <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                            }
+                        </div>
                         <!-- Wrapper for carousel items -->
                         <div class="carousel-inner">
                             @for (int i = 0; i < ServiceList.Count; i += 4)
@@ -342,7 +345,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i data-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <i data-bs-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/service/delete/@ServiceList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -360,12 +363,12 @@
                             }
                         </div>
                         <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#serviceCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#serviceCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -382,14 +385,17 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="requestCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <div id="requestCarousel" class="carousel slide" data-bs-ride="carousel">
                         <!-- Carousel indicators -->
-                        <ol class="carousel-indicators">
-                            @for (int i = 0; i < RequestList.Count / 4; i++)
-                            {
-                                <li data-target="#requestCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                        <div class="carousel-indicators">
+                            @{
+                                int noOdBtnRequestCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
                             }
-                        </ol>
+                            @for (int i = 0; i < noOdBtnRequestCarousel; i++)
+                            {
+                                <button type="button" data-bs-target="#requestCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                            }
+                        </div>
                         <!-- Wrapper for carousel items -->
                         <div class="carousel-inner">
                             @for (int i = 0; i < RequestList.Count; i += 4)
@@ -406,7 +412,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <i data-bs-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -418,19 +424,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         }
                                     </div>
                                 </div>
                             }
                         </div>
-                        <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#requestCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#requestCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
+                        <!-- Left and right controls/icons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#requestCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#requestCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
                 </div>
             </div>
