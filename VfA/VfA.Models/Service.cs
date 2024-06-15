@@ -33,5 +33,6 @@ namespace VfA.Models
 
         [ValidateNever]
         public List<ServiceImage> ServiceImages { get; set; }
-	}
+        public string? UserId { get; set; }
+    }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
+using VfA.DataAccess.Common;
 
 namespace VfAWeb.Areas.Admin.Controllers
 {
@@ -17,14 +18,16 @@ namespace VfAWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        ApplicationUser _user;
         public RequestController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _user = UserSession.GetUser();
         }
         public IActionResult Index() 
         {
-            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties:"Category").ToList();
+            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties:"Category").Where(x=>x.UserId == _user.Id).ToList();
            
             return View(objRequestList);
         }
@@ -58,6 +61,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                requestVM.Request.UserId = _user.Id;
                 if (requestVM.Request.Id == 0) {
                     _unitOfWork.Request.Add(requestVM.Request);
                 }
@@ -138,7 +142,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties: "Category").ToList();
+            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
             return Json(new { data = objRequestList });
         }
 

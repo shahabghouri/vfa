@@ -280,8 +280,8 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-bs-product-id="@ProductList[j].Id"></i>
-                                                        @* <i class="DeleteProductBtn fa fa-trash" data-bs-product-id="@ProductList[j].Id"></i> *@
+                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-product-id="@ProductList[j].Id"></i>
+                                                        @* <i class="DeleteProductBtn fa fa-trash" data-product-id="@ProductList[j].Id"></i> *@
                                                         <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -345,7 +345,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i data-bs-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <i data-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/service/delete/@ServiceList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -412,7 +412,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i data-bs-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">

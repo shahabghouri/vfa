@@ -43,5 +43,6 @@ namespace VfA.Models
 
         [ValidateNever]
         public List<ProductImage> ProductImages { get; set; }
+        public string? UserId { get; set; }
     }
 }

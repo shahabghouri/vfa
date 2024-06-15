@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
+using VfA.DataAccess.Common;
 
 namespace VfAWeb.Areas.Admin.Controllers
 {
@@ -17,14 +18,16 @@ namespace VfAWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        ApplicationUser _user;
         public ServiceController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _user = UserSession.GetUser();
         }
         public IActionResult Index()
         {
-            List<Service> objServiceList = _unitOfWork.Service.GetAll(includeProperties: "Category").ToList();
+            List<Service> objServiceList = _unitOfWork.Service.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
 
             return View(objServiceList);
         }
@@ -58,6 +61,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                serviceVM.Service.UserId = _user.Id;
                 if (serviceVM.Service.Id == 0)
                 {
                     _unitOfWork.Service.Add(serviceVM.Service);
@@ -153,7 +157,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Service> objServiceList = _unitOfWork.Service.GetAll(includeProperties: "Category").ToList();
+            List<Service> objServiceList = _unitOfWork.Service.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
             return Json(new { data = objServiceList });
         }
 

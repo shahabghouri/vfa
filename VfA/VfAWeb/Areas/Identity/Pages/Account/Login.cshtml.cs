@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using VfA.DataAccess.Repository.IRepository;
 using System.Text.Json;
+using VfA.DataAccess.Common;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {

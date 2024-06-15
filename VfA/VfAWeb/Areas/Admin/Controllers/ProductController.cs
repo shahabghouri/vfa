@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
+using VfA.DataAccess.Common;
 
 namespace VfAWeb.Areas.Admin.Controllers
 {
@@ -17,14 +18,16 @@ namespace VfAWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        ApplicationUser _user;
         public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _user = UserSession.GetUser();
         }
         public IActionResult Index() 
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").Where(x => x.UserId == _user.Id).ToList();
            
             return View(objProductList);
         }
@@ -58,6 +61,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                productVM.Product.UserId = _user.Id;
                 if (productVM.Product.Id == 0) {
                     _unitOfWork.Product.Add(productVM.Product);
                 }
@@ -149,7 +153,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
             return Json(new { data = objProductList });
         }
 

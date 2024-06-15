@@ -34,6 +34,7 @@ namespace VfA.Models
 
         [ValidateNever]
         public List<RequestImage> RequestImages { get; set; }
-        
-	}
+
+        public string? UserId { get; set; }
+    }
 }

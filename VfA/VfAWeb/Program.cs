@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using VfA.Utility;
 using Stripe;
 using VfA.DataAccess.DbInitializer;
+using VfA.DataAccess.Common;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +64,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+// Register the IHttpContextAccessor instance with your static class
+var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+UserSession.Configure(httpContextAccessor);
 SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(

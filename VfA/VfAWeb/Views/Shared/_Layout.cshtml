@@ -1,10 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Text.Json
-@inject IHttpContextAccessor HttpContextAccessor
+@using VfA.DataAccess.Common
 @{
-    ISession session = HttpContextAccessor.HttpContext.Session;
-    var userJson = session.GetString("user");
-    var user = !String.IsNullOrEmpty(userJson) ? JsonSerializer.Deserialize<ApplicationUser>(userJson) : null;
+    ApplicationUser user = new ApplicationUser();
+    user = UserSession.GetUser();
     var profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
 }
 
