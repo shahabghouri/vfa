@@ -279,7 +279,11 @@
                                             }
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
-                                                    <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                                    <span class="wish-icon">
+                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-product-id="@ProductList[j].Id"></i>
+                                                        @* <i class="DeleteProductBtn fa fa-trash" data-product-id="@ProductList[j].Id"></i> *@
+                                                        <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
+                                                    </span>
                                                     <div class="img-box">
                                                         <img src="@productImgUrl" class="img-fluid" alt="@ProductList[j].Name">
                                                     </div>
@@ -337,7 +341,10 @@
                                             }
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
-                                                    <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                                    <span class="wish-icon">
+                                                        <i data-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <a class="fa fa-trash" onClick=Delete('/admin/service/delete/@ServiceList[j].Id')></a>
+                                                    </span>
                                                     <div class="img-box">
                                                         <img src="@serviceImgUrl" class="img-fluid" alt="@ServiceList[j].Name">
                                                     </div>
@@ -398,7 +405,10 @@
                                             }
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
-                                                    <span class="wish-icon"><i class="fa fa-solid fa-pencil mr-2"></i><i class="fa fa-trash"></i></span>
+                                                    <span class="wish-icon">
+                                                        <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
+                                                    </span>
                                                     <div class="img-box">
                                                         <img src="@requestImgUrl" class="img-fluid" alt="@RequestList[j].Name">
                                                     </div>
@@ -431,9 +441,9 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $(".wish-icon i").click(function () {
-                $(this).toggleClass("fa-heart fa-heart-o");
-            });
+            // $(".wish-icon i").click(function () {
+            //     $(this).toggleClass("fa-heart fa-heart-o");
+            // });
             $('#AddProductBtn').on('click', function () {
                 window.location.href = '@Url.Action("Upsert", "Product", new { area = "Admin" })';
             });
@@ -443,6 +453,42 @@
             $('#AddRequestBtn').on('click', function () {
                 window.location.href = '@Url.Action("Upsert", "Request", new { area = "Admin" })';
             });
+
+            $('.EditProductBtn').on('click', function () {
+                var productId = $(this).data('product-id');
+                window.location.href = '@Url.Action("Upsert", "Product", new { area = "Admin", id = "__id__" })'.replace('__id__', productId);
+            });
+            $('.EditServiceBtn').on('click', function () {
+                var serviceId = $(this).data('service-id');
+                window.location.href = '@Url.Action("Upsert", "Service", new { area = "Admin", id = "__id__" })'.replace('__id__', serviceId);
+            });
+            $('.EditRequestBtn').on('click', function () {
+                var requestId = $(this).data('request-id');
+                window.location.href = '@Url.Action("Upsert", "Request", new { area = "Admin", id = "__id__" })'.replace('__id__', requestId);
+            });
         });
+        function Delete(url) {
+            debugger;
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            toastr.success(data.message);
+                            window.location.reload();
+                        }
+                    })
+                }
+            })
+        }
     </script>
 }
