@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Register Member";
 }
+<script src="~/js/beamember.js"></script>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
@@ -38,6 +39,7 @@
             $('#multi-step-form').find('.step').slice(1).hide();
 
             $(".next-step").click(function () {
+                validateForm();
                 if (currentStep < 3) {
                     $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft");
                     currentStep++;
@@ -50,6 +52,7 @@
             });
 
             $(".prev-step").click(function () {
+                validateForm();
                 if (currentStep > 1) {
                     $(".step-" + currentStep).addClass("animate__animated animate__fadeOutRight");
                     currentStep--;

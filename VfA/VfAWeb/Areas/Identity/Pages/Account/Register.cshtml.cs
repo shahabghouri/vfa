@@ -96,6 +96,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public string Email { get; set; }
             [Required(ErrorMessage = "Email is required.")]
             [EmailAddress]
+            [Display(Name = "Email")]
             public string UserName { get; set; }
 
             /// <summary>
