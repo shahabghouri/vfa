@@ -32,6 +32,7 @@ namespace VfA.DataAccess.Repository
                 objFromDb.CapacityUnit = obj.CapacityUnit;
                 objFromDb.Certificates = obj.Certificates;
                 objFromDb.ProductImages = obj.ProductImages;
+                objFromDb.UserId = obj.UserId;
                 //if (obj.ImageUrl != null)
                 //{
                 //    objFromDb.ImageUrl = obj.ImageUrl;

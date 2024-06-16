@@ -29,7 +29,7 @@ namespace VfA.DataAccess.Repository
                 objFromDb.Category = obj.Category;
                 objFromDb.Description = obj.Description;
                 objFromDb.RequestImages = obj.RequestImages;
-
+                objFromDb.UserId = obj.UserId;
             }
         }
     }
