@@ -11,5 +11,6 @@ namespace VfA.DataAccess.Repository.IRepository
     public interface ICompanyActivityRepository : IRepository<CompanyActivity>
     {
         List<CompanyActivity> GetAll();
+        void Update(CompanyActivity obj);
     }
 }

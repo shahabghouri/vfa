@@ -20,5 +20,13 @@ namespace VfA.DataAccess.Repository
         {
             return _db.CompanyActivites.ToList();
         }
+        public void Update(CompanyActivity obj)
+        {
+            var objFromDb = _db.CompanyActivites.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
+            {
+                objFromDb.Name = obj.Name;
+            }
+        }
     }
 }
