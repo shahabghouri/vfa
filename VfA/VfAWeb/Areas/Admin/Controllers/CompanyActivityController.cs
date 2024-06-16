@@ -10,7 +10,7 @@ using VfA.Utility;
 namespace VfAWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Importer},{SD.Role_Exporter}")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CompanyActivityController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
