@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using VfA.DataAccess.Common;
+using VfA.Models.ViewModels;
 
 namespace VfAWeb.Areas.Visitor.Controllers
 {
@@ -14,21 +16,34 @@ namespace VfAWeb.Areas.Visitor.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        ApplicationUser? _user;
 
         public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _user = UserSession.GetUser();
         }
 
         public IActionResult Index()
         {
-            
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages");
-            return View(productList);
-            
+            ProfileViewModel profileViewModel = new ProfileViewModel();
+            try
+            {
+                var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
+                var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").ToList();
+                var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").ToList();
+                profileViewModel.Products = products;
+                profileViewModel.Services = services;
+                profileViewModel.Requests = requests;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return View(profileViewModel);
         }
-        
+
         public IActionResult Services()
         {
 

@@ -68,3 +68,6 @@ function validateForm() {
     $.validator.unobtrusive.parse(form);
     var validate = form.validate().form();
 }
+$('.btn-reset').click(function () {
+    $('#multi-step-form')[0].reset();
+});

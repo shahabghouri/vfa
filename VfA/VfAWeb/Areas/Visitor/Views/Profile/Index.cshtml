@@ -253,11 +253,11 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" >
                         <!-- Carousel indicators -->
                         <div class="carousel-indicators">
                             @{
-                                int noOdBtnProductCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
+                                int noOdBtnProductCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
                             }
                             @for (int i = 0; i < noOdBtnProductCarousel; i++)
                             {
@@ -280,8 +280,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i class=" EditProductBtn fa fa-solid fa-pencil mr-2" data-product-id="@ProductList[j].Id"></i>
-                                                        @* <i class="DeleteProductBtn fa fa-trash" data-product-id="@ProductList[j].Id"></i> *@
+                                                        <i data-product-id="@ProductList[j].Id" class=" EditProductBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
@@ -318,11 +317,11 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
+                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel" >
                         <!-- Carousel indicators -->
                         <div class="carousel-indicators">
                             @{
-                                int noOdBtnServiceCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
+                                int noOdBtnServiceCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
                             }
                             @for (int i = 0; i < noOdBtnServiceCarousel; i++)
                             {
@@ -412,7 +411,7 @@
                                             <div class="col-sm-3">
                                                 <div class="thumb-wrapper">
                                                     <span class="wish-icon">
-                                                        <i data-request-id+++++++++="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
+                                                        <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
                                                         <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
                                                     </span>
                                                     <div class="img-box">
