@@ -237,9 +237,9 @@
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
-                            int noOdBtnProductCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
+                            int noOdBtnproductCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
                         }
-                        @for (int i = 0; i < noOdBtnProductCarousel; i++)
+                        @for (int i = 0; i < noOdBtnproductCarousel; i++)
                         {
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
                         }
@@ -252,15 +252,15 @@
                                 <div class="row">
                                     @for (int j = i; j < i + 4 && j < ProductList.Count; j++)
                                     {
-                                        var productImgUrl = "";
+                                        var serviceImgUrl = "";
                                         if (ProductList[j].ProductImages.Count > 0)
                                         {
-                                            productImgUrl = ProductList[j].ProductImages[0].ImageUrl;
+                                            serviceImgUrl = ProductList[j].ProductImages[0].ImageUrl;
                                         }
                                         <div class="col-sm-3">
                                             <div class="thumb-wrapper">
                                                 <div class="img-box">
-                                                    <img src="@productImgUrl" class="img-fluid" alt="@ProductList[j].Name">
+                                                    <img src="@serviceImgUrl" class="img-fluid" alt="@ProductList[j].Name">
                                                 </div>
                                                 <div class="thumb-content">
                                                     <h4>@ProductList[j].Name</h4>
@@ -290,15 +290,15 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
-                            int noOdBtnServiceCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
+                            int noOdBtnProductCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
                         }
-                        @for (int i = 0; i < noOdBtnServiceCarousel; i++)
+                        @for (int i = 0; i < noOdBtnProductCarousel; i++)
                         {
-                            <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
                         }
                     </div>
                     <!-- Wrapper for carousel items -->
@@ -331,10 +331,10 @@
                         }
                     </div>
                     <!-- Carousel controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
                 </div>
@@ -406,33 +406,37 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div id="ourPartnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0">
+                <div id="ourPartnersCarousel" class="carousel slide" data-bs-ride="carousel">
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
-                            // int noOdBtnourPartnersCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
+                            int noOdBtnourPartnersCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
                         }
-                        @for (int i = 0; i < 3; i++)
+                        @for (int i = 0; i < noOdBtnourPartnersCarousel; i++)
                         {
                             <button type="button" data-bs-target="#ourPartnersCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
                         }
                     </div>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        @for (int i = 0; i < 10; i += 4)
+                        @for (int i = 0; i < ProductList.Count; i += 4)
                         {
                             <div class="item carousel-item @(i == 0 ? "active" : "")">
                                 <div class="row">
-                                    @for (int j = i; j < i + 4 && j < 10; j++)
+                                    @for (int j = i; j < i + 4 && j < ProductList.Count; j++)
                                     {
-                                        var serviceImgUrl = "";
+                                        var requestImgUrl = "";
+                                        if (ProductList[j].ProductImages.Count > 0)
+                                        {
+                                            requestImgUrl = ProductList[j].ProductImages[0].ImageUrl;
+                                        }
                                         <div class="col-sm-3">
                                             <div class="thumb-wrapper">
                                                 <div class="img-box">
-                                                    <img src="@serviceImgUrl" class="img-fluid" alt="">
+                                                    <img src="@requestImgUrl" class="img-fluid" alt="@ProductList[j].Name">
                                                 </div>
                                                 <div class="thumb-content">
-                                                    <h4>Name</h4>
+                                                    <h4>@ProductList[j].Name</h4>
                                                     <a href="#" class="btn btn-primary">Details</a>
                                                 </div>
                                             </div>
@@ -442,7 +446,7 @@
                             </div>
                         }
                     </div>
-                    <!-- Carousel controls -->
+                    <!-- Left and right controls/icons -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#ourPartnersCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
@@ -455,7 +459,7 @@
         <div class="row col-6">
             <div class="col-md-12  d-flex justify-content-start">
                 <div>
-                    <h2 class="h2ProfileCsarousel">Requests</h2>
+                    <h2 class="h2ProfileCsarousel">Trust Us</h2>
                 </div>
             </div>
             <div class="col-md-12">
