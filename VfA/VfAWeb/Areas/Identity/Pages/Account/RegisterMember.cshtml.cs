@@ -172,6 +172,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public List<Category> Categories { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> States { get; set; }
+            [Required(ErrorMessage = "You must agreee to our terms and conditions before continue")]
+            public string AggreeToTermsAndConditions { get; set; }
         }
 
 

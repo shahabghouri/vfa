@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Register Member";
 }
-<script src="~/js/beamember.js"></script>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
@@ -18,64 +17,12 @@
                 }
             })
         })
-    </script>
-
-
-    @* MY VIEW START's FROM HERE *@
-    <script>
-        var currentStep = 1;
-        var updateProgressBar;
-
-        function displayStep(stepNumber) {
-            if (stepNumber >= 1 && stepNumber <= 3) {
-                $(".step-" + currentStep).hide();
-                $(".step-" + stepNumber).show();
-                currentStep = stepNumber;
-                updateProgressBar();
-            }
-        }
-
-        $(document).ready(function () {
-            $('#multi-step-form').find('.step').slice(1).hide();
-
-            $(".next-step").click(function () {
-                validateForm();
-                if (currentStep < 3) {
-                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft");
-                    currentStep++;
-                    setTimeout(function () {
-                        $(".step").removeClass("animate__animated animate__fadeOutLeft").hide();
-                        $(".step-" + currentStep).show().addClass("animate__animated animate__fadeInRight");
-                        updateProgressBar();
-                    }, 500);
-                }
-            });
-
-            $(".prev-step").click(function () {
-                validateForm();
-                if (currentStep > 1) {
-                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutRight");
-                    currentStep--;
-                    setTimeout(function () {
-                        $(".step").removeClass("animate__animated animate__fadeOutRight").hide();
-                        $(".step-" + currentStep).show().addClass("animate__animated animate__fadeInLeft");
-                        updateProgressBar();
-                    }, 500);
-                }
-            });
-
-            updateProgressBar = function () {
-                var progressPercentage = ((currentStep - 1) / 2) * 100;
-                $(".progress-bar").css("width", progressPercentage + "%");
-            }
-        });
         function loadStates(countryId) {
             $.ajax({
                 url: '@Url.Action("GetStates", "StateProvince")',
                 type: 'GET',
                 data: { countryId: countryId },
                 success: function (data) {
-                    debugger;
                     var stateSelect = $('select[name="Input.StateProvinceId"]');
                     stateSelect.empty();
                     stateSelect.append('<option value="">-Select-</option>');
@@ -88,27 +35,8 @@
                 }
             });
         }
-
-        $("#importerBtn").click(function () {
-            $("#formTitle").text("Register - Importer");
-            $("input[name='Input.IsImporter']").val("true");
-            $("input[name='Input.IsExporter']").val("false");
-            $(".ImporterFields").show();
-            $(".ExporterFields").hide();
-            $("#formContainer").show();
-            $("#btnContainer").hide();
-        });
-
-        $("#exporterBtn").click(function () {
-            $("#formTitle").text("Register - Exporter");
-            $("input[name='Input.IsImporter']").val("false");
-            $("input[name='Input.IsExporter']").val("true");
-            $(".ImporterFields").hide();
-            $(".ExporterFields").show();
-            $("#formContainer").show();
-            $("#btnContainer").hide();
-        });
     </script>
+    <script src="~/js/beamember.js"></script>
 }
 <style>
     #container {
@@ -279,7 +207,7 @@
                                 @* <h3>Step 1</h3> *@
                                 <div class="mb-3">
                                     <label asp-for="Input.Name" class="form-label">First <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.Name" class="form-control">
+                                    <input asp-for="Input.Name" class="form-control" required>
                                     <span asp-validation-for="Input.Name" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
@@ -289,7 +217,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.LastName" class="form-label">Last <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.LastName" type="text" class="form-control">
+                                    <input asp-for="Input.LastName" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.LastName" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
@@ -299,11 +227,11 @@
                                         </div>
                                         <div class="input-padding">
                                             <div>
-                                                <input asp-for="Input.Gender" type="radio" value="male">
+                                                <input asp-for="Input.Gender" type="radio" value="male" required>
                                                 <label asp-for="Input.Gender">Male</label>
                                             </div>
                                             <div>
-                                                <input asp-for="Input.Gender" type="radio" value="female">
+                                                <input asp-for="Input.Gender" type="radio" value="female" required>
                                                 <label asp-for="Input.Gender">Female</label>
                                             </div>
                                         </div>
@@ -312,7 +240,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.CountryId" class="form-label">Country <span class="text-primary">*</span></label>
-                                    <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select">
+                                    <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select" required>
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.CountryId" class="text-danger"></span>
@@ -322,13 +250,13 @@
                                         <div class="full-width-grey">
                                             <label asp-for="Input.PhoneNumber" class="form-label text-light">Phone Number <span class="text-light">*</span></label>
                                         </div>
-                                        <input asp-for="Input.PhoneNumber" type="text" class="form-control">
+                                        <input asp-for="Input.PhoneNumber" type="text" class="form-control" required>
                                         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.Job" class="form-label">Job <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.Job" type="text" class="form-control">
+                                    <input asp-for="Input.Job" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.Job" class="text-danger"></span>
                                 </div>
                                 <button type="button" class="btn border-warning text-warning next-step">Next -></button>
@@ -344,12 +272,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.CompanyCEOName" class="form-label">Company CEO (Cheif Executive Officer)</label>
-                                    <input asp-for="Input.CompanyCEOName" type="text" class="form-control">
+                                    <input asp-for="Input.CompanyCEOName" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.CompanyCEOName" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.CompanyActivityId" class="form-label">Company Activity <span class="text-primary">*</span></label>
-                                    <select asp-for="Input.CompanyActivityId" asp-items="@Model.Input.CompanyActivityList" class="form-select">
+                                    <select asp-for="Input.CompanyActivityId" asp-items="@Model.Input.CompanyActivityList" class="form-select" required>
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.CompanyActivityId" class="text-danger"></span>
@@ -366,7 +294,7 @@
                                         <div class="full-width-grey">
                                             <label asp-for="Input.WilayaID" class="form-label text-light">Wilaya<span class="text-light">*</span></label>
                                         </div>
-                                        <select asp-for="Input.WilayaID" asp-items="@Model.Input.WiliyaList" class="form-select">
+                                        <select asp-for="Input.WilayaID" asp-items="@Model.Input.WiliyaList" class="form-select" required>
                                             <option value="">-Select-</option>
                                         </select>
                                     </div>
@@ -374,29 +302,29 @@
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.StreetAddress" class="form-label">Address <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.StreetAddress" type="text" class="form-control">
+                                    <input asp-for="Input.StreetAddress" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.City" class="form-label">City/Town <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.City" type="text" class="form-control">
+                                    <input asp-for="Input.City" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.City" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3 ImporterFields">
                                     <label asp-for="Input.StateProvinceId" class="form-label">State/Province <span class="text-primary">*</span></label>
-                                    <select asp-for="Input.StateProvinceId" asp-items="@Model.Input.States" class="form-select">
+                                    <select asp-for="Input.StateProvinceId" asp-items="@Model.Input.States" class="form-select" required>
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.StateProvinceId" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.PostalCode" class="form-label">ZIP/Postal Code <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.PostalCode" type="text" class="form-control">
+                                    <input asp-for="Input.PostalCode" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.CompanyCategoryId" class="form-label">Category <span class="text-primary">*</span></label>
-                                    <select asp-for="Input.CompanyCategoryId" asp-items="@(new SelectList(Model.Input.Categories, "Id", "Name"))" class="form-select">
+                                    <select asp-for="Input.CompanyCategoryId" asp-items="@(new SelectList(Model.Input.Categories, "Id", "Name"))" class="form-select" required>
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.CompanyCategoryId" class="text-danger"></span>
@@ -410,7 +338,7 @@
                                 <!-- Step 3 form fields here -->
                                 <div class="mb-3">
                                     <label asp-for="Input.UserName" class="form-label">Email <span class="text-primary">*</span></label>
-                                    <input asp-for="Input.UserName" type="text" class="form-control">
+                                    <input asp-for="Input.UserName" type="text" class="form-control" required>
                                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
@@ -420,20 +348,22 @@
                                         </div>
                                         <div class="mx-2 my-3">
                                             <label asp-for="Input.Password" class="form-label">Password <span class="text-primary">*</span></label>
-                                            <input asp-for="Input.Password" class="form-control">
+                                            <input asp-for="Input.Password" class="form-control" required>
                                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                                         </div>
                                         <div class="mx-2 mb-3">
                                             <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password <span class="text-primary">*</span></label>
-                                            <input asp-for="Input.ConfirmPassword" class="form-control">
+                                            <input asp-for="Input.ConfirmPassword" class="form-control" required>
                                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="checkbox" id="AgreeTermsAndCondition" name="AgreeTermsAndCondition" value="">
+                                    <input type="checkbox" asp-for="Input.AggreeToTermsAndConditions" required>
                                     <label>I agree to the terms and conditions and the privacy policy</label>
+                                    </br><span asp-validation-for="Input.AggreeToTermsAndConditions" class="text-danger"></span>
                                 </div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                                 <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
                                 <button type="submit" class="btn btn-warning text-light">Submit</button>
                                 <button type="button" class="btn border-warning text-warning">Reset</button>
