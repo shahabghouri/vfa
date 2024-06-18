@@ -18,40 +18,40 @@
                 <div class="col-10">
                     <div class="border p-3">
                         @*<div asp-validation-summary="ModelOnly"></div>*@
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating mb-2">
                             <input asp-for="Product.Name" class="form-control" />
                             <label asp-for="Product.Name" class="form-label"></label>
                             <span asp-validation-for="Product.Name" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                        <div class="form-floating mb-2">
+                            <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
                                 <option disabled selected>--Select Category--</option>
                             </select>
                             <label asp-for="Product.CategoryId" class="form-label"></label>
                             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                         </div>
-                        <div class="py-2 col-12">
+                        <div class=" mb-2">
                             <label asp-for="Product.Description" class="text-muted"></label>
                             <textarea asp-for="Product.Description" class="form-control"></textarea>
                             <span asp-validation-for="Product.Description" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating mb-2">
                             <input asp-for="Product.ProductionCapacity" class="form-control" />
-                            <label asp-for="Product.ProductionCapacity" class="ms-2"></label>
+                            <label asp-for="Product.ProductionCapacity" class="form-label"></label>
                             <span asp-validation-for="Product.ProductionCapacity" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating mb-2">
                             <input asp-for="Product.CapacityUnit" class="form-control" />
                             <label asp-for="Product.CapacityUnit" class="form-label"></label>
                             <span asp-validation-for="Product.CapacityUnit" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating mb-2">
                             <input asp-for="Product.Certificates" class="form-control" />
                             <label asp-for="Product.Certificates" class="form-label"></label>
                             <span asp-validation-for="Product.Certificates" class="text-danger"></span>
                         </div>
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating mb-2">
                             <input type="file" name="files" class="form-control" multiple />
                             <label asp-for="Product.ProductImages" class="form-label"></label>
                         </div>

@@ -6,6 +6,8 @@
     user = UserSession.GetUser();
     var profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
 }
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IViewLocalizer Localizer
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,31 +45,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="About">@Localizer["About"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Products">Products</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Products">@Localizer["Products"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Services">Services</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Services">@Localizer["Services"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Requests">Requests</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Requests">@Localizer["Requests"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Info">Useful Informations</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Info">@Localizer["Useful Informations"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Partner">@Localizer["Our Partners"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Partner">Our Partners</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Trust">Trust us</a>
+                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Trust">@Localizer["Trust us"]</a>
                         </li>
                         @if (user != null)
                         {
@@ -324,7 +323,7 @@
     @*Footer*@
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - <img src="/images/footer.png" /> - All rights Reserved <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - <img src="/images/footer.png" /> - @Localizer["All rights Reserved"] <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
         </div>
     </footer>
     @*____________________________________________________________________________________________________________________________________________________________*@
