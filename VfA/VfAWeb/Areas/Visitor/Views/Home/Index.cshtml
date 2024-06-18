@@ -1,9 +1,11 @@
-﻿@model ProfileViewModel
+﻿@model HomeVM
 @{
     ViewData["Title"] = "Home";
     var ProductList = Model.Products.ToList();
     var ServiceList = Model.Services.ToList();
     var RequestList = Model.Requests.ToList();
+    var PartnerList = Model.Partners.ToList();
+    var TrustiesList = Model.Trusts.ToList();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -410,7 +412,7 @@
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
-                            int noOdBtnourPartnersCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
+                            int noOdBtnourPartnersCarousel = (int)Math.Ceiling(PartnerList.Count / 4.0);
                         }
                         @for (int i = 0; i < noOdBtnourPartnersCarousel; i++)
                         {
@@ -419,25 +421,25 @@
                     </div>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        @for (int i = 0; i < ProductList.Count; i += 4)
+                        @for (int i = 0; i < PartnerList.Count; i += 4)
                         {
                             <div class="item carousel-item @(i == 0 ? "active" : "")">
                                 <div class="row">
-                                    @for (int j = i; j < i + 4 && j < ProductList.Count; j++)
+                                    @for (int j = i; j < i + 4 && j < PartnerList.Count; j++)
                                     {
                                         var requestImgUrl = "";
-                                        if (ProductList[j].ProductImages.Count > 0)
+                                        if (PartnerList[j].PartnerImages.Count > 0)
                                         {
-                                            requestImgUrl = ProductList[j].ProductImages[0].ImageUrl;
+                                            requestImgUrl = PartnerList[j].PartnerImages[0].ImageUrl;
                                         }
                                         <div class="col-sm-3">
                                             <div class="thumb-wrapper">
                                                 <div class="img-box">
-                                                    <img src="@requestImgUrl" class="img-fluid" alt="@ProductList[j].Name">
+                                                    <img src="@requestImgUrl" class="img-fluid" alt="@PartnerList[j].Name">
                                                 </div>
                                                 <div class="thumb-content">
-                                                    <h4>@ProductList[j].Name</h4>
-                                                    <a href="#" class="btn btn-primary">Details</a>
+                                                    <h4>@PartnerList[j].Name</h4>
+                                                    @* <a href="#" class="btn btn-primary">Details</a> *@
                                                 </div>
                                             </div>
                                         </div>
@@ -467,7 +469,7 @@
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
-                            int noOdBtntrustUsCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
+                            int noOdBtntrustUsCarousel = (int)Math.Ceiling(TrustiesList.Count / 4.0);
                         }
                         @for (int i = 0; i < noOdBtntrustUsCarousel; i++)
                         {
@@ -476,25 +478,25 @@
                     </div>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        @for (int i = 0; i < RequestList.Count; i += 4)
+                        @for (int i = 0; i < TrustiesList.Count; i += 4)
                         {
                             <div class="item carousel-item @(i == 0 ? "active" : "")">
                                 <div class="row">
-                                    @for (int j = i; j < i + 4 && j < RequestList.Count; j++)
+                                    @for (int j = i; j < i + 4 && j < TrustiesList.Count; j++)
                                     {
                                         var requestImgUrl = "";
-                                        if (RequestList[j].RequestImages.Count > 0)
+                                        if (TrustiesList[j].TrustImages.Count > 0)
                                         {
-                                            requestImgUrl = RequestList[j].RequestImages[0].ImageUrl;
+                                            requestImgUrl = TrustiesList[j].TrustImages[0].ImageUrl;
                                         }
                                         <div class="col-sm-3">
                                             <div class="thumb-wrapper">
                                                 <div class="img-box">
-                                                    <img src="@requestImgUrl" class="img-fluid" alt="@RequestList[j].Name">
+                                                    <img src="@requestImgUrl" class="img-fluid" alt="@TrustiesList[j].Name">
                                                 </div>
                                                 <div class="thumb-content">
-                                                    <h4>@RequestList[j].Name</h4>
-                                                    <a href="#" class="btn btn-primary">Details</a>
+                                                    <h4>@Html.Raw(TrustiesList[j].Name.ToString())</h4>
+                                                    @* <a href="#" class="btn btn-primary">Details</a> *@
                                                 </div>
                                             </div>
                                         </div>

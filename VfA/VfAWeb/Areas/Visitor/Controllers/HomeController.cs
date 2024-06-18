@@ -27,21 +27,23 @@ namespace VfAWeb.Areas.Visitor.Controllers
 
         public IActionResult Index()
         {
-            ProfileViewModel profileViewModel = new ProfileViewModel();
+            HomeVM homeVm = new HomeVM();
             try
             {
                 var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
                 var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").ToList();
                 var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").ToList();
-                profileViewModel.Products = products;
-                profileViewModel.Services = services;
-                profileViewModel.Requests = requests;
+                homeVm.Products = products;
+                homeVm.Services = services;
+                homeVm.Requests = requests;
+                homeVm.Partners = _unitOfWork.Partner.GetAll(includeProperties: "PartnerImages").ToList();
+                homeVm.Trusts = _unitOfWork.Trust.GetAll(includeProperties: "TrustImages").ToList();
             }
             catch (Exception ex)
             {
                 throw;
             }
-            return View(profileViewModel);
+            return View(homeVm);
         }
 
         public IActionResult Services()

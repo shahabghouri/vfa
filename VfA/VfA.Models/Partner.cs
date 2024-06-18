@@ -15,7 +15,7 @@ namespace VfA.Models
 
 
 		
-		public List<PartnerImage> PartnerImages { get; set; }
+		public List<PartnerImage>? PartnerImages { get; set; }
         
 	}
 }

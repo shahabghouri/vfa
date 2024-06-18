@@ -14,7 +14,7 @@ namespace VfA.Models
 		public string Name { get; set; }
 
 		
-		public List<TrustImage> TrustImages { get; set; }
+		public List<TrustImage>? TrustImages { get; set; }
         
 	}
 }
