@@ -20,7 +20,7 @@ namespace VfA.Models
 		public int ReceiverUserId { get; set; }
 
 		[Required]
-		[MaxLength(500)] // Ajustez la longueur maximale selon vos besoins
+		[MaxLength(500)] 
 		public string Content { get; set; }
 
 		[Required]
@@ -28,37 +28,15 @@ namespace VfA.Models
 
 		public bool IsRead { get; set; }
 
-		public string AttachmentUrl { get; set; } // URL du fichier ou de l'image attaché
+		public string AttachmentUrl { get; set; }
 
-		// Autres propriétés de notification si nécessaire
 
 		[ForeignKey("SenderUserId")]
 		[InverseProperty("SentMessages")]
-		public virtual User Sender { get; set; }
+		public virtual ApplicationUser Sender { get; set; }
 
 		[ForeignKey("ReceiverUserId")]
 		[InverseProperty("ReceivedMessages")]
-		public virtual User Receiver { get; set; }
-	}
-
-	// Classe utilisateur pour référence
-	public class User
-	{
-		[Key]
-		public int UserId { get; set; }
-
-		[Required]
-		[MaxLength(100)] // Ajustez la longueur maximale selon vos besoins
-		public string Username { get; set; }
-
-		// Autres propriétés utilisateur
-
-		// Messages envoyés par cet utilisateur
-		[InverseProperty("Sender")]
-		public virtual ICollection<Message> SentMessages { get; set; }
-
-		// Messages reçus par cet utilisateur
-		[InverseProperty("Receiver")]
-		public virtual ICollection<Message> ReceivedMessages { get; set; }
+		public virtual ApplicationUser Receiver { get; set; }
 	}
 }

@@ -35,7 +35,7 @@ namespace VfA.DataAcess.Data
 
         public DbSet<PrivacyImage> PrivacyImages { get; set; }
 
-        //public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
 
 
