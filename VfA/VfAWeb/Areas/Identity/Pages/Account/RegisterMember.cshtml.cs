@@ -348,7 +348,65 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+            if (_roleManager.RoleExistsAsync(SD.Role_Visitor).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Visitor)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Gold)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Silver)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Basic)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Importer)).GetAwaiter().GetResult();
+            }
 
+            /* Input = new() {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem {
+                     Text = i,
+                     Value = i
+                 }),
+             };*/
+
+            Input = new()
+            {
+
+                RoleList = _roleManager.Roles
+                  .Where(x => x.Name != "Admin" && x.Name != "Visitor") // Exclure les rôles "Admin" et "Visitor"
+                  .Select(x => x.Name)
+                   .Select(i => new SelectListItem
+                   {
+                       Text = i,
+                       Value = i
+                   }),
+            };
+            Input.Categories = _unitOfWork.Category.GetAll();
+            Input.CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            Input.CompanyCountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            Input.CompanyActivityList = _unitOfWork.CompanyActivity.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            Input.WiliyaList = _unitOfWork.Wilaya.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            //    CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem {
+            //        Text = i.Name,
+            //        Value = i.Id.ToString()
+            //    })
+
+
+
+            ReturnUrl = returnUrl;
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             // If we got this far, something failed, redisplay form
             return Page();
         }

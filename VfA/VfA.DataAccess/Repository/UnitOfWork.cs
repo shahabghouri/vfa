@@ -31,6 +31,7 @@ namespace VfA.DataAccess.Repository
         public IInfoImageRepository InfoImage { get; private set; }
         public IAboutImageRepository AboutImage { get; private set; }
         public IPrivacyImageRepository PrivacyImage { get; private set; }
+        public IMessageRepository Message { get; private set; }
 
 
 
@@ -71,8 +72,9 @@ namespace VfA.DataAccess.Repository
 			//Bulky DB
 			ProductImage = new ProductImageRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
-            
-            
+            Message = new MessageRepository(_db);
+
+
             Product = new ProductRepository(_db);
             Company = new CompanyRepository(_db);   
             

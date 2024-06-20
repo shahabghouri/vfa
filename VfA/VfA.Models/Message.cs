@@ -14,10 +14,10 @@ namespace VfA.Models
 		public int MessageId { get; set; }
 
 		[Required]
-		public int SenderUserId { get; set; }
+		public string SenderUserId { get; set; }
 
 		[Required]
-		public int ReceiverUserId { get; set; }
+		public string ReceiverUserId { get; set; }
 
 		[Required]
 		[MaxLength(500)] 
@@ -32,11 +32,9 @@ namespace VfA.Models
 
 
 		[ForeignKey("SenderUserId")]
-		[InverseProperty("SentMessages")]
 		public virtual ApplicationUser Sender { get; set; }
 
 		[ForeignKey("ReceiverUserId")]
-		[InverseProperty("ReceivedMessages")]
 		public virtual ApplicationUser Receiver { get; set; }
 	}
 }

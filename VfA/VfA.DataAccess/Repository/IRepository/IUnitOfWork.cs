@@ -34,9 +34,10 @@ namespace VfA.DataAccess.Repository.IRepository
         IInfoImageRepository InfoImage { get; }
         IAboutImageRepository AboutImage { get; }
         IPrivacyImageRepository PrivacyImage { get; }
+        IMessageRepository Message { get; }
 
 
-        
+
 
         IProductRepository Product { get; }
         ICompanyRepository Company { get; }

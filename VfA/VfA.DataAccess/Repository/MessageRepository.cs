@@ -17,9 +17,6 @@ namespace VfA.DataAccess.Repository
         {
             _db = db;
         }
-
-        
-
         public void MarkAsRead(Message obj)
         {
             var objFromDb = _db.Messages.FirstOrDefault(u => u.MessageId == obj.MessageId);
