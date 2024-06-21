@@ -123,50 +123,54 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
             [Display(Name = "First Name")]
-            [AllowNull]
+            [Required]
             public string Name { get; set; }
-            [AllowNull]
+            [Required]
             public string? LastName { get; set; }
             [AllowNull]
             public string? MiddleName { get; set; }
-            [AllowNull]
+            [Required]
             public string? Gender { get; set; }
-            [AllowNull]
+            [Required]
             public int? CountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CountryList { get; set; }
 
-            [AllowNull]
+            [Required]
             public string? Job { get; set; }
 
-            [AllowNull]
+            [Required]
             public string? PhoneNumber { get; set; }
-            [AllowNull]
             public int? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
             //CompanyInformation
-            [AllowNull]
+            [Required]
             public string? CompanyName { get; set; }
-            [AllowNull]
+            [Required]
             public string? CompanyCEOName { get; set; }
-            [AllowNull]
+            [Required]
             public int? CompanyActivityId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyActivityList { get; set; }
-            [AllowNull]
+            [Required]
             public int? CompanyCountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyCountryList { get; set; }
             public IEnumerable<SelectListItem> WiliyaList { get; set; }
-            public int? WilayaID { get; set; }
+            [Required]
+            public int WilayaID { get; set; }
+            [Required]
             public string? StreetAddress { get; set; }
+            [Required]
             public string? City { get; set; }
-            [AllowNull]
+            [Required]
             public int? StateProvinceId { get; set; }
+            [Required]
             public string? State { get; set; }
+            [Required]
             public string? PostalCode { get; set; }
-            [AllowNull]
+            [Required]
             public int? CompanyCategoryId { get; set; }
             [ValidateNever]
             public List<Category> Categories { get; set; }
