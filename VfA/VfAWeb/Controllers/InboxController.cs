@@ -22,13 +22,14 @@ namespace VfAWeb.Controllers
             var viewModel = new MessageViewModel();
             if (_user != null)
             {
-                var allUsers = _unitOfWork.ApplicationUser.GetAll(x => x.Id != _user.Id);
-                var messages = _unitOfWork.Message.GetAll(x => x.SenderUserId == _user.Id || x.ReceiverUserId == _user.Id);
-                var chats1 = (from user in allUsers join message in messages on user.Id equals message.SenderUserId select user);
-                var chats2 = (from user in allUsers join message in messages on user.Id equals message.ReceiverUserId select user);
-                chats1.ToList().AddRange(chats2);
-                var chats = chats1.Distinct().ToList();
-                viewModel.Chats = chats;
+                var allUsers = _unitOfWork.ApplicationUser.GetAll(x => x.Id != _user.Id).ToList();
+                var messages = _unitOfWork.Message.GetAll(x => x.SenderUserId == _user.Id || x.ReceiverUserId == _user.Id).ToList();
+                //var chats1 = (from user in allUsers join message in messages on user.Id equals message.SenderUserId select user);
+                //var chats2 = (from user in allUsers join message in messages on user.Id equals message.ReceiverUserId select user);
+                //chats1.ToList().AddRange(chats2);
+                //var chats = chats1.Distinct().ToList();
+                viewModel.Chats = allUsers;
+                viewModel.Messages = messages;
             }
             return View(viewModel);
         }
@@ -38,7 +39,9 @@ namespace VfAWeb.Controllers
             message.IsRead = false;
             message.SenderUserId = _user.Id;
             message.Timestamp = DateTime.Now;
+            message.AttachmentUrl = "";
             _unitOfWork.Message.Add(message);
+            _unitOfWork.Save();
             return Ok();
         }
         [HttpGet]
