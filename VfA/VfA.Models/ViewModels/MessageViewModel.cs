@@ -8,7 +8,7 @@ namespace VfA.Models.ViewModels
 {
     public class MessageViewModel
     {
-        public List<Message> messages { get; set; }
+        public List<Message> Messages { get; set; }
         public List<ApplicationUser> Chats { get; set; }
     }
 }
