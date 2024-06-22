@@ -213,6 +213,12 @@
         position: relative;
     }
 
+    .img-box2 {
+       
+        height: 200px; /* Set desired height */
+        overflow: hidden;
+        position: relative;
+    }
         .img-box img {
             width: 100%;
             height: 100%;
@@ -226,8 +232,8 @@
 </style>
 <div class="container-xl">
     <div class="row">
-        <div class="col-md-2">
-            <img class="img-logo" alt="logo-here" />
+        <div class="col-md-2 img-box2">
+            <img src="@Model.CompnayLogo" class="" alt="logo-here" />
         </div>
         <div class="col-md-10">
             <div><input class="my-2" placeholder="company Name" value="@Model.CompnayName" /></div>

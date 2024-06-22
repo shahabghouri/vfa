@@ -25,6 +25,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using VfA.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -38,6 +40,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public RegisterMemberModel(
             UserManager<IdentityUser> userManager,
@@ -46,7 +49,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
@@ -56,6 +60,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -182,6 +187,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> States { get; set; }
             public string AggreeToTermsAndConditions { get; set; }
+            [Display(Name = "Company Logo")]
+            public List<CompanyImage>? CompanyImages { get; set; }
         }
 
 
@@ -253,7 +260,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null, List<IFormFile> files = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -296,6 +303,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
 
                 // Add company if validation passes
                 user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
+                AddCompanyImages(company, files);
                 //Ends
 
                 if (Input.Role == SD.Role_Company)
@@ -385,8 +393,6 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
-
         private ApplicationUser CreateUser()
         {
             try
@@ -400,7 +406,6 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
-
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -408,6 +413,41 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+        public void AddCompanyImages(Company company,List<IFormFile> files)
+        {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (files != null)
+            {
+                foreach (IFormFile file in files)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string companyPath = @"images\companies\company-" + company.Id;
+                    string finalPath = Path.Combine(wwwRootPath, companyPath);
+
+                    if (!Directory.Exists(finalPath))
+                        Directory.CreateDirectory(finalPath);
+
+                    using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    CompanyImage companyImage = new()
+                    {
+                        ImageUrl = @"\" + companyPath + @"\" + fileName,
+                        CompanyId = company.Id,
+                    };
+
+                    if (company.CompanyImages == null)
+                        company.CompanyImages = new List<CompanyImage>();
+
+                    company.CompanyImages.Add(companyImage);
+                }
+
+                _unitOfWork.Company.Update(company);
+                _unitOfWork.Save();
+            }
         }
     }
 }

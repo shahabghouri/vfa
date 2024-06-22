@@ -204,7 +204,7 @@
                             <div onclick="displayStep(2)" class="displaySteptext">Company Informations</div>
                             <div onclick="displayStep(3)" class="displaySteptext">Account Informations</div>
                         </div>
-                        <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                             <input asp-for="Input.IsImporter" type="hidden" value="false" />
                             <input asp-for="Input.IsExporter" type="hidden" value="false" />
                             <div class="step step-1">
@@ -332,6 +332,10 @@
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.CompanyCategoryId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyImages" class="form-label"></label>
+                                    <input type="file" name="files" class="form-control border-0 shadow" multiple />
                                 </div>
                                 <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
                                 <button type="button" class="btn border-warning text-warning next-step">Next -></button>

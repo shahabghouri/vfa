@@ -16,5 +16,6 @@ namespace VfA.Models.ViewModels
         public IEnumerable<Product>? Products { get; set; }
         public IEnumerable<Service>? Services { get; set; }
         public IEnumerable<Request>? Requests { get; set; }
+        public string? CompnayLogo { get; set; }
     }
 }
