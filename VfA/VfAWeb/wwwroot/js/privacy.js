@@ -8,8 +8,8 @@ function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": { url:'/admin/privacy/getall'},
         "columns": [
-            { data: 'Title', "width": "25%" },
-            { data: 'Topic', "width": "25%" },
+            { data: 'title', "width": "25%" },
+            { data: 'topic', "width": "25%" },
             {
                 data: 'id',
                 "render": function (data) {

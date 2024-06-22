@@ -34,5 +34,7 @@ namespace VfA.Models {
         [ValidateNever]
         public Category? Category { get; set; }
         public int? WilayaId { get; set; }
+        [ValidateNever]
+        public List<CompanyImage>? CompanyImages { get; set; }
     }
 }
