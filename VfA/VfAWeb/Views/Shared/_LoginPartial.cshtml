@@ -2,7 +2,7 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
+@* 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
@@ -30,4 +30,45 @@
             <a class="nav-link " id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
-</ul>
+</ul> *@
+    <div class="dropdown-user-scroll scrollbar-outer">
+        @if (SignInManager.IsSignedIn(User))
+        {
+        <li>
+            <div class="user-box">
+                    @* <div class="avatar-lg">
+            <img src="assets/img/profile.jpg"
+            alt="image profile"
+            class="avatar-img rounded" />
+            </div> *@
+                <div class="u-text">
+                    <h4>User Name</h4>
+                    <p class="text-muted">@UserManager.GetUserName(User)!</p>
+                    <a href="profile.html"
+                       class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Account Setting</a>
+            <div class="dropdown-divider"></div>
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="dropdown-item">Logout</button>
+            </form>
+        </li>
+        }
+        else
+        {
+        <li>
+            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/RegisterMember">Be a Member</a>
+            <a class="dropdown-item" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+        }
+    </div>
+    </li>

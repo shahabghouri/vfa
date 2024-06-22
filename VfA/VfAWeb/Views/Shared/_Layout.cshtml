@@ -26,279 +26,503 @@
     @*cSS for datatables (search, sort etc...)*@
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+
+    <!-- CSS Files -->
+    @*  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" /> *@
+    <link rel="stylesheet" href="~/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/images/logo.png" style="width:50px" />
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                @**************************************************************Visior*********************************************************@
-
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="white">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="light-blue">
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/kaiadmin/logo_light.svg"
+                             alt="navbar brand"
+                             class="navbar-brand"
+                             height="20" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li b-zdo7mud374="" class="nav-item active">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Index" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Home</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="About">@Localizer["About"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="About" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-info"></i>
+                                <p b-zdo7mud374="">About</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Products">@Localizer["Products"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Products" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Products</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Services">@Localizer["Services"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Services" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Services</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Requests">@Localizer["Requests"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Requests" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Request</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Info">@Localizer["Useful Informations"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Info" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Useful Info</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Partner">@Localizer["Our Partners"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Partner" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Our Partners</p>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Trust">@Localizer["Trust us"]</a>
+                        <li b-zdo7mud374="" class="nav-item">
+                            <a asp-area="Visitor" asp-controller="Home" asp-action="Trust" b-zdo7mud374="" class="collapsed">
+                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <p b-zdo7mud374="">Trust Us</p>
+                            </a>
                         </li>
-                        @if (user != null)
+                        @if (user != null && !User.IsInRole(SD.Role_Admin))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Visitor" asp-controller="Profile" asp-action="Index">My Profile @profilePreText</a>
+                            <li b-zdo7mud374="" class="nav-item">
+                                <a asp-area="Visitor" asp-controller="Profile" asp-action="Index" b-zdo7mud374="" class="collapsed">
+                                    <i b-zdo7mud374="" class="fas fa-home"></i>
+                                    <p b-zdo7mud374="">My Profile @profilePreText</p>
+                                </a>
                             </li>
                         }
-                        @*
-                        <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
-                        </li>
-                        *@
-
-                        @**************************************************************Admin**************************************************************@
-
                         @if (User.IsInRole(SD.Role_Admin))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Content Managment
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#ContentManagement">
+                                    <i class="fa fa-tasks"></i>
+                                    <p>Content Management</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                                    </li>
-
-                                    @* <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="SuppProduct" asp-action="Index">SuppProduct</a>
-                                    </li> *@
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">Service</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Request" asp-action="Index">Request</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="CompanyActivity" asp-action="Index">Activity</a>
-                                    </li>
-
-                                    @*<li class="nav-item">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
-                                </li>*@
-
-
-                                    @*
-                                <li><hr class="dropdown-divider"></li>
-
-                                <li class="nav-item">
-                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create User</a>
-                                </li>
-                                <li class="nav-item">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Manage User</a>
-                                </li>
-                                *@
-
-                                </ul>
+                                <div class="collapse" id="ContentManagement">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Category" asp-action="Index">
+                                                <span class="sub-item">Category</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Service" asp-action="Index">
+                                                <span class="sub-item">Service</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Request" asp-action="Index">
+                                                <span class="sub-item">Request</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Product" asp-action="Index">
+                                                <span class="sub-item">Product</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="CompanyActivity" asp-action="Index">
+                                                <span class="sub-item">Activity</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    User Managment
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#UserManagement">
+                                    <i class="fa fa-users"></i>
+                                    <p>User Management</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create User</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Manage User</a>
-                                    </li>
-
-                                </ul>
+                                <div class="collapse" id="UserManagement">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Identity" asp-page="/Account/Register">
+                                                <span class="sub-item">Create User</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="User" asp-action="Index">
+                                                <span class="sub-item">Manage User</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Plateform Managment
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#PlateformManagement">
+                                    <i class="fas fa-gear"></i>
+                                    <p>Plateform Management</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Info" asp-action="Index">Info</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Trust" asp-action="Index">Trust</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Partner" asp-action="Index">Patner</a>
-                                    </li>
-
-
-                                    @*<li class="nav-item">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
-                                </li>*@
-
-                                    <li><hr class="dropdown-divider"></li>
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Privacy" asp-action="Index">Privacy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="About" asp-action="Index">About</a>
-                                    </li>
-
-                                </ul>
+                                <div class="collapse" id="PlateformManagement">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Info" asp-action="Index">
+                                                <span class="sub-item">Info</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Trust" asp-action="Index">
+                                                <span class="sub-item">Trust</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Partner" asp-action="Index">
+                                                <span class="sub-item">Partner</span>
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="Privacy" asp-action="Index">
+                                                <span class="sub-item">Privacy</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Admin" asp-controller="About" asp-action="Index">
+                                                <span class="sub-item">About</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         }
-                        @**************************************************************Gold*******************************************************@
                         @if (User.IsInRole(SD.Role_Gold))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    My Area
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#Gold">
+                                    <i class="fa fa-users"></i>
+                                    <p>My Area</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Gold" asp-controller="SuppProduct" asp-action="Index">My Products</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Gold" asp-controller="Service" asp-action="Index">My Services</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Gold" asp-controller="Request" asp-action="Index">My Requests</a>
-                                    </li>
-                                </ul>
+                                <div class="collapse" id="Gold">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Gold" asp-controller="SuppProduct" asp-action="Index">
+                                                <span class="sub-item">My Products</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Gold" asp-controller="Service" asp-action="Index">
+                                                <span class="sub-item">My Services</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Gold" asp-controller="Request" asp-action="Index">
+                                                <span class="sub-item">My Requests</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-
-
                         }
-                        @*_______________________________________________________________________________________________________________________*@
-                        @**************************************************************Silver*******************************************************@
                         @if (User.IsInRole(SD.Role_Silver))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    My Area
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#Silver">
+                                    <i class="fa fa-users"></i>
+                                    <p>My Area</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Silver" asp-controller="SuppProduct" asp-action="Index">My Products</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Silver" asp-controller="Service" asp-action="Index">My Services</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Silver" asp-controller="Request" asp-action="Index">My Requests</a>
-                                    </li>
-                                </ul>
+                                <div class="collapse" id="Silver">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Silver" asp-controller="SuppProduct" asp-action="Index">
+                                                <span class="sub-item">My Products</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Silver" asp-controller="Service" asp-action="Index">
+                                                <span class="sub-item">My Services</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Silver" asp-controller="Request" asp-action="Index">
+                                                <span class="sub-item">My Requests</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-
-
+                            
                         }
-                        @*_______________________________________________________________________________________________________________________*@
-
-                        @**************************************************************Basic*******************************************************@
                         @if (User.IsInRole(SD.Role_Basic))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    My Area
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#Basic">
+                                    <i class="fa fa-users"></i>
+                                    <p>My Area</p>
+                                    <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Basicr" asp-controller="SuppProduct" asp-action="Index">My Products</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Basic" asp-controller="Service" asp-action="Index">My Services</a>
-                                    </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Basic" asp-controller="Request" asp-action="Index">My Requests</a>
-                                    </li>
-                                </ul>
+                                <div class="collapse" id="Basic">
+                                    <ul class="nav nav-collapse">
+                                        <li>
+                                            <a asp-area="Basic" asp-controller="SuppProduct" asp-action="Index">
+                                                <span class="sub-item">My Products</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Basic" asp-controller="Service" asp-action="Index">
+                                                <span class="sub-item">My Services</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Basic" asp-controller="Request" asp-action="Index">
+                                                <span class="sub-item">My Requests</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
-
-
                         }
-                        @*_______________________________________________________________________________________________________________________*@
-                        @**************************************************************Importer*******************************************************@
                         @if (User.IsInRole(SD.Role_Importer))
                         {
-
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Importer" aasp-controller="Request" asp-action="Index">My Requests</a>
+                                <a asp-area="Importer" asp-controller="Request" asp-action="Index">
+                                    <i class="fa fa-users"></i>
+                                    <p>Request</p>
+                                </a>
                             </li>
-
-
                         }
-                        @*_______________________________________________________________________________________________________________________*@
-
-
-                        @*
-                        <li class="nav-item">
-                        <a class="nav-link" asp-area="Visitor" asp-controller="Cart" asp-action="Index">
-                        @await Component.InvokeAsync("ShoppingCart")
-                        </a>
-                        </li>
-                        *@
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            <partial name="_Notification" />
-            @RenderBody()
-        </main>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="index.html" class="logo">
+                            <img src="assets/img/kaiadmin/logo_light.svg"
+                                 alt="navbar brand"
+                                 class="navbar-brand"
+                                 height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="light-blue">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="btn btn-search pe-1">
+                                        <i class="fa fa-search search-icon"></i>
+                                    </button>
+                                </div>
+                                <input type="text"
+                                       placeholder="Search ..."
+                                       class="form-control" />
+                            </div>
+                        </nav>
+
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic"
+                                   data-bs-toggle="dropdown"
+                                   href="#"
+                                   aria-expanded="false">
+                                    <div class="avatar-sm">
+                                        <img src="assets/img/profile.jpg"
+                                             alt="..."
+                                             class="avatar-img rounded-circle" />
+                                    </div>
+                                    <span class="profile-username">
+                                        <span class="op-7">Hi,</span>
+                                        <span class="fw-bold">User</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <partial name="_LoginPartial" />
+                                </ul>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+
+            <div class="container">
+                <div class="page-inner">
+                    <partial name="_Notification" />
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <!-- Custom template | don't include it in your project! -->
+        <div class="custom-template">
+            <div class="title">Settings</div>
+            <div class="custom-content">
+                <div class="switcher">
+                    <div class="switch-block">
+                        <h4>Logo Header</h4>
+                        <div class="btnSwitch">
+                            <button type="button"
+                                    class="selected changeLogoHeaderColor"
+                                    data-color="dark"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="blue"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="purple"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="light-blue"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="green"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="orange"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="red"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="white"></button>
+                            <br />
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="dark2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="blue2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="purple2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="light-blue2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="green2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="orange2"></button>
+                            <button type="button"
+                                    class="changeLogoHeaderColor"
+                                    data-color="red2"></button>
+                        </div>
+                    </div>
+                    <div class="switch-block">
+                        <h4>Navbar Header</h4>
+                        <div class="btnSwitch">
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="dark"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="blue"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="purple"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="light-blue"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="green"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="orange"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="red"></button>
+                            <button type="button"
+                                    class="selected changeTopBarColor"
+                                    data-color="white"></button>
+                            <br />
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="dark2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="blue2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="purple2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="light-blue2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="green2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="orange2"></button>
+                            <button type="button"
+                                    class="changeTopBarColor"
+                                    data-color="red2"></button>
+                        </div>
+                    </div>
+                    <div class="switch-block">
+                        <h4>Sidebar</h4>
+                        <div class="btnSwitch">
+                            <button type="button"
+                                    class="changeSideBarColor"
+                                    data-color="white"></button>
+                            <button type="button"
+                                    class="selected changeSideBarColor"
+                                    data-color="dark"></button>
+                            <button type="button"
+                                    class="changeSideBarColor"
+                                    data-color="dark2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-toggle">
+                <i class="icon-settings"></i>
+            </div>
+        </div>
+        <!-- End Custom template -->
     </div>
     @*_______________________________________________________________________________________________________________________*@
 
