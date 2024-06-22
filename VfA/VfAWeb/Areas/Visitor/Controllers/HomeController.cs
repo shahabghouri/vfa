@@ -90,5 +90,10 @@ namespace VfAWeb.Areas.Visitor.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult ProductDetails(int Id)
+        {
+            Product objProduct = _unitOfWork.Product.Get(x => x.Id == Id, includeProperties: "Category,ProductImages");
+            return View(objProduct);
+        }
     }
 }

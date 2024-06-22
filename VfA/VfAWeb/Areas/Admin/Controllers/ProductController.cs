@@ -28,7 +28,6 @@ namespace VfAWeb.Areas.Admin.Controllers
         public IActionResult Index() 
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").Where(x => x.UserId == _user.Id).ToList();
-           
             return View(objProductList);
         }
 

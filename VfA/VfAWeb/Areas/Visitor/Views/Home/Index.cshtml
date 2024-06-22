@@ -235,7 +235,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" >
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <!-- Carousel indicators -->
                     <div class="carousel-indicators">
                         @{
@@ -267,7 +267,7 @@
                                                 <div class="thumb-content">
                                                     <h4>@ProductList[j].Name</h4>
                                                     <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
-                                                    <a href="#" class="btn btn-primary">Details</a>
+                                                    <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary">Details</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -523,8 +523,13 @@
 
 @section Scripts {
     <script>
+        function ProductDetailsBtn(productId) {
+            debugger;
+            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", productId);
+            window.location.href = url;
+        }
         $(document).ready(function () {
-
         });
     </script>
 }
