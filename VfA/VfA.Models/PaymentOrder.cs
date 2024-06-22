@@ -16,6 +16,7 @@ namespace VfA.Models
         public DateTime OrderDate { get; set; }
         public bool IsConfirmed { get; set; }
         public string Status { get; set; }
+        public string Description { get; set; }
 
     }
 }
