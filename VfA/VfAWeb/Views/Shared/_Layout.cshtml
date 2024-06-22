@@ -1,12 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Text.Json
 @using VfA.DataAccess.Common
+@using VfA.DataAccess.Repository.IRepository
+@inject IUserClaimsService _userClaimsService;
+@inject IHttpContextAccessor httpContextAccessor;
 @{
-    ApplicationUser user = new ApplicationUser();
-    user = UserSession.GetUser();
-    var profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
+    UserClaimsVM user = httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ? _userClaimsService.GetUserClaims() : null;
+    var profilePreText = user != null ? (user.IsImporter.Value ? "( Importer )" : (user.IsExporter.Value ? "( Exporter )" : "")) : "";
 }
-@inject IHttpContextAccessor HttpContextAccessor
 @inject IViewLocalizer Localizer
 
 <!DOCTYPE html>

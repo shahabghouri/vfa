@@ -12,12 +12,15 @@ namespace VfAWeb.Areas.Visitor.Controllers
     public class ProfileController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        ApplicationUser? _user;
+        private readonly IUserClaimsService _userClaimsService;
+        //ApplicationUser? _user;
+        UserClaimsVM _user;
 
-        public ProfileController(IUnitOfWork unitOfWork)
+        public ProfileController(IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
-            _user = UserSession.GetUser();
+            //_user = UserSession.GetUser();
+            _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index()
         {
@@ -40,16 +43,16 @@ namespace VfAWeb.Areas.Visitor.Controllers
                     {
                         profileViewModel.CompnayLogo = Logo.ImageUrl;
                     }
-                    if (_user.IsImporter)
+                    if (_user.IsImporter.Value)
                     {
                         profileViewModel.CountryName = _unitOfWork.Country.GetAll().Where(x => x.Id == company.CountryId).FirstOrDefault().Name;
                     }
-                    if (_user.IsExporter)
+                    if (_user.IsExporter.Value)
                     {
                         profileViewModel.WilayaName = _unitOfWork.Wilaya.GetAll().Where(x => x.Id == company.WilayaId).FirstOrDefault().Name;
                     }
                     profileViewModel.ActivityName = _unitOfWork.CompanyActivity.GetAll().Where(x => x.Id == company.CompanyActivityId).FirstOrDefault().Name;
-                    profileViewModel.UserType = _user.IsImporter ? "Impoter" : _user.IsExporter ? "Expoter" : "";
+                    profileViewModel.UserType = _user.IsImporter.Value ? "Impoter" : _user.IsExporter.Value ? "Expoter" : "";
                 }
             }
             catch (Exception ex)

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using VfA.DataAccess.Repository.IRepository;
 using System.Text.Json;
 using VfA.DataAccess.Common;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -115,7 +117,27 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     string username = User.Identity.Name;
-                    var user  = _unitOfWork.ApplicationUser.Get(u => u.UserName == username);
+                    var user = _unitOfWork.ApplicationUser.Get(u => u.UserName == username);
+                    user.Email= user.Email ?? string.Empty;
+                    user.CompanyId = user.CompanyId ?? 0;
+                    user.IsExporter = user.IsExporter == null ? false : user.IsExporter;
+                    user.IsImporter = user.IsImporter == null ? false : user.IsImporter;
+                    #region CLAIMS
+                    var claims = new List<Claim>();
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));  // Example: Add user ID
+                        claims.Add(new Claim(ClaimTypes.Email, user.Email));        // Example: Add email
+                        claims.Add(new Claim("IsImporter", user.IsImporter.ToString()));        // Example: Add email
+                        claims.Add(new Claim("IsExporter", user.IsExporter.ToString()));        // Example: Add email
+                        claims.Add(new Claim("CompanyId", user.CompanyId.ToString()));        // Example: Add email
+                        // Add other necessary claims
+                    // Add claims to user's identity
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    #endregion
+
                     _session.SetString("user", JsonSerializer.Serialize(user));
                     //Console.WriteLine("User Obj is = " + _session.GetString("user") );
                     _logger.LogInformation("User logged in.");

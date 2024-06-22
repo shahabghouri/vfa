@@ -15,12 +15,10 @@ namespace VfAWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        ApplicationUser _user;
         public CompanyActivityController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
-            _user = UserSession.GetUser();
         }
         public IActionResult Index()
         {

@@ -11,11 +11,13 @@ namespace VfAWeb.Controllers
     public class InboxController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        ApplicationUser? _user;
-        public InboxController(IUnitOfWork unitOfWork)
+        private readonly IUserClaimsService _userClaimsService;
+        //ApplicationUser? _user;
+        UserClaimsVM _user;
+        public InboxController(IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
-            _user = UserSession.GetUser();
+            _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index()
         {
