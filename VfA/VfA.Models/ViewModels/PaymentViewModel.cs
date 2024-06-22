@@ -11,5 +11,6 @@ namespace VfA.Models.ViewModels
         public List<SubscriptionPlan> SubscriptionPlans { get; set; }
         public List<PaymentHistory> PaymentHistory { get; set; }
         public SubscriptionPlan SubscriptionPlan { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace VfA.Models
         public long Id { get; set; }
         public long SubscriptionPlanId { get; set; }
         public string UserId { get; set; }
+        public int Months { get; set; }
         public int OrderNumber { get; set; }
         public long Amount { get; set; }
         public DateTime OrderDate { get; set; }

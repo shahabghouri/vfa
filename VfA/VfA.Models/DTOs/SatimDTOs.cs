@@ -13,7 +13,7 @@ namespace VfA.Models.DTOs
     {
         public string orderId { set; get; }
         public string formUrl { set; get; }
-        public string errorCode { set; get; }
+        public int errorCode { set; get; }
         public string errorMessage { set; get; }
     }
     public class SatimConfirmOrderResponse

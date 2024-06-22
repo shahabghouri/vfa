@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PaymentViewModel
+@{
     ViewData["Title"] = "Payment Settings";
 }
 <h3>Payment Settings</h3>
@@ -16,12 +17,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Basic 'Importer' Plan Subscription for June</td>
-                    <td>15 June 2024</td>
-                    <td>$29</td>
-                    <td>3 Months</td>
-                </tr>
+                @if (Model.PaymentHistory != null && Model.PaymentHistory.Count != 0)
+                {
+                    foreach (var payment in Model.PaymentHistory)
+                    {
+                        <tr>
+                            <td>@payment.Description</td>
+                            <td>@payment.PaymentDate.ToString("dd MMM yyyy")</td>
+                            <td>@payment.PaidAmount</td>
+                            <td>@payment.Tenure</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">No Payments Found.</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -29,33 +42,39 @@
         <div class="card ms-auto w-100">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">My Subscription</h5>
-                <div class="btn btn-sm btn-danger">Free</div>
+                @if(Model.SubscriptionPlan.Id == 0){
+                    <div class="btn btn-sm btn-danger">Free</div>
+                }
+                else
+                {
+                    <div class="btn btn-sm btn-success">@Model.SubscriptionPlan.Name</div>
+                }
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-3">
                         <h5 class="fw-normal">Products</h5>
-                        <p class="fw-light">0</p>
+                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfProducts</p>
                     </div>
                     <div class="col-12 col-md-3">
                         <h5 class="fw-normal">Services</h5>
-                        <p class="fw-light">0</p>
+                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfServices</p>
                     </div>
                     <div class="col-12 col-md-3">
                         <h5 class="fw-normal">Requests</h5>
-                        <p class="fw-light">0</p>
+                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfRequests</p>
                     </div>
                     <div class="col-12 col-md-6">
                         <h5 class="fw-normal">Started On</h5>
-                        <p class="fw-light">Sept 1, 2020</p>
+                        <p class="fw-light">@(Model.ApplicationUser.LastPaymentDate != null ? Model.ApplicationUser.LastPaymentDate.Value.ToString("MMM dd, yyyy") : "---")</p>
                     </div>
                     <div class="col-12 col-md-6">
                         <h5 class="fw-normal">Price</h5>
-                        <p class="fw-light">$29 / 3 Months</p>
+                        <p class="fw-light">@Model.SubscriptionPlan.MonthlyAmount</p>
                     </div>
                     <div class="col-12 col-md-6">
                         <h5 class="fw-normal">Billing Date</h5>
-                        <p class="fw-light">Next Billing on 24 July 2024</p>
+                        <p class="fw-light">@(Model.ApplicationUser.NextPaymentDate != null ? "Next Billing on "+Model.ApplicationUser.NextPaymentDate.Value.ToString("dd MMM yyyy") : "---")</p>
                     </div>
                 </div>
             </div>

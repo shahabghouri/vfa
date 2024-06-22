@@ -100,11 +100,11 @@ UserSession.Configure(httpContextAccessor);
 SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
-    name: "area-route",
-    pattern: "{area=Visitor}/{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "area-route",
+    pattern: "{area=Visitor}/{controller=Home}/{action=Index}/{id?}");
 app.UseRequestLocalization();
 app.Run();
 
