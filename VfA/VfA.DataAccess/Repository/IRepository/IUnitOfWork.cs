@@ -43,8 +43,10 @@ namespace VfA.DataAccess.Repository.IRepository
         ICompanyRepository Company { get; }
         
         IApplicationUserRepository ApplicationUser { get; }
-       
-        
+
+        ISubscriptionPlanRepository SubscriptionPlan { get; }
+        IPaymentHistoryRepository PaymentHistory { get; }
+        IPaymentOrderRepository PaymentOrder { get; }
         IProductImageRepository ProductImage { get; }
         void Save();
     }

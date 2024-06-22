@@ -43,6 +43,9 @@ namespace VfA.DataAcess.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
+        public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
+        public DbSet<PaymentHistory> PaymentHistory { get; set; }
+        public DbSet<PaymentOrder> PaymentOrders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -47,6 +47,9 @@ namespace VfA.DataAccess.Repository
         public IApplicationUserRepository ApplicationUser { get; private set; }
         
         public IProductImageRepository ProductImage { get; private set; }
+        public ISubscriptionPlanRepository SubscriptionPlan { get; private set; }
+        public IPaymentHistoryRepository PaymentHistory { get; private set; }
+        public IPaymentOrderRepository PaymentOrder { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -82,6 +85,11 @@ namespace VfA.DataAccess.Repository
             StateProvince = new StateProvinceRepository(_db);
             CompanyActivity = new CompanyActivityRepository(_db);
             Wilaya = new WilayaRepository(_db);
+
+            SubscriptionPlan = new SubscriptionPlanRepository(_db);
+            PaymentHistory = new PaymentHistoryRepository(_db);
+
+            PaymentOrder = new PaymentOrderRepository(_db);
         }
 
         public void Save()

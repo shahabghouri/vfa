@@ -31,11 +31,19 @@ namespace VfA.Models
         public int? StateProvinceId { get; set; }
         public string? PostalCode { get; set; }
         public int? CompanyId { get; set; }
+        public long? SubscribedPlanId { get; set; } //if null then it means its on free plan.
+
+        [ForeignKey("SubscribedPlanId")]
+        [ValidateNever]
+        public SubscriptionPlan? SubsciptionPlan { get; set; }
+
         [ForeignKey("CompanyId")]
         [ValidateNever]
         public Company? Company { get; set; }
         [NotMapped]
         public string Role { get; set; }
+        public DateTime? LastPaymentDate { get; set; }
+        public DateTime? NextPaymentDate { get; set; }
     }
     /*
     public class ApplicationUser : IdentityUser

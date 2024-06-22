@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VfA.DataAcess.Data;
 
@@ -11,9 +12,11 @@ using VfA.DataAcess.Data;
 namespace VfA.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240622104716_Payment")]
+    partial class Payment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -544,42 +547,6 @@ namespace VfA.DataAccess.Migrations
                     b.ToTable("PaymentHistory");
                 });
 
-            modelBuilder.Entity("VfA.Models.PaymentOrder", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("SubscriptionPlanId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentOrders");
-                });
-
             modelBuilder.Entity("VfA.Models.Privacy", b =>
                 {
                     b.Property<int>("Id")
@@ -835,7 +802,7 @@ namespace VfA.DataAccess.Migrations
                     b.ToTable("StateProvinces");
                 });
 
-            modelBuilder.Entity("VfA.Models.SubscriptionPlan", b =>
+            modelBuilder.Entity("VfA.Models.SubsciptionPlan", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -886,7 +853,7 @@ namespace VfA.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionPlans");
+                    b.ToTable("SubsciptionPlans");
                 });
 
             modelBuilder.Entity("VfA.Models.Trust", b =>
@@ -970,18 +937,12 @@ namespace VfA.DataAccess.Migrations
                     b.Property<string>("Job")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastPaymentDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("NextPaymentDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
@@ -1235,7 +1196,7 @@ namespace VfA.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("VfA.Models.SubscriptionPlan", "SubsciptionPlan")
+                    b.HasOne("VfA.Models.SubsciptionPlan", "SubsciptionPlan")
                         .WithMany()
                         .HasForeignKey("SubscribedPlanId");
 
