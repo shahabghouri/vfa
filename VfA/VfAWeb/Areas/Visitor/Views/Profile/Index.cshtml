@@ -295,7 +295,7 @@
                                                     <div class="thumb-content">
                                                         <h4>@ProductList[j].Name</h4>
                                                         <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,7 +360,7 @@
                                                     <div class="thumb-content">
                                                         <h4>@ServiceList[j].Name</h4>
                                                         <p class="card-title text-warning text-center">Category <b>@ServiceList[j].Category.Name</b></p>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <a onclick="ServiceDetailsBtn(@ServiceList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -428,7 +428,7 @@
                                                     <div class="thumb-content">
                                                         <h4>@RequestList[j].Name</h4>
                                                         <p class="card-title text-warning text-center">Category <b>@RequestList[j].Category.Name</b></p>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <a onclick="RequestDetailsBtn(@RequestList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -502,6 +502,21 @@
                     })
                 }
             })
+        }
+        function ProductDetailsBtn(productId) {
+            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", productId);
+            window.location.href = url;
+        }
+        function ServiceDetailsBtn(serviceId) {
+            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", serviceId);
+            window.location.href = url;
+        }
+        function RequestDetailsBtn(requestId) {
+            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", requestId);
+            window.location.href = url;
         }
     </script>
 }

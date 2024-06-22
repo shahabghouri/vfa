@@ -1,7 +1,7 @@
-﻿@model Product
+﻿@model Request
 @{
-    ViewData["Title"] = "Details";
-    var ImageMain = Model.ProductImages.Count != 0 ? Model.ProductImages.FirstOrDefault().ImageUrl : "";
+    ViewData["Title"] = "RequestDetails";
+    var ImageMain = Model.RequestImages.Count != 0 ? Model.RequestImages.FirstOrDefault().ImageUrl : "";
 }
 <style>
     .text-bold {
@@ -115,14 +115,14 @@
                 <div class="main-img">
                     <img class="img-fluid"
                          src="@ImageMain"
-                         alt="ProductS">
+                         alt="Request">
                     <div class="row my-3 previews">
-                        @foreach (var image in Model.ProductImages)
+                        @foreach (var image in Model.RequestImages)
                         {
                             <div class="col-md-3">
                                 <img class="w-100"
                                      src="@image.ImageUrl"
-                                     alt="Sale">
+                                     alt="Request">
                             </div>
                         }
                     </div>
@@ -142,23 +142,6 @@
                     <p class="details-title text-color mb-1">Product Details</p>
                     <p class="description">@Html.Raw(Model.Description)</p>
                 </div>
-                <div class="delivery my-4">
-                    <p class="font-weight-bold mb-0">
-                        <span><i class="fa-solid fa-truck"></i></span> <b>
-                            CapacityUnit: @Model.CapacityUnit
-                        </b>
-                    </p>
-                    <p class="text-secondary">ProductionCapacity: @Model.ProductionCapacity</p>
-                </div>
-                <div class="delivery-options my-4">
-                    <p class="font-weight-bold mb-0">
-                        <span><i class="fa-solid fa-filter"></i></span> <b>
-                            Certificates: @Model.Certificates
-                        </b>
-                    </p>
-                </div>
-
-
             </div>
         </div>
     </div>

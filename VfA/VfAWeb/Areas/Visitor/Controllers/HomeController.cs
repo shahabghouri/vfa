@@ -95,5 +95,15 @@ namespace VfAWeb.Areas.Visitor.Controllers
             Product objProduct = _unitOfWork.Product.Get(x => x.Id == Id, includeProperties: "Category,ProductImages");
             return View(objProduct);
         }
+        public IActionResult ServiceDetails(int Id)
+        {
+            Service objService = _unitOfWork.Service.Get(x => x.Id == Id, includeProperties: "Category,ServiceImages");
+            return View(objService);
+        }
+        public IActionResult RequestDetails(int Id)
+        {
+            Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
+            return View(objRequest);
+        }
     }
 }
