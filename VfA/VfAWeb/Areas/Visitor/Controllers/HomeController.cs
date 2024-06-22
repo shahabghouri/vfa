@@ -30,9 +30,9 @@ namespace VfAWeb.Areas.Visitor.Controllers
             HomeVM homeVm = new HomeVM();
             try
             {
-                var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
-                var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").ToList();
-                var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").ToList();
+                var products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").ToList();
+                var services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").ToList();
+                var requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").ToList();
                 homeVm.Products = products;
                 homeVm.Services = services;
                 homeVm.Requests = requests;

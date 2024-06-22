@@ -14,6 +14,6 @@ namespace VfA.Models
 		public string Title { get; set; }
 		public string Topic { get; set; }
 
-        public List<InfoImage> InfoImages { get; set; }
+        public List<InfoImage>? InfoImages { get; set; }
     }
 }

@@ -26,9 +26,9 @@ namespace VfAWeb.Areas.Visitor.Controllers
             {
                 if (_user != null)
                 {
-                    var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").Where(x=>x.UserId == _user.Id).ToList();
-                    var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").Where(x=>x.UserId == _user.Id).ToList();
-                    var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").Where(x => x.UserId == _user.Id).ToList();
+                    var products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").Where(x=>x.UserId == _user.Id).ToList();
+                    var services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").Where(x=>x.UserId == _user.Id).ToList();
+                    var requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").Where(x => x.UserId == _user.Id).ToList();
                     profileViewModel.Products = products;
                     profileViewModel.Services = services;
                     profileViewModel.Requests = requests;

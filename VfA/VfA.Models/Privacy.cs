@@ -16,6 +16,6 @@ namespace VfA.Models
 		public string Topic { get; set; }
 
         [ValidateNever]
-        public List<PrivacyImage> PrivacyImages { get; set; }
+        public List<PrivacyImage>? PrivacyImages { get; set; }
     }
 }

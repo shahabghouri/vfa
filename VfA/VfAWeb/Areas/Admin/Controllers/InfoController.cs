@@ -149,7 +149,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Info> objInfoList = _unitOfWork.Info.GetAll(includeProperties: "Category").ToList();
+            List<Info> objInfoList = _unitOfWork.Info.GetAll().ToList();
             return Json(new { data = objInfoList });
         }
 
