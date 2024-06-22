@@ -1,20 +1,22 @@
 ﻿var currentStep = 1;
 var updateProgressBar;
-
 function displayStep(stepNumber) {
-    if (stepNumber >= 1 && stepNumber <= 3) {
-        $(".step-" + currentStep).hide();
-        $(".step-" + stepNumber).show();
-        currentStep = stepNumber;
-        updateProgressBar();
+    if (IsValidateForm()) {
+        if (stepNumber >= 1 && stepNumber <= 3) {
+            $(".step-" + currentStep).hide();
+            $(".step-" + stepNumber).show();
+            currentStep = stepNumber;
+            updateProgressBar();
+        }
     }
 }
 
 $(document).ready(function () {
+
     $('#multi-step-form').find('.step').slice(1).hide();
 
     $(".next-step").click(function () {
-        if ($('#multi-step-form').valid()) {
+        if (IsValidateForm()) {
             if (currentStep < 3) {
                 $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft");
                 currentStep++;
@@ -28,7 +30,7 @@ $(document).ready(function () {
     });
 
     $(".prev-step").click(function () {
-        if ($('#multi-step-form').valid()) {
+        if (IsValidateForm()) {
             if (currentStep > 1) {
                 $(".step-" + currentStep).addClass("animate__animated animate__fadeOutRight");
                 currentStep--;
@@ -47,6 +49,7 @@ $(document).ready(function () {
     }
 });
 $("#importerBtn").click(function () {
+    SetExporterFieldsNull();
     $("#formTitle").text("Register - Importer");
     $("input[name='Input.IsImporter']").val("true");
     $("input[name='Input.IsExporter']").val("false");
@@ -55,8 +58,15 @@ $("#importerBtn").click(function () {
     $("#formContainer").show();
     $("#btnContainer").hide();
 });
-
+function SetImporterFieldsNull() {
+    $('#Input_StateProvinceId').val('0');
+    $('#Input_CompanyCountryId').val('0');
+}
+function SetExporterFieldsNull() {
+    $('#Input_WilayaID').val('0');
+}
 $("#exporterBtn").click(function () {
+    SetImporterFieldsNull();
     $("#formTitle").text("Register - Exporter");
     $("input[name='Input.IsImporter']").val("false");
     $("input[name='Input.IsExporter']").val("true");
@@ -65,10 +75,8 @@ $("#exporterBtn").click(function () {
     $("#formContainer").show();
     $("#btnContainer").hide();
 });
-function validateForm() {
-    var form = $('#multi-step-form');
-    $.validator.unobtrusive.parse(form);
-    var validate = form.validate().form();
+function IsValidateForm() {
+    return $('#multi-step-form').valid();
 }
 $('.btn-reset').click(function () {
     $('#multi-step-form')[0].reset();

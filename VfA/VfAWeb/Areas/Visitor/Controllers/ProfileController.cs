@@ -26,15 +26,20 @@ namespace VfAWeb.Areas.Visitor.Controllers
             {
                 if (_user != null)
                 {
-                    var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").Where(x=>x.UserId == _user.Id).ToList();
-                    var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").Where(x=>x.UserId == _user.Id).ToList();
-                    var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").Where(x => x.UserId == _user.Id).ToList();
+                    var products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").Where(x => x.UserId == _user.Id).ToList();
+                    var services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").Where(x => x.UserId == _user.Id).ToList();
+                    var requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").Where(x => x.UserId == _user.Id).ToList();
                     profileViewModel.Products = products;
                     profileViewModel.Services = services;
                     profileViewModel.Requests = requests;
                     Company company = new Company();
-                    company = _unitOfWork.Company.GetAll().Where(x => x.Id == _user.CompanyId).FirstOrDefault();
+                    company = _unitOfWork.Company.GetAll(includeProperties: "CompanyImages").Where(x => x.Id == _user.CompanyId).FirstOrDefault();
                     profileViewModel.CompnayName = company.Name;
+                    var Logo = company.CompanyImages.FirstOrDefault();
+                    if (Logo != null)
+                    {
+                        profileViewModel.CompnayLogo = Logo.ImageUrl;
+                    }
                     if (_user.IsImporter)
                     {
                         profileViewModel.CountryName = _unitOfWork.Country.GetAll().Where(x => x.Id == company.CountryId).FirstOrDefault().Name;

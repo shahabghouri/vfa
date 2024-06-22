@@ -25,7 +25,6 @@ namespace VfAWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Privacy> objPrivacyList = _unitOfWork.Privacy.GetAll().ToList();
-
             return View(objPrivacyList);
         }
 
@@ -149,7 +148,7 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Privacy> objPrivacyList = _unitOfWork.Privacy.GetAll(includeProperties: "Category").ToList();
+            List<Privacy> objPrivacyList = _unitOfWork.Privacy.GetAll().ToList();
             return Json(new { data = objPrivacyList });
         }
 

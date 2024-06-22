@@ -20,13 +20,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
-builder.Services.AddDbContext<ApplicationDbContext>(options=> 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-builder.Services.ConfigureApplicationCookie(options => {
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(Options =>
+{
+Options.Password.RequireDigit = false;
+})
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(options =>
+{
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
@@ -37,13 +43,15 @@ builder.Services.AddAuthentication().AddFacebook(option => {
     option.AppSecret = "8fc42ae3f4f2a4986143461d4e2da919";
 });
 */
-builder.Services.AddAuthentication().AddMicrosoftAccount(option => {
+builder.Services.AddAuthentication().AddMicrosoftAccount(option =>
+{
     option.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
     option.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
 });
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.IdleTimeout = TimeSpan.FromMinutes(100);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
@@ -101,8 +109,10 @@ app.UseRequestLocalization();
 app.Run();
 
 
-void SeedDatabase() {
-    using (var scope = app.Services.CreateScope()) {
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
         var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
         dbInitializer.Initialize();
     }

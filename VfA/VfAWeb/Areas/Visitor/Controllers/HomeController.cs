@@ -30,9 +30,9 @@ namespace VfAWeb.Areas.Visitor.Controllers
             HomeVM homeVm = new HomeVM();
             try
             {
-                var products = _unitOfWork.Product.GetAll(includeProperties: "ProductImages").ToList();
-                var services = _unitOfWork.Service.GetAll(includeProperties: "ServiceImages").ToList();
-                var requests = _unitOfWork.Request.GetAll(includeProperties: "RequestImages").ToList();
+                var products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").ToList();
+                var services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").ToList();
+                var requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").ToList();
                 homeVm.Products = products;
                 homeVm.Services = services;
                 homeVm.Requests = requests;
@@ -89,6 +89,21 @@ namespace VfAWeb.Areas.Visitor.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult ProductDetails(int Id)
+        {
+            Product objProduct = _unitOfWork.Product.Get(x => x.Id == Id, includeProperties: "Category,ProductImages");
+            return View(objProduct);
+        }
+        public IActionResult ServiceDetails(int Id)
+        {
+            Service objService = _unitOfWork.Service.Get(x => x.Id == Id, includeProperties: "Category,ServiceImages");
+            return View(objService);
+        }
+        public IActionResult RequestDetails(int Id)
+        {
+            Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
+            return View(objRequest);
         }
     }
 }

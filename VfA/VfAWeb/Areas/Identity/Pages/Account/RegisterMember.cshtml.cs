@@ -24,6 +24,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using VfA.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -37,6 +40,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public RegisterMemberModel(
             UserManager<IdentityUser> userManager,
@@ -45,7 +49,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
@@ -55,6 +60,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -69,6 +75,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string ReturnUrl { get; set; }
+        public bool? IsFormContinue { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -82,6 +89,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [AllowNull]
+            public string FormTitle { get; set; }
             public bool IsImporter { get; set; }
             public bool IsExporter { get; set; }
 
@@ -103,6 +112,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+            [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$",
+                ErrorMessage = "Password must contain at least one number, one uppercase letter, and one special character (@, $, !, %, *, ?, &).")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -154,7 +165,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyActivityList { get; set; }
             [Required]
-            public int? CompanyCountryId { get; set; }
+            public int CompanyCountryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyCountryList { get; set; }
             public IEnumerable<SelectListItem> WiliyaList { get; set; }
@@ -165,19 +176,19 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [Required]
             public string? City { get; set; }
             [Required]
-            public int? StateProvinceId { get; set; }
-            [Required]
-            public string? State { get; set; }
+            public int StateProvinceId { get; set; }
+            public string State { get; set; }
             [Required]
             public string? PostalCode { get; set; }
             [Required]
             public int? CompanyCategoryId { get; set; }
             [ValidateNever]
-            public List<Category> Categories { get; set; }
+            public IEnumerable<SelectListItem> Categories { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> States { get; set; }
-            [Required(ErrorMessage = "You must agreee to our terms and conditions before continue")]
             public string AggreeToTermsAndConditions { get; set; }
+            [Display(Name = "Company Logo")]
+            public List<CompanyImage>? CompanyImages { get; set; }
         }
 
 
@@ -212,7 +223,11 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                        Value = i
                    }),
             };
-            Input.Categories = _unitOfWork.Category.GetAll();
+            Input.Categories = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             Input.CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
             {
                 Text = i.Name,
@@ -241,13 +256,15 @@ namespace VfAWeb.Areas.Identity.Pages.Account
 
 
             ReturnUrl = returnUrl;
+            IsFormContinue = false;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null, List<IFormFile> files = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            IsFormContinue = true;
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -269,35 +286,24 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 user.PhoneNumber = Input.PhoneNumber;
                 user.Job = Input.Job;
                 user.UserName = Input.UserName;
-                user.State = Input.State;
+                //user.State = _unitOfWork.StateProvince.GetAll().Where(x => x.Id == Input.StateProvinceId).FirstOrDefault().Name;
 
                 //company-info
                 Company company = new Company();
                 company.Name = Input.CompanyName;
                 company.CEOName = Input.CompanyCEOName;
                 company.CompanyActivityId = Input.CompanyActivityId;
-                company.CountryId = Input.CompanyCountryId;
+                company.CountryId = Input.CompanyCountryId == 0 ? null : Input.CompanyCountryId;
+                company.StateProvinceId = Input.StateProvinceId == 0 ? null : Input.StateProvinceId;
+                company.WilayaId = Input.WilayaID == 0 ? null : Input.WilayaID;
                 company.StreetAddress = Input.StreetAddress;
                 company.City = Input.City;
-                company.StateProvinceId = Input.StateProvinceId;
                 company.PostalCode = Input.PostalCode;
                 company.CategoryId = Input.CompanyCategoryId;
-                company.WilayaId = Input.WilayaID;
 
-                if (!string.IsNullOrEmpty(company.Name) ||
-                !string.IsNullOrEmpty(company.CEOName) ||
-                company.CompanyActivityId != null ||
-                company.CountryId != null ||
-                !string.IsNullOrEmpty(company.StreetAddress) ||
-                !string.IsNullOrEmpty(company.City) ||
-                company.StateProvinceId != null ||
-                !string.IsNullOrEmpty(company.PostalCode) ||
-                company.CategoryId != null ||
-                company.WilayaId != null)
-                {
-                    // Add company if validation passes
-                    user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
-                }
+                // Add company if validation passes
+                user.CompanyId = (int)_unitOfWork.Company.AddCompany(company);
+                AddCompanyImages(company, files);
                 //Ends
 
                 if (Input.Role == SD.Role_Company)
@@ -310,15 +316,20 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (!String.IsNullOrEmpty(Input.Role))
+                    #region ASSIGN ROLE
+                    IdentityRole identityRole = new IdentityRole();
+                    if (user.IsImporter)
                     {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
+                        identityRole = _roleManager.Roles.ToList().Where(x => x.Name.Trim().ToLower() == "importer").FirstOrDefault();
                     }
-                    //else {
-                    //    await _userManager.AddToRoleAsync(user, SD.Role_Visitor);
-                    //}
-
+                    if (user.IsExporter)
+                    {
+                        identityRole = _roleManager.Roles.ToList().Where(x => x.Name.Trim().ToLower() == "expoter").FirstOrDefault();
+                    }
+                    await _userManager.AddToRoleAsync(user, identityRole.ToString());
+                    #endregion
                     var userId = await _userManager.GetUserIdAsync(user);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -352,36 +363,13 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            if (_roleManager.RoleExistsAsync(SD.Role_Visitor).GetAwaiter().GetResult())
+            Input.FormTitle = Input.FormTitle;
+            ReturnUrl = null;
+            Input.Categories = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
             {
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Visitor)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Gold)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Silver)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Basic)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Importer)).GetAwaiter().GetResult();
-            }
-
-            /* Input = new() {
-                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem {
-                     Text = i,
-                     Value = i
-                 }),
-             };*/
-
-            Input = new()
-            {
-
-                RoleList = _roleManager.Roles
-                  .Where(x => x.Name != "Admin" && x.Name != "Visitor") // Exclure les rôles "Admin" et "Visitor"
-                  .Select(x => x.Name)
-                   .Select(i => new SelectListItem
-                   {
-                       Text = i,
-                       Value = i
-                   }),
-            };
-            Input.Categories = _unitOfWork.Category.GetAll();
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             Input.CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
             {
                 Text = i.Name,
@@ -402,19 +390,9 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
-            //    CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem {
-            //        Text = i.Name,
-            //        Value = i.Id.ToString()
-            //    })
-
-
-
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
         private ApplicationUser CreateUser()
         {
             try
@@ -428,7 +406,6 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
-
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -436,6 +413,41 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+        public void AddCompanyImages(Company company,List<IFormFile> files)
+        {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (files != null)
+            {
+                foreach (IFormFile file in files)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string companyPath = @"images\companies\company-" + company.Id;
+                    string finalPath = Path.Combine(wwwRootPath, companyPath);
+
+                    if (!Directory.Exists(finalPath))
+                        Directory.CreateDirectory(finalPath);
+
+                    using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    CompanyImage companyImage = new()
+                    {
+                        ImageUrl = @"\" + companyPath + @"\" + fileName,
+                        CompanyId = company.Id,
+                    };
+
+                    if (company.CompanyImages == null)
+                        company.CompanyImages = new List<CompanyImage>();
+
+                    company.CompanyImages.Add(companyImage);
+                }
+
+                _unitOfWork.Company.Update(company);
+                _unitOfWork.Save();
+            }
         }
     }
 }

@@ -7,6 +7,11 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
+            var isFormContinue = @Html.Raw(Model.IsFormContinue.ToString().ToLower());
+            if (isFormContinue) {
+                $("#formContainer").show();
+                $("#btnContainer").hide();
+            }
             $('#Input_Role').change(function () {
                 var selection = $('#Input_Role Option:Selected').text();
                 if (selection == 'Company') {
@@ -199,7 +204,7 @@
                             <div onclick="displayStep(2)" class="displaySteptext">Company Informations</div>
                             <div onclick="displayStep(3)" class="displaySteptext">Account Informations</div>
                         </div>
-                        <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                             <input asp-for="Input.IsImporter" type="hidden" value="false" />
                             <input asp-for="Input.IsExporter" type="hidden" value="false" />
                             <div class="step step-1">
@@ -262,7 +267,6 @@
                                 <button type="button" class="btn border-warning text-warning next-step">Next -></button>
                                 <button type="button" class="btn border-warning text-warning btn-reset">Reset</button>
                             </div>
-
                             <div class="step step-2">
                                 <!-- Step 2 form fields here -->
                                 <div class="mb-3">
@@ -324,16 +328,19 @@
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Input.CompanyCategoryId" class="form-label">Category <span class="text-primary">*</span></label>
-                                    <select asp-for="Input.CompanyCategoryId" asp-items="@(new SelectList(Model.Input.Categories, "Id", "Name"))" class="form-select"  >
+                                    <select asp-for="Input.CompanyCategoryId" asp-items="@Model.Input.Categories" class="form-select"  >
                                         <option value="">-Select-</option>
                                     </select>
                                     <span asp-validation-for="Input.CompanyCategoryId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Input.CompanyImages" class="form-label"></label>
+                                    <input type="file" name="files" class="form-control border-0 shadow" multiple />
                                 </div>
                                 <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
                                 <button type="button" class="btn border-warning text-warning next-step">Next -></button>
                                 <button type="button" class="btn border-warning text-warning btn-reset">Reset</button>
                             </div>
-
                             <div class="step step-3">
                                 <!-- Step 3 form fields here -->
                                 <div class="mb-3">
@@ -359,7 +366,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="checkbox" asp-for="Input.AggreeToTermsAndConditions"  >
+                                    <input type="checkbox" asp-for="Input.AggreeToTermsAndConditions"  required>
                                     <label>I agree to the terms and conditions and the privacy policy</label>
                                     </br><span asp-validation-for="Input.AggreeToTermsAndConditions" class="text-danger"></span>
                                 </div>

@@ -13,6 +13,6 @@ namespace VfA.Models
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Topic { get; set; }
-        public List<AboutImage> AboutImages { get; set; }
+        public List<AboutImage>? AboutImages { get; set; }
     }
 }

@@ -371,6 +371,28 @@ namespace VfA.DataAccess.Migrations
                     b.ToTable("CompanyActivites");
                 });
 
+            modelBuilder.Entity("VfA.Models.CompanyImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CompanyImage");
+                });
+
             modelBuilder.Entity("VfA.Models.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -1096,6 +1118,17 @@ namespace VfA.DataAccess.Migrations
                     b.Navigation("StateProvince");
                 });
 
+            modelBuilder.Entity("VfA.Models.CompanyImage", b =>
+                {
+                    b.HasOne("VfA.Models.Company", "Company")
+                        .WithMany("CompanyImages")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("VfA.Models.InfoImage", b =>
                 {
                     b.HasOne("VfA.Models.Info", "Info")
@@ -1249,6 +1282,11 @@ namespace VfA.DataAccess.Migrations
             modelBuilder.Entity("VfA.Models.About", b =>
                 {
                     b.Navigation("AboutImages");
+                });
+
+            modelBuilder.Entity("VfA.Models.Company", b =>
+                {
+                    b.Navigation("CompanyImages");
                 });
 
             modelBuilder.Entity("VfA.Models.Info", b =>

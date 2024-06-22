@@ -213,6 +213,12 @@
         position: relative;
     }
 
+    .img-box2 {
+       
+        height: 200px; /* Set desired height */
+        overflow: hidden;
+        position: relative;
+    }
         .img-box img {
             width: 100%;
             height: 100%;
@@ -226,8 +232,8 @@
 </style>
 <div class="container-xl">
     <div class="row">
-        <div class="col-md-2">
-            <img class="img-logo" alt="logo-here" />
+        <div class="col-md-2 img-box2">
+            <img src="@Model.CompnayLogo" class="" alt="logo-here" />
         </div>
         <div class="col-md-10">
             <div><input class="my-2" placeholder="company Name" value="@Model.CompnayName" /></div>
@@ -288,7 +294,8 @@
                                                     </div>
                                                     <div class="thumb-content">
                                                         <h4>@ProductList[j].Name</h4>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
+                                                        <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -352,7 +359,8 @@
                                                     </div>
                                                     <div class="thumb-content">
                                                         <h4>@ServiceList[j].Name</h4>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <p class="card-title text-warning text-center">Category <b>@ServiceList[j].Category.Name</b></p>
+                                                        <a onclick="ServiceDetailsBtn(@ServiceList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -419,7 +427,8 @@
                                                     </div>
                                                     <div class="thumb-content">
                                                         <h4>@RequestList[j].Name</h4>
-                                                        <a href="#" class="btn btn-primary">Details</a>
+                                                        <p class="card-title text-warning text-center">Category <b>@RequestList[j].Category.Name</b></p>
+                                                        <a onclick="RequestDetailsBtn(@RequestList[j].Id)" class="btn btn-primary">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -493,6 +502,21 @@
                     })
                 }
             })
+        }
+        function ProductDetailsBtn(productId) {
+            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", productId);
+            window.location.href = url;
+        }
+        function ServiceDetailsBtn(serviceId) {
+            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", serviceId);
+            window.location.href = url;
+        }
+        function RequestDetailsBtn(requestId) {
+            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", requestId);
+            window.location.href = url;
         }
     </script>
 }
