@@ -4,8 +4,8 @@ namespace VfAWeb.Utilities
 {
     public class SatimPayment
     {
-        private readonly string userName = "";
-        private readonly string password = "";
+        private readonly string userName = "vfa.dz01@gmail.com";
+        private readonly string password = "Salmirafif2728@";
         readonly HttpClient _httpClient;
         public SatimPayment()
         {

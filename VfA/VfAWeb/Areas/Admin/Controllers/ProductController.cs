@@ -18,12 +18,15 @@ namespace VfAWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        ApplicationUser _user;
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        private readonly IUserClaimsService _userClaimsService;
+        //ApplicationUser _user;
+        UserClaimsVM _user;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
-            _user = UserSession.GetUser();
+           // _user = UserSession.GetUser();
+            _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index() 
         {

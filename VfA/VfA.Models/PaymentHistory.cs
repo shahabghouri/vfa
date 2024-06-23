@@ -11,6 +11,7 @@ namespace VfA.Models
         public long Id { get; set; }
         public string Description { get; set; }
         public string PaymentIdentifier { get; set; }
+        public string Tenure { get; set; }
         public decimal PaidAmount { get; set; }
         public DateTime PaymentDate { get; set; }
         public long SubscriptionPlanId { get; set; }
