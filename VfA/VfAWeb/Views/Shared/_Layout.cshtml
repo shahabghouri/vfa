@@ -44,10 +44,10 @@
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="light-blue">
                     <a href="index.html" class="logo">
-                        <img src="assets/img/kaiadmin/logo_light.svg"
+                        @* <img src="assets/img/kaiadmin/logo_light.svg"
                              alt="navbar brand"
                              class="navbar-brand"
-                             height="20" />
+                             height="20" /> *@
                     </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
@@ -80,37 +80,37 @@
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Products" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-product-hunt"></i>
                                 <p b-zdo7mud374="">Products</p>
                             </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Services" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-cogs"></i>
                                 <p b-zdo7mud374="">Services</p>
                             </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Requests" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-registered"></i>
                                 <p b-zdo7mud374="">Request</p>
                             </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Info" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-info-circle"></i>
                                 <p b-zdo7mud374="">Useful Info</p>
                             </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Partner" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-handshake-o"></i>
                                 <p b-zdo7mud374="">Our Partners</p>
                             </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Trust" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
+                                <i b-zdo7mud374="" class="fa fa-leaf"></i>
                                 <p b-zdo7mud374="">Trust Us</p>
                             </a>
                         </li>
@@ -184,7 +184,7 @@
                             </li>
                             <li class="nav-item">
                                 <a data-bs-toggle="collapse" href="#PlateformManagement">
-                                    <i class="fas fa-gear"></i>
+                                    <i class="fa fa-desktop"></i>
                                     <p>Plateform Management</p>
                                     <span class="caret"></span>
                                 </a>
@@ -329,10 +329,10 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="index.html" class="logo">
-                            <img src="assets/img/kaiadmin/logo_light.svg"
+                            @* <img src="assets/img/kaiadmin/logo_light.svg"
                                  alt="navbar brand"
                                  class="navbar-brand"
-                                 height="20" />
+                                 height="20" /> *@
                         </a>
                         <div class="nav-toggle">
                             <button class="btn btn-toggle toggle-sidebar">
@@ -366,19 +366,10 @@
 
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             <li class="nav-item topbar-user dropdown hidden-caret">
-                                <a class="dropdown-toggle profile-pic"
+                                <a class="dropdown-toggle profile-pic fa fa-lg fa-solid fa-user"
                                    data-bs-toggle="dropdown"
                                    href="#"
                                    aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="assets/img/profile.jpg"
-                                             alt="..."
-                                             class="avatar-img rounded-circle" />
-                                    </div>
-                                    <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
-                                        <span class="fw-bold">User</span>
-                                    </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                                     <partial name="_LoginPartial" />
@@ -394,6 +385,11 @@
                     @RenderBody()
                 </div>
             </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    &copy; 2024 - <img src="/images/footer.png" /> - @Localizer["All rights Reserved"] <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+                </div>
+            </footer>
         </div>
         <!-- Custom template | don't include it in your project! -->
         <div class="custom-template">
@@ -544,12 +540,7 @@
     @*_______________________________________________________________________________________________________________________*@
 
 
-    @*Footer*@
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - <img src="/images/footer.png" /> - @Localizer["All rights Reserved"] <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
-        </div>
-    </footer>
+    
     @*____________________________________________________________________________________________________________________________________________________________*@
 
 
