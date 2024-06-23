@@ -44,11 +44,8 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="light-blue">
-                    <a href="index.html" class="logo">
-                        @* <img src="assets/img/kaiadmin/logo_light.svg"
-                             alt="navbar brand"
-                             class="navbar-brand"
-                             height="20" /> *@
+                    <a href="/Admin/Category" class="logo">
+                        <img src="/images/logo.png" class="navbar-brand" height="50">
                     </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
@@ -67,7 +64,7 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
-                        <li b-zdo7mud374="" class="nav-item active">
+                       @*  <li b-zdo7mud374="" class="nav-item active">
                             <a asp-area="Visitor" asp-controller="Home" asp-action="Index" b-zdo7mud374="" class="collapsed">
                                 <i b-zdo7mud374="" class="fa fa-home"></i>
                                 <p b-zdo7mud374="">Home</p>
@@ -114,7 +111,7 @@
                                 <i b-zdo7mud374="" class="fa fa-leaf"></i>
                                 <p b-zdo7mud374="">Trust Us</p>
                             </a>
-                        </li>
+                        </li> *@
                         @if (user != null && !User.IsInRole(SD.Role_Admin))
                         {
                             <li b-zdo7mud374="" class="nav-item">
@@ -278,7 +275,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            
+
                         }
                         @if (User.IsInRole(SD.Role_Basic))
                         {
@@ -331,9 +328,9 @@
                     <div class="logo-header" data-background-color="dark">
                         <a href="index.html" class="logo">
                             @* <img src="assets/img/kaiadmin/logo_light.svg"
-                                 alt="navbar brand"
-                                 class="navbar-brand"
-                                 height="20" /> *@
+                            alt="navbar brand"
+                            class="navbar-brand"
+                            height="20" /> *@
                         </a>
                         <div class="nav-toggle">
                             <button class="btn btn-toggle toggle-sidebar">
@@ -352,7 +349,7 @@
                 <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="light-blue">
                     <div class="container-fluid">
-                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                       @*  <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button type="submit" class="btn btn-search pe-1">
@@ -363,9 +360,17 @@
                                        placeholder="Search ..."
                                        class="form-control" />
                             </div>
-                        </nav>
+                        </nav> *@
 
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic fa fa-lg fa-solid fa-envelope"
+                                   data-bs-toggle="dropdown"
+                                   href="#"
+                                   aria-expanded="false">
+                                </a>
+                            </li>
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic fa fa-lg fa-solid fa-user"
                                    data-bs-toggle="dropdown"
@@ -375,6 +380,7 @@
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                                     <partial name="_AdminLoginPartial" />
                                 </ul>
+                            </li>
                     </div>
                 </nav>
                 <!-- End Navbar -->
@@ -541,7 +547,7 @@
     @*_______________________________________________________________________________________________________________________*@
 
 
-    
+
     @*____________________________________________________________________________________________________________________________________________________________*@
 
 
@@ -563,10 +569,10 @@
     *@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     @* <script src="https://cdn.tiny.cloud/1/o8s9hbwmqyxn9r3s2360zni13dzl7y14kbp0ny95vhlqj4vv/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> *@
-    
+
     <!-- Kaiadmin JS -->
     <script src="~/js/kaiadmin.min.js"></script>
-    
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script></script>
     @await RenderSectionAsync("Scripts", required: false)
 
