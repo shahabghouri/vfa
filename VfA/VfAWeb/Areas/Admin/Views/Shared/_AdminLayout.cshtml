@@ -2,10 +2,16 @@
 @using System.Text.Json
 @using Microsoft.AspNetCore.Mvc.Localization
 @using VfA.DataAccess.Common
+@using VfA.DataAccess.Repository.IRepository
+@inject IUserClaimsService _userClaimsService;
+@inject IHttpContextAccessor httpContextAccessor;
 @{
-    ApplicationUser user = new ApplicationUser();
-    user = UserSession.GetUser();
-    var profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
+    UserClaimsVM user = User.Identity.IsAuthenticated ? _userClaimsService.GetUserClaims() : null;
+    var profilePreText = "";
+    if (user != null)
+    {
+        profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
+    }
 }
 @inject IHttpContextAccessor HttpContextAccessor
 @inject IViewLocalizer Localizer
@@ -64,53 +70,53 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
-                       @*  <li b-zdo7mud374="" class="nav-item active">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Index" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-home"></i>
-                                <p b-zdo7mud374="">Home</p>
-                            </a>
+                        @*  <li b-zdo7mud374="" class="nav-item active">
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Index" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-home"></i>
+                        <p b-zdo7mud374="">Home</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="About" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-info"></i>
-                                <p b-zdo7mud374="">About</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="About" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-info"></i>
+                        <p b-zdo7mud374="">About</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Products" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-product-hunt"></i>
-                                <p b-zdo7mud374="">Products</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Products" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-product-hunt"></i>
+                        <p b-zdo7mud374="">Products</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Services" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-cogs"></i>
-                                <p b-zdo7mud374="">Services</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Services" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-cogs"></i>
+                        <p b-zdo7mud374="">Services</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Requests" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-registered"></i>
-                                <p b-zdo7mud374="">Request</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Requests" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-registered"></i>
+                        <p b-zdo7mud374="">Request</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Info" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-info-circle"></i>
-                                <p b-zdo7mud374="">Useful Info</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Info" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-info-circle"></i>
+                        <p b-zdo7mud374="">Useful Info</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Partner" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-handshake-o"></i>
-                                <p b-zdo7mud374="">Our Partners</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Partner" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-handshake-o"></i>
+                        <p b-zdo7mud374="">Our Partners</p>
+                        </a>
                         </li>
                         <li b-zdo7mud374="" class="nav-item">
-                            <a asp-area="Visitor" asp-controller="Home" asp-action="Trust" b-zdo7mud374="" class="collapsed">
-                                <i b-zdo7mud374="" class="fa fa-leaf"></i>
-                                <p b-zdo7mud374="">Trust Us</p>
-                            </a>
+                        <a asp-area="Visitor" asp-controller="Home" asp-action="Trust" b-zdo7mud374="" class="collapsed">
+                        <i b-zdo7mud374="" class="fa fa-leaf"></i>
+                        <p b-zdo7mud374="">Trust Us</p>
+                        </a>
                         </li> *@
                         @if (user != null && !User.IsInRole(SD.Role_Admin))
                         {
@@ -349,17 +355,17 @@
                 <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="light-blue">
                     <div class="container-fluid">
-                       @*  <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pe-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                       placeholder="Search ..."
-                                       class="form-control" />
-                            </div>
+                        @*  <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-search pe-1">
+                        <i class="fa fa-search search-icon"></i>
+                        </button>
+                        </div>
+                        <input type="text"
+                        placeholder="Search ..."
+                        class="form-control" />
+                        </div>
                         </nav> *@
 
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
