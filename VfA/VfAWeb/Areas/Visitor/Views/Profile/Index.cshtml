@@ -458,26 +458,26 @@
             //     $(this).toggleClass("fa-heart fa-heart-o");
             // });
             $('#AddProductBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Product", new { area = "Admin" })';
+                window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor" })';
             });
             $('#AddServiceBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Service", new { area = "Admin" })';
+                window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor" })';
             });
             $('#AddRequestBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Request", new { area = "Admin" })';
+                window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor" })';
             });
 
             $('.EditProductBtn').on('click', function () {
                 var productId = $(this).data('product-id');
-                window.location.href = '@Url.Action("Upsert", "Product", new { area = "Admin", id = "__id__" })'.replace('__id__', productId);
+                window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor", id = "__id__" })'.replace('__id__', productId);
             });
             $('.EditServiceBtn').on('click', function () {
                 var serviceId = $(this).data('service-id');
-                window.location.href = '@Url.Action("Upsert", "Service", new { area = "Admin", id = "__id__" })'.replace('__id__', serviceId);
+                window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor", id = "__id__" })'.replace('__id__', serviceId);
             });
             $('.EditRequestBtn').on('click', function () {
                 var requestId = $(this).data('request-id');
-                window.location.href = '@Url.Action("Upsert", "Request", new { area = "Admin", id = "__id__" })'.replace('__id__', requestId);
+                window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor", id = "__id__" })'.replace('__id__', requestId);
             });
         });
         function Delete(url) {
