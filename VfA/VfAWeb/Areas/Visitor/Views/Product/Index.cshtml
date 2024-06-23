@@ -1,12 +1,12 @@
-﻿@model List<Service>
+﻿@model List<Product>
 @{
-    ViewData["Title"] = "Services";
+    ViewData["Title"] = "Products";
 }
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Service List</h2>
+                <h2 class="text-white py-2">Product List</h2>
             </div>
         </div>
     </div>
@@ -15,8 +15,8 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Service" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i>  Create New Service
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i>  Create New Product
                 </a>
             </div>
         </div>
@@ -25,6 +25,9 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>ProductionCapacity</th>
+                    <th>CapacityUnit</th>
+                    <th>Description</th>
                     <th>Category</th>
                     <th></th>
                 </tr>
@@ -34,6 +37,6 @@
     </div>
 </div>
 
-@section Scripts {
-    <script src="~/js/serviceAdmin.js"></script>
+@section Scripts{
+    <script src="~/js/product.js"></script>
 }

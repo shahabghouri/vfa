@@ -27,4 +27,8 @@
     <ProjectReference Include="..\VfA.Utility\VfA.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Text.Json
-@using VfA.DataAccess.Common
 @using VfA.DataAccess.Repository.IRepository
 @inject IUserClaimsService _userClaimsService;
 @inject IHttpContextAccessor httpContextAccessor;
@@ -73,10 +72,16 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Visitor" asp-controller="Home" asp-action="Trust">@Localizer["Trust us"]</a>
                         </li>
-                        @if (user != null)
+                        @if (user != null && user.SubscribedPlanId > 0)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Visitor" asp-controller="Profile" asp-action="Index">My Profile @profilePreText</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="" asp-action="">Get Subscription</a>
                             </li>
                         }
                         @*
@@ -274,7 +279,7 @@
                         }
                         @*_______________________________________________________________________________________________________________________*@
                         @**************************************************************Importer*******************************************************@
-                        @if (User.IsInRole(SD.Role_Importer))
+                       @*  @if (User.IsInRole(SD.Role_Importer))
                         {
 
                             <li class="nav-item">
@@ -282,7 +287,7 @@
                             </li>
 
 
-                        }
+                        } *@
                         @*_______________________________________________________________________________________________________________________*@
 
 

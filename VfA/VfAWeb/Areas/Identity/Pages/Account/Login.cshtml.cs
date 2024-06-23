@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using VfA.DataAccess.Repository.IRepository;
 using System.Text.Json;
-using VfA.DataAccess.Common;
+using VfA.Utility;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using VfA.Models;
@@ -144,6 +144,10 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     _session.SetString("user", JsonSerializer.Serialize(user));
                     //Console.WriteLine("User Obj is = " + _session.GetString("user") );
                     _logger.LogInformation("User logged in.");
+                    if (User.IsInRole(SD.Role_Admin))
+                    {
+                        return LocalRedirect("/Admin/Category");
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

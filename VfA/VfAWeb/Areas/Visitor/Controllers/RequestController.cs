@@ -9,17 +9,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
 
-namespace VfAWeb.Areas.Admin.Controllers
+namespace VfAWeb.Areas.Visitor.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Importer},{SD.Role_Exporter}")]
-    public class ProductController : Controller
+    [Area("Visitor")]
+    [Authorize(Roles = $"{SD.Role_Importer},{SD.Role_Exporter}")]
+    public class RequestController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IUserClaimsService _userClaimsService;
         UserClaimsVM _user;
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IUserClaimsService userClaimsService)
+        public RequestController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
@@ -27,59 +27,56 @@ namespace VfAWeb.Areas.Admin.Controllers
         }
         public IActionResult Index() 
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").Where(x => x.UserId == _user.Id).ToList();
-            return View(objProductList);
+            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties:"Category").Where(x=>x.UserId == _user.Id).ToList();
+           
+            return View(objRequestList);
         }
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM productVM = new()
+            RequestVM requestVM = new()
             {
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                Product = new Product()
+                Request = new Request()
             };
             if (id == null || id == 0)
             {
                 //create
-                return View(productVM);
+                return View(requestVM);
             }
             else
             {
                 //update
-                productVM.Product = _unitOfWork.Product.Get(u=>u.Id==id,includeProperties:"ProductImages");
-                return View(productVM);
+                requestVM.Request = _unitOfWork.Request.Get(u=>u.Id==id,includeProperties:"RequestImages");
+                return View(requestVM);
             }
             
         }
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, List<IFormFile> files)
+        public IActionResult Upsert(RequestVM requestVM, List<IFormFile> files)
         {
             if (ModelState.IsValid)
             {
-                productVM.Product.UserId = _user.Id;
-                if (productVM.Product.Id == 0) {
-                    _unitOfWork.Product.Add(productVM.Product);
+                requestVM.Request.UserId = _user.Id;
+                if (requestVM.Request.Id == 0) {
+                    _unitOfWork.Request.Add(requestVM.Request);
                 }
                 else {
-                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Request.Update(requestVM.Request);
                 }
-
                 _unitOfWork.Save();
-
-
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (files != null)
                 {
-
                     foreach(IFormFile file in files) 
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = @"images\products\product-" + productVM.Product.Id;
-                        string finalPath = Path.Combine(wwwRootPath, productPath);
+                        string requestPath = @"images\requests\request-" + requestVM.Request.Id;
+                        string finalPath = Path.Combine(wwwRootPath, requestPath);
 
                         if (!Directory.Exists(finalPath))
                             Directory.CreateDirectory(finalPath);
@@ -88,45 +85,38 @@ namespace VfAWeb.Areas.Admin.Controllers
                             file.CopyTo(fileStream);
                         }
 
-                        ProductImage productImage = new() {
-                            ImageUrl = @"\" + productPath + @"\" + fileName,
-                            ProductId=productVM.Product.Id,
+                        RequestImage requestImage = new() {
+                            ImageUrl = @"\" + requestPath + @"\" + fileName,
+                            RequestId=requestVM.Request.Id,
                         };
 
-                        if (productVM.Product.ProductImages == null)
-                            productVM.Product.ProductImages = new List<ProductImage>();
+                        if (requestVM.Request.RequestImages == null)
+                            requestVM.Request.RequestImages = new List<RequestImage>();
 
-                        productVM.Product.ProductImages.Add(productImage);
+                        requestVM.Request.RequestImages.Add(requestImage);
 
                     }
-
-                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Request.Update(requestVM.Request);
                     _unitOfWork.Save();
-
-
-
-
                 }
-
-                
-                TempData["success"] = "Product created/updated successfully";
+                TempData["success"] = "Request created/updated successfully";
                 return RedirectToAction("Index");
             }
             else
             {
-                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                requestVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
-                return View(productVM);
+                return View(requestVM);
             }
         }
 
 
         public IActionResult DeleteImage(int imageId) {
-            var imageToBeDeleted = _unitOfWork.ProductImage.Get(u => u.Id == imageId);
-            int productId = imageToBeDeleted.ProductId;
+            var imageToBeDeleted = _unitOfWork.RequestImage.Get(u => u.Id == imageId);
+            int requestId = imageToBeDeleted.RequestId;
             if (imageToBeDeleted != null) {
                 if (!string.IsNullOrEmpty(imageToBeDeleted.ImageUrl)) {
                     var oldImagePath =
@@ -138,13 +128,13 @@ namespace VfAWeb.Areas.Admin.Controllers
                     }
                 }
 
-                _unitOfWork.ProductImage.Remove(imageToBeDeleted);
+                _unitOfWork.RequestImage.Remove(imageToBeDeleted);
                 _unitOfWork.Save();
 
                 TempData["success"] = "Deleted successfully";
             }
 
-            return RedirectToAction(nameof(Upsert), new { id = productId });
+            return RedirectToAction(nameof(Upsert), new { id = requestId });
         }
 
         #region API CALLS
@@ -152,22 +142,22 @@ namespace VfAWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
-            return Json(new { data = objProductList });
+            List<Request> objRequestList = _unitOfWork.Request.GetAll(includeProperties: "Category").Where(x => x.UserId == _user.Id).ToList();
+            return Json(new { data = objRequestList });
         }
 
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productToBeDeleted == null)
+            var requestToBeDeleted = _unitOfWork.Request.Get(u => u.Id == id);
+            if (requestToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            string productPath = @"images\products\product-" + id;
-            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+            string requestPath = @"images\requests\request-" + id;
+            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, requestPath);
 
             if (Directory.Exists(finalPath)) {
                 string[] filePaths = Directory.GetFiles(finalPath);
@@ -179,7 +169,7 @@ namespace VfAWeb.Areas.Admin.Controllers
             }
 
 
-            _unitOfWork.Product.Remove(productToBeDeleted);
+            _unitOfWork.Request.Remove(requestToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete Successful" });

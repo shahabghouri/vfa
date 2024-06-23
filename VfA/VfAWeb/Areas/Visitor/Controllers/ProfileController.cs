@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
-using VfA.DataAccess.Common;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
 using VfA.Models.ViewModels;

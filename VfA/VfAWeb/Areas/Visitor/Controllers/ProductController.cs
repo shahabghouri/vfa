@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
 
-namespace VfAWeb.Areas.Admin.Controllers
+namespace VfAWeb.Areas.Visitor.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Importer},{SD.Role_Exporter}")]
+    [Area("Visitor")]
+    [Authorize(Roles = $"{SD.Role_Importer},{SD.Role_Exporter}")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
-using VfA.DataAccess.Common;
 using VfA.Models.ViewModels;
 
 namespace VfAWeb.Areas.Visitor.Controllers

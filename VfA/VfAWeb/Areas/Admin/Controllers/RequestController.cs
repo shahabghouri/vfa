@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Data;
-using VfA.DataAccess.Common;
 
 namespace VfAWeb.Areas.Admin.Controllers
 {
@@ -19,13 +18,11 @@ namespace VfAWeb.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IUserClaimsService _userClaimsService;
-        //ApplicationUser _user;
         UserClaimsVM _user;
         public RequestController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
-           // _user = UserSession.GetUser();
             _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index() 

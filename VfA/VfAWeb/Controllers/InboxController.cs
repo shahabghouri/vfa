@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VfA.DataAccess.Common;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
 using VfA.Models.ViewModels;

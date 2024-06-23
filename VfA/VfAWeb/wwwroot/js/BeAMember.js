@@ -49,14 +49,17 @@ $(document).ready(function () {
     }
 });
 $("#importerBtn").click(function () {
+    $('#importerBtn').addClass('bg-primary text-white');
+    $('#exporterBtn').removeClass('bg-primary text-white');
+
     SetExporterFieldsNull();
-    $("#formTitle").text("Register - Importer");
+    //$("#formTitle").text("Register - Importer");
     $("input[name='Input.IsImporter']").val("true");
     $("input[name='Input.IsExporter']").val("false");
     $(".ImporterFields").show();
     $(".ExporterFields").hide();
     $("#formContainer").show();
-    $("#btnContainer").hide();
+    //$("#btnContainer").hide();
 });
 function SetImporterFieldsNull() {
     $('#Input_StateProvinceId').val('0');
@@ -66,14 +69,17 @@ function SetExporterFieldsNull() {
     $('#Input_WilayaID').val('0');
 }
 $("#exporterBtn").click(function () {
+    $('#exporterBtn').addClass('bg-primary text-white');
+    $('#importerBtn').removeClass('bg-primary text-white');
+
     SetImporterFieldsNull();
-    $("#formTitle").text("Register - Exporter");
+    //$("#formTitle").text("Register - Exporter");
     $("input[name='Input.IsImporter']").val("false");
     $("input[name='Input.IsExporter']").val("true");
     $(".ImporterFields").hide();
     $(".ExporterFields").show();
     $("#formContainer").show();
-    $("#btnContainer").hide();
+    //$("#btnContainer").hide();
 });
 function IsValidateForm() {
     return $('#multi-step-form').valid();
