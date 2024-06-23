@@ -12,12 +12,15 @@ namespace VfAWeb.Areas.Visitor.Controllers
     public class ProfileController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        ApplicationUser? _user;
+        private readonly IUserClaimsService _userClaimsService;
+        //ApplicationUser? _user;
+        UserClaimsVM _user;
 
-        public ProfileController(IUnitOfWork unitOfWork)
+        public ProfileController(IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
-            _user = UserSession.GetUser();
+            //_user = UserSession.GetUser();
+            _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index()
         {

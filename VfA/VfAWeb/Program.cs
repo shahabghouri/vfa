@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.Razor;
 using VfA.DataAccess.Common;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using VfA.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,12 +28,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(Options =>
-{
-Options.Password.RequireDigit = false;
-})
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+    {
+        options.Password.RequireDigit = false;
+        options.SignIn.RequireConfirmedAccount = false;
+    }
+    )
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Identity/Account/Login";
@@ -43,12 +49,25 @@ builder.Services.AddAuthentication().AddFacebook(option => {
     option.AppSecret = "8fc42ae3f4f2a4986143461d4e2da919";
 });
 */
-builder.Services.AddAuthentication().AddMicrosoftAccount(option =>
+// Add authentication services
+builder.Services.AddAuthentication(options =>
 {
-    option.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
-    option.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+})
+.AddMicrosoftAccount(options =>
+{
+    options.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
+    options.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+    options.Cookie.Name = "YourAppCookieName"; // Set your cookie name
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Adjust expiration as needed
+    options.LoginPath = "/Identity/Account/Login"; // Set your login path
+    options.LogoutPath = "/Identity/Account/Logout"; // Set your logout path
 });
-
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -56,11 +75,12 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IUserClaimsService, UserClaimsService>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, CustomClaimsFactory>();
 
 builder.Services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
@@ -95,16 +115,16 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 // Register the IHttpContextAccessor instance with your static class
-var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
-UserSession.Configure(httpContextAccessor);
+//var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+//UserSession.Configure(httpContextAccessor);
 SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
     name: "area-route",
     pattern: "{area=Visitor}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.UseRequestLocalization();
 app.Run();
 

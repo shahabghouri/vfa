@@ -1,12 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Text.Json
 @using VfA.DataAccess.Common
+@using VfA.DataAccess.Repository.IRepository
+@inject IUserClaimsService _userClaimsService;
+@inject IHttpContextAccessor httpContextAccessor;
 @{
-    ApplicationUser user = new ApplicationUser();
-    user = UserSession.GetUser();
-    var profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
+    UserClaimsVM user = httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ? _userClaimsService.GetUserClaims() : null;
+    var profilePreText = "";
+    if (user != null)
+    {
+        profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
+    }
 }
-@inject IHttpContextAccessor HttpContextAccessor
 @inject IViewLocalizer Localizer
 
 <!DOCTYPE html>
@@ -94,8 +99,8 @@
                                     </li>
 
                                     @* <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="SuppProduct" asp-action="Index">SuppProduct</a>
-                                    </li> *@
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="SuppProduct" asp-action="Index">SuppProduct</a>
+                                </li> *@
 
 
                                     <li class="nav-item">

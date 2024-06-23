@@ -1,6 +1,7 @@
 ﻿using Humanizer.Localisation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VfA.DataAccess.Repository;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
 using VfA.Models.ViewModels;
@@ -13,18 +14,21 @@ namespace VfAWeb.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly SatimPayment _satimPayment;
-        public PaymentController(IUnitOfWork unitOfWork)
+        //ApplicationUser _user;
+        UserClaimsVM _user;
+        public PaymentController(IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
             _satimPayment = new();
+            _user = userClaimsService.GetUserClaims();
         }
         public IActionResult Index()
         {
-            var currentSubscriptionPlan = 0;
+            var currentSubscriptionPlan = _user.SubscribedPlanId;
             var viewModel = new PaymentViewModel();
             viewModel.SubscriptionPlan = _unitOfWork.SubscriptionPlan.Get(x => x.Id == currentSubscriptionPlan);
             viewModel.PaymentHistory = _unitOfWork.PaymentHistory.GetAll().ToList();
-            viewModel.ApplicationUser = _unitOfWork.ApplicationUser.Get(x => x.UserName == User.Identity.Name);
+            viewModel.ApplicationUser = _unitOfWork.ApplicationUser.Get(x => x.Id == _user.Id);
             return View(viewModel);
         }
         public IActionResult Pricing()
@@ -38,7 +42,7 @@ namespace VfAWeb.Controllers
             var subscriptionPlan = _unitOfWork.SubscriptionPlan.Get(x => x.Id == subscriptionPlanId);
             if (subscriptionPlan != null)
             {
-                var currentUserId = "";
+                var currentUserId = _user.Id;
                 var lastOrderNumber = _unitOfWork.PaymentOrder.GetAll().OrderByDescending(x => x.OrderNumber).FirstOrDefault()?.OrderNumber;
                 lastOrderNumber++;
                 var orderNumber = lastOrderNumber ?? 1;
@@ -84,7 +88,7 @@ namespace VfAWeb.Controllers
         }
         public async Task<IActionResult> Success(int orderNumber)
         {
-            var currentUserId = "";
+            var currentUserId = _user.Id;
             var paymentOrder = _unitOfWork.PaymentOrder.Get(x => x.OrderNumber == orderNumber);
             if (paymentOrder != null)
             {

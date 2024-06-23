@@ -10,17 +10,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using VfA.DataAccess.Repository.IRepository;
 using System.Text.Json;
 using VfA.DataAccess.Common;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using VfA.Models;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IUnitOfWork _unitOfWork;
         public ISession _session;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -115,7 +118,29 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     string username = User.Identity.Name;
-                    var user  = _unitOfWork.ApplicationUser.Get(u => u.UserName == username);
+                    var user = _unitOfWork.ApplicationUser.Get(u => u.UserName == username);
+                    user.Email= user.Email ?? string.Empty;
+                    user.CompanyId = user.CompanyId ?? 0;
+                    user.IsExporter = user.IsExporter == null ? false : user.IsExporter;
+                    user.IsImporter = user.IsImporter == null ? false : user.IsImporter;
+                    //#region CLAIMS
+                    //var claims = new List<Claim>
+                    //{
+                    //    new Claim(ClaimTypes.NameIdentifier, user.Id),  // Example: Add user ID
+                    //    new Claim(ClaimTypes.Email, username),        // Example: Add email
+                    //    new Claim("IsImporter", user.IsImporter.ToString()),        // Example: Add email
+                    //    new Claim("IsExporter", user.IsExporter.ToString()),        // Example: Add email
+                    //    new Claim("CompanyId", user.CompanyId.ToString())        // Example: Add email
+                    //};
+                    //    // Add other necessary claims
+                    //// Add claims to user's identity
+                    //var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    //var principal = new ClaimsPrincipal(identity);
+
+                    //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    //#endregion
+
                     _session.SetString("user", JsonSerializer.Serialize(user));
                     //Console.WriteLine("User Obj is = " + _session.GetString("user") );
                     _logger.LogInformation("User logged in.");
