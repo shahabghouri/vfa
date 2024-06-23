@@ -5,7 +5,7 @@
 @inject IUserClaimsService _userClaimsService;
 @inject IHttpContextAccessor httpContextAccessor;
 @{
-    UserClaimsVM user = httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ? _userClaimsService.GetUserClaims() : null;
+    UserClaimsVM user = User.Identity.IsAuthenticated ? _userClaimsService.GetUserClaims() : null;
     var profilePreText = "";
     if (user != null)
     {

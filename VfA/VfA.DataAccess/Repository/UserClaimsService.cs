@@ -31,7 +31,8 @@ namespace VfA.DataAccess.Repository
 
             bool.TryParse(isImporterClaim, out bool isImporter);
             bool.TryParse(isExporterClaim, out bool isExporter);
-
+            var companyIdInt = string.IsNullOrEmpty(companyId) ? 0 : int.Parse(companyId ?? "0");
+            var subscribedPlanIdInt = string.IsNullOrEmpty(SubscribedPlanId) ? 0 : int.Parse(SubscribedPlanId ?? "0");
             var userClaims = new UserClaimsVM
             {
                 Id = userId,
@@ -39,8 +40,8 @@ namespace VfA.DataAccess.Repository
                 Name = name ?? "",
                 IsImporter = isImporter,
                 IsExporter = isExporter,
-                CompanyId = int.Parse(companyId ?? "0"),
-                SubscribedPlanId = long.Parse(SubscribedPlanId ?? "0"),
+                CompanyId = companyIdInt,
+                SubscribedPlanId = subscribedPlanIdInt,
                 // Add other properties as needed
             };
 

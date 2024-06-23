@@ -29,45 +29,44 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-    {
-        options.Password.RequireDigit = false;
-        options.SignIn.RequireConfirmedAccount = false;
-    }
-    )
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+{
+    options.Password.RequireDigit = false;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = $"/Identity/Account/Login";
-    options.LogoutPath = $"/Identity/Account/Logout";
-    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-});
-/*
-builder.Services.AddAuthentication().AddFacebook(option => {
-    option.AppId = "193813826680436";
-    option.AppSecret = "8fc42ae3f4f2a4986143461d4e2da919";
-});
-*/
-// Add authentication services
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
-})
-.AddMicrosoftAccount(options =>
-{
-    options.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
-    options.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
-})
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-{
-    options.Cookie.Name = "YourAppCookieName"; // Set your cookie name
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Adjust expiration as needed
-    options.LoginPath = "/Identity/Account/Login"; // Set your login path
-    options.LogoutPath = "/Identity/Account/Logout"; // Set your logout path
-});
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.LoginPath = $"/Identity/Account/Login";
+//    options.LogoutPath = $"/Identity/Account/Logout";
+//    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+//});
+///*
+//builder.Services.AddAuthentication().AddFacebook(option => {
+//    option.AppId = "193813826680436";
+//    option.AppSecret = "8fc42ae3f4f2a4986143461d4e2da919";
+//});
+//*/
+//// Add authentication services
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    //options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+//})
+//.AddMicrosoftAccount(options =>
+//{
+//    options.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
+//    options.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
+//})
+//.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+//{
+//    options.Cookie.Name = "YourAppCookieName"; // Set your cookie name
+//    options.Cookie.HttpOnly = true;
+//    options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Adjust expiration as needed
+//    options.LoginPath = "/Identity/Account/Login"; // Set your login path
+//    options.LogoutPath = "/Identity/Account/Logout"; // Set your logout path
+//});
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
