@@ -1,5 +1,9 @@
 ﻿@model MessageViewModel
 @{
+    if (User.IsInRole(SD.Role_Admin))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
     ViewData["Title"] = "Inbox";
     var chatUsers = (from chat in Model.Chats
                      select new
@@ -8,82 +12,83 @@
                          Name = chat.Name,
                          LastMessage = Model.Messages.Where(x => x.SenderUserId == chat.Id || x.ReceiverUserId == chat.Id).OrderByDescending(x => x.Timestamp).FirstOrDefault(),
 
-                     }).OrderByDescending(x=> x.LastMessage == null ? DateTime.Now.AddYears(-100) : x.LastMessage.Timestamp);
+                     }).OrderByDescending(x => x.LastMessage == null ? DateTime.Now.AddYears(-100) : x.LastMessage.Timestamp);
     var today = DateTime.Now;
-    var yesterday = DateTime.Now.AddDays(-1) ;
+    var yesterday = DateTime.Now.AddDays(-1);
 }
-<link href="~/css/inbox.css" rel="stylesheet" />
-<div class="wrapper">
-    <div class="d-flex h-100">
-        <div class="left">
-            <div class="top d-flex justify-content-between">
-                <h4>Chats</h4>
-                @* <input type="text" placeholder="Search" class="w-100" />*@
-                <a href="javascript:;" class="search"></a>  
-            </div>
-            <ul class="people p-0">
-                @foreach (var chat in chatUsers)
-                {
-                    var msg = chat.LastMessage == null ? "" : chat.LastMessage.Content;
-                    msg = msg.Length > 25 ? msg.Substring(0, 25)+"..." : msg;
-                    var lastMessageTime = chat.LastMessage == null ? "" :
-                    chat.LastMessage.Timestamp.Date == today.Date ?
-                    chat.LastMessage.Timestamp.ToString("hh:mm tt") : chat.LastMessage.Timestamp.Date == yesterday.Date ? "Yesterday" : chat.LastMessage.Timestamp.ToString("dd MM yy");
-                    <li class="person d-flex" data-chat="@chat.UserId" data-chatUser="@chat.Name">
-                        <img src="/images/user.png" alt="" />
-                        <div>
-                            <div class="name">@chat.Name</div>
-                            <div class="preview">@msg</div>
-                            <span class="time">@lastMessageTime</span>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="right border">
-            <div class="top"><span>To: <span class="name"></span></span></div>
-            <div class="chat-container" style="height: calc(100% - 137px);overflow-y: scroll;">
-                @foreach (var chat in Model.Chats)
-                {
-                    var messages = Model.Messages.Where(x => x.SenderUserId == chat.Id || x.ReceiverUserId == chat.Id);
-                    <div class="chat border-0" data-chat="@chat.Id">
-                        @foreach (var message in messages.GroupBy(x => x.Timestamp.Date))
-                        {
-                            var groupName = message.Key.Date == today.Date ? "Today" : message.Key.Date == yesterday.Date ? "Yesterday" : @message.Key.DayOfWeek.ToString() + ", " + @message.Key.ToString("dd MMM yyyy");
-                            <div class="conversation-start">
-                                <span>@groupName</span>
+<div class="chat-container container mt-5 pt-5">
+    <div class="wrapper">
+        <div class="d-flex h-100">
+            <div class="left">
+                <div class="top d-flex justify-content-between">
+                    <h4>Chats</h4>
+                    @* <input type="text" placeholder="Search" class="w-100" />*@
+                    <a href="javascript:;" class="search"></a>
+                </div>
+                <ul class="people p-0">
+                    @foreach (var chat in chatUsers)
+                    {
+                        var msg = chat.LastMessage == null ? "" : chat.LastMessage.Content;
+                        msg = msg.Length > 25 ? msg.Substring(0, 25)+"..." : msg;
+                        var lastMessageTime = chat.LastMessage == null ? "" :
+                        chat.LastMessage.Timestamp.Date == today.Date ?
+                        chat.LastMessage.Timestamp.ToString("hh:mm tt") : chat.LastMessage.Timestamp.Date == yesterday.Date ? "Yesterday" : chat.LastMessage.Timestamp.ToString("dd MM yy");
+                        <li class="person d-flex" data-chat="@chat.UserId" data-chatUser="@chat.Name">
+                            <img src="/images/user.png" alt="" />
+                            <div>
+                                <div class="name">@chat.Name</div>
+                                <div class="preview">@msg</div>
+                                <span class="time">@lastMessageTime</span>
                             </div>
-                            @foreach (var msg in message)
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="right border">
+                <div class="top"><span>To: <span class="name"></span></span></div>
+                <div class="chat-container" style="height: calc(100% - 137px);overflow-y: scroll;">
+                    @foreach (var chat in Model.Chats)
+                    {
+                        var messages = Model.Messages.Where(x => x.SenderUserId == chat.Id || x.ReceiverUserId == chat.Id);
+                        <div class="chat border-0" data-chat="@chat.Id">
+                            @foreach (var message in messages.GroupBy(x => x.Timestamp.Date))
                             {
-                                var messageTime = msg.Timestamp.Date == today.Date ?
-                                msg.Timestamp.ToString("hh:mm tt") : msg.Timestamp.Date == yesterday.Date ? "Yesterday "+ msg.Timestamp.ToString("hh:mm tt") : msg.Timestamp.ToString("dd-MMM-yy hh:mm tt");
-                                var msgFrom = msg.SenderUserId == chat.Id ? "you" : "me";
-                                <div class="bubble mb-3 @msgFrom">
-                                    @msg.Content
-                                    <p class="message-time">
-                                        @messageTime
-                                    </p>
+                                var groupName = message.Key.Date == today.Date ? "Today" : message.Key.Date == yesterday.Date ? "Yesterday" : @message.Key.DayOfWeek.ToString() + ", " + @message.Key.ToString("dd MMM yyyy");
+                                <div class="conversation-start">
+                                    <span>@groupName</span>
                                 </div>
+                                @foreach (var msg in message)
+                                {
+                                    var messageTime = msg.Timestamp.Date == today.Date ?
+                                    msg.Timestamp.ToString("hh:mm tt") : msg.Timestamp.Date == yesterday.Date ? "Yesterday "+ msg.Timestamp.ToString("hh:mm tt") : msg.Timestamp.ToString("dd-MMM-yy hh:mm tt");
+                                    var msgFrom = msg.SenderUserId == chat.Id ? "you" : "me";
+                                    <div class="bubble mb-3 @msgFrom">
+                                        @msg.Content
+                                        <p class="message-time">
+                                            @messageTime
+                                        </p>
+                                    </div>
+                                }
+                                @if (groupName != "Today")
+                                {
+                                    <div class="conversation-start today-conversation" style="display:none;">
+                                        <span>Today</span>
+                                    </div>
+                                }
                             }
-                            @if (groupName != "Today")
-                            {
-                                <div class="conversation-start today-conversation" style="display:none;">
-                                    <span>Today</span>
-                                </div>
-                            }
-                        }
 
-                    </div>
-                }
+                        </div>
+                    }
+                </div>
+                <div class="write">
+                    @* <a href="javascript:;" class="write-link attach"></a> *@
+                    <input id="message-box" autocomplete="off" type="text" />
+                    <a href="javascript:;" class="write-link smiley"></a>
+                    <a href="javascript:SendMessage();" class="write-link send"></a>
+                </div>
             </div>
-            <div class="write">
-                @* <a href="javascript:;" class="write-link attach"></a> *@
-                <input id="message-box" autocomplete="off" type="text" />
-                <a href="javascript:;" class="write-link smiley"></a>
-                <a href="javascript:SendMessage();" class="write-link send"></a>
-            </div>
+
         </div>
-
     </div>
 </div>
 @section Scripts {
