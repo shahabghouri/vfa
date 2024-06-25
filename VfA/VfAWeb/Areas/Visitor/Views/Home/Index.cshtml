@@ -8,6 +8,54 @@
     var TrustiesList = Model.Trusts.ToList();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .search-container {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        width: 450px;
+        border-radius: 3px;
+    }
+
+    .search-dd {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        border-radius: 3px;
+        right: 10px;
+        width: 135px;
+    }
+
+    .search-input {
+        border: 0;
+        padding: 4px;
+        width: calc(100% - 11px);
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 0;
+        right: -2px;
+        bottom: 0;
+        border: 0;
+        background: none;
+        font-size: 16px;
+        padding: 0 20px 2px 20px;
+        background: #0d6efd;
+        color: #fff;
+        transition: 0.3s;
+    }
+
+    .our-partners {
+        color: #0e0e0e;
+        margin-bottom: 20px;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+    }
+</style>
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
@@ -18,30 +66,43 @@
                         <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Viadct</span></h2>
                         <p class="animate__animated animate__fadeInUp">Find the right products & services, right away</p>
                         <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+                        <div class="d-flex justify-content-center">
+                            <div class="search-dd">
+                                <select id="search-keyword-dd" class="form-select">
+                                    <option value="Product">Product</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Request">Request</option>
+                                </select>
+                            </div>
+                            <div class="search-container">
+                                <input id="search-keyword" class="search-input" type="text">
+                                <button onclick="searchKeyWord()" class="search-btn">Search</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-@* 
+            @*
             <!-- Slide 2 -->
             <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
-                <div class="carousel-container">
-                    <div class="container">
-                        <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
-                    </div>
-                </div>
+            <div class="carousel-container">
+            <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+            </div>
+            </div>
             </div>
 
             <!-- Slide 3 -->
             <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
-                <div class="carousel-container">
-                    <div class="container">
-                        <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
-                    </div>
-                </div>
+            <div class="carousel-container">
+            <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+            </div>
+            </div>
             </div> *@
 
         </div>
@@ -91,79 +152,78 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">
         <div class="container">
-
-            <div class="row">
-                @for (int j = 0; j < TrustiesList.Count; j++)
-                {
-                    var requestImgUrl = "";
-                    if (TrustiesList[j].TrustImages.Count > 0)
+            <h2 class="animate__animated animate__fadeInDown our-partners">Our Partners</h2><div class="container">
+                <div class="row">
+                    @for (int j = 0; j < TrustiesList.Count; j++)
                     {
-                        requestImgUrl = TrustiesList[j].TrustImages[0].ImageUrl;
+                        var requestImgUrl = "";
+                        if (TrustiesList[j].TrustImages.Count > 0)
+                        {
+                            requestImgUrl = TrustiesList[j].TrustImages[0].ImageUrl;
+                        }
+                        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                            <img src="@requestImgUrl" class="img-fluid" alt="">
+                        </div>
                     }
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="@requestImgUrl" class="img-fluid" alt="">
-                    </div>
-                }
-            </div>
+                </div>
 
-        </div>
+            </div>
     </section><!-- End Clients Section -->
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-        <div class="container">
+    @*   <section id="services" class="services">
+    <div class="container">
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="icon-box">
-                        <i class="bi bi-briefcase"></i>
-                        <h4><a href="#">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="bi bi-card-checklist"></i>
-                        <h4><a href="#">Dolor Sitema</a></h4>
-                        <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="bi bi-bar-chart"></i>
-                        <h4><a href="#">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="bi bi-binoculars"></i>
-                        <h4><a href="#">Nemo Enim</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="bi bi-brightness-high"></i>
-                        <h4><a href="#">Magni Dolore</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="bi bi-calendar4-week"></i>
-                        <h4><a href="#">Eiusmod Tempor</a></h4>
-                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+    <div class="col-md-6">
+    <div class="icon-box">
+    <i class="bi bi-briefcase"></i>
+    <h4><a href="#">Lorem Ipsum</a></h4>
+    <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+    </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+    <div class="icon-box">
+    <i class="bi bi-card-checklist"></i>
+    <h4><a href="#">Dolor Sitema</a></h4>
+    <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+    </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+    <div class="icon-box">
+    <i class="bi bi-bar-chart"></i>
+    <h4><a href="#">Sed ut perspiciatis</a></h4>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+    </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+    <div class="icon-box">
+    <i class="bi bi-binoculars"></i>
+    <h4><a href="#">Nemo Enim</a></h4>
+    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+    <div class="icon-box">
+    <i class="bi bi-brightness-high"></i>
+    <h4><a href="#">Magni Dolore</a></h4>
+    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+    </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+    <div class="icon-box">
+    <i class="bi bi-calendar4-week"></i>
+    <h4><a href="#">Eiusmod Tempor</a></h4>
+    <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+    </div>
+    </div>
+    </div>
 
-        </div>
-    </section><!-- End Services Section -->
+    </div>
+    </section> *@<!-- End Services Section -->
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-
-            <div class="row">
+            @* <div class="row">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="portfolio-flters">
                         <li data-filter="*" class="filter-active">All</li>
@@ -172,10 +232,39 @@
                         <li data-filter=".filter-web">Requests</li>
                     </ul>
                 </div>
+            </div> *@
+            <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2>
+            <div class="row portfolio-container-2">
+                @for (int index = 0; index < ProductList.Count; index++)
+                {
+                    var item = ProductList[index];
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-wrap">
+                            @{
+                                var ProductImgUrl = "";
+                                if (item.ProductImages.Count > 0)
+                                {
+                                    ProductImgUrl = item.ProductImages[0].ImageUrl;
+                                }
+                                else
+                                {
+                                    ProductImgUrl = @"\images\blank-img.jpg";
+                                }
+                            }
+                            <img src="@ProductImgUrl" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>@item.Name</h4>
+                                <p>@item.Category.Name</p>
+                                <div class="portfolio-links">
+                                    <a href="@ProductImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                                    <a onclick="ProductDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-
-            <div class="row portfolio-container">
-
+            @* <div class="row portfolio-container-2">
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
                         <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
@@ -302,13 +391,83 @@
                     </div>
                 </div>
 
-            </div>
+            </div> *@
 
         </div>
     </section><!-- End Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeInDown our-partners">Services</h2>
+            <div class="row portfolio-container-2">
+                @for (int index = 0; index < ServiceList.Count; index++)
+                {
+                    var item = ServiceList[index];
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-wrap">
+                            @{
+                                var ServiceImgUrl = "";
+                                if (item.ServiceImages.Count > 0)
+                                {
+                                    ServiceImgUrl = item.ServiceImages[0].ImageUrl;
+                                }
+                                else
+                                {
+                                    ServiceImgUrl = @"\images\blank-img.jpg";
+                                }
+                            }
+                            <img src="@ServiceImgUrl" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>@item.Name</h4>
+                                <p>@item.Category.Name</p>
+                                <div class="portfolio-links">
+                                    <a href="@ServiceImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                                    <a onclick="ServiceDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeInDown our-partners">Requests</h2>
+            <div class="row portfolio-container-2">
+                @for (int index = 0; index < RequestList.Count; index++)
+                {
+                    var item = RequestList[index];
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-wrap">
+                            @{
+                                var RequestImgUrl = "";
+                                if (item.RequestImages.Count > 0)
+                                {
+                                    RequestImgUrl = item.RequestImages[0].ImageUrl;
+                                }
+                                else
+                                {
+                                    RequestImgUrl = @"\images\blank-img.jpg";
+                                }
+                            }
+                            <img src="@RequestImgUrl" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>@item.Name</h4>
+                                <p>@item.Category.Name</p>
+                                <div class="portfolio-links">
+                                    <a href="@RequestImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                                    <a onclick="RequestDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
 
 </main><!-- End #main -->
-<div class="container-xl">
+@* <div class="container-xl">
     <div class="row">
         <div class="row">
             <div class="col-md-12  d-flex justify-content-start">
@@ -359,24 +518,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @*  <div class="col-md-4">
-                                <div class="card card-post card-round">
-                                <img class="card-img-top" src="assets/img/blogpost.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                <div class="d-flex">
-                                <div class="avatar">
-                                <img class="card-img-top" src="@serviceImgUrl" alt="@ProductList[j].Name">
-                                </div>
-                                </div>
-                                <div class="separator-solid"></div>
-                                <h3 class="card-title">
-                                <a href="#"> @ProductList[j].Name </a>
-                                </h3>
-                                <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
-                                <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary  btn-sm">Details</a>
-                                </div>
-                                </div>
-                                </div> *@
                                     }
                                 </div>
                             </div>
@@ -517,7 +658,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> *@
 
 @section Scripts {
     <script>
@@ -536,6 +677,29 @@
             url = url.replace("__Id__", requestId);
             window.location.href = url;
         }
+        function searchKeyWord() {
+            var searchkeyworddd = $('#search-keyword-dd').val();
+            var searchkeyword = $('#search-keyword').val();
+
+            var data = {
+                searchkeyworddd: searchkeyworddd,
+                searchkeyword: searchkeyword
+            };
+            $.ajax({
+                type: 'GET', // Change to 'POST' if your controller action expects POST requests
+                url: '@Url.Action("search", "Home", new { area = "visitor" })',
+                data: data,
+                success: function (resp) {
+                    var newWindow = window.open();
+                    newWindow.document.write(resp);
+                },
+                error: function (er) { },
+            });
+            //var url = '@Url.Action("search", "Home", new { area = "visitor" })';
+            //url += '?' + $.param(data);
+
+        }
+
         $(document).ready(function () {
         });
     </script>

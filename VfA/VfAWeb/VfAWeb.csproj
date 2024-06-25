@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Visitor\Views\Home\search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
@@ -77,6 +81,18 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Visitor\Views\Home\search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Visitor\Views\Home\search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Visitor\Views\Home\search.cshtml" />
   </ItemGroup>
 
 </Project>

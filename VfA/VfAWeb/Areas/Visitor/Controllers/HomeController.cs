@@ -102,5 +102,9 @@ namespace VfAWeb.Areas.Visitor.Controllers
             Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
             return View(objRequest);
         }
+        public IActionResult search(searchVM searchVm)
+        {
+            return View(searchVm);
+        }
     }
 }

@@ -9,9 +9,20 @@ function loadDataTable() {
         "ajax": { url:'/visitor/product/getall'},
         "columns": [
             { data: 'name', "width": "25%" },
-            { data: 'ProductionCapacity', "width": "15%" },
-            { data: 'CapacityUnit', "width": "10%" },
-            { data: 'description', "width": "15%" },
+            { data: 'productionCapacity', "width": "15%" },
+            { data: 'capacityUnit', "width": "10%" },
+            {
+                data: 'description',
+                "render": function (data, type, row) {
+                    // Adjust the max length and append ellipsis if the description is longer
+                    if (data.length > 20) {
+                        return data.substr(0, 10) + '...';
+                    } else {
+                        return data;
+                    }
+                }
+                , "width": "15%"
+            },
             { data: 'category.name', "width": "10%" },
             {
                 data: 'id',
