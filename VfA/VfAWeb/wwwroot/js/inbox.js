@@ -7,10 +7,10 @@ let friends = {
     name: ''
 },
     chat = {
-        container: document.querySelector('.container .right'),
+        container: document.querySelector('.chat-container .right'),
         current: null,
         person: null,
-        name: document.querySelector('.container .right .top .name')
+        name: document.querySelector('.chat-container .right .top .name')
     };
 
 friends.all.forEach(f => {
@@ -60,6 +60,9 @@ function GetMessages() {
 }
 function SendMessage() {
     var msg = $('#message-box').val();
+    if (msg == '') {
+        return;
+    }
     var data = {
         ReceiverUserId: currentChatUserId,
         Content: $('#message-box').val()

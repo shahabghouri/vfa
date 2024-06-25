@@ -10,6 +10,7 @@
     {
         profilePreText = user != null ? (user.IsImporter ? "( Importer )" : (user.IsExporter ? "( Exporter )" : "")) : "";
     }
+    var path = Context.Request.Path;
 }
 @inject IViewLocalizer Localizer
 
@@ -288,8 +289,9 @@
         </div>
     </header><!-- End Header -->
     <!-- ======= Hero Section ======= -->
-    @RenderBody()
-
+    <div class="@(path == "/" || path == "/Visitor/Home" ? "" : "container my-5 py-5")">
+        @RenderBody()
+    </div>
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
@@ -386,6 +388,11 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function logoutUser() {
+            $('#logoutForm').submit();
+        }
+    </script>
 </body>
 
 </html>
