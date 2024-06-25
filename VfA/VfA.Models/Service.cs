@@ -27,7 +27,7 @@ namespace VfA.Models
         public Category Category { get; set; }
 
         [Required]
-        [MinLength(100)]
+        [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
         [DisplayName("Description")]
         public string Description { get; set; }
 

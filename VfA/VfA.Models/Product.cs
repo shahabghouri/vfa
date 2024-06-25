@@ -19,7 +19,7 @@ namespace VfA.Models
         [DisplayName("Product Name")]
         public string Name { get; set; }
         [Required]
-        [MinLength(100)]
+        [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
         public string Description { get; set; }
         [DisplayName("Production Capacity (in thousands) ")]
         [Range(1, 10000, ErrorMessage = "Capacity must be between 1-10000")]

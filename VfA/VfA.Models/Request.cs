@@ -27,8 +27,8 @@ namespace VfA.Models
         [ForeignKey("CategoryId")]
         [ValidateNever]
         public Category Category { get; set; }
-
-        [MinLength(100)]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
         [DisplayName("Description")]
         public string Description { get; set; }
 
