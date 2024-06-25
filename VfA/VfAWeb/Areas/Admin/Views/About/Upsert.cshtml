@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = Model.About.Id != 0 ? "Update About" : "Create About";
 }
-<div class="card shadow border-0 my-4">
+@* <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -13,11 +13,9 @@
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="About.Id" hidden />
-
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
-                        @*<div asp-validation-summary="ModelOnly"></div>*@
                         <div class="form-floating py-2 col-12">
                             <input asp-for="About.Title" class="form-control border-0 shadow" />
                             <label asp-for="About.Title" class="ms-2"></label>
@@ -28,7 +26,7 @@
                             <textarea asp-for="About.Topic" class="form-control border-0 shadow"></textarea>
                         </div>
 
-                       
+
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="files" class="form-control border-0 shadow" multiple />
                             <label asp-for="About.AboutImages" class="ms-2"></label>
@@ -50,8 +48,6 @@
                                 </a>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="col-2">
@@ -70,7 +66,85 @@
                     }
                 </div>
             </div>
+        </form>
+    </div>
+</div> *@
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="About.Id" hidden />
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">@(Model.About.Id != 0 ? "Update" : "Create") About</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-10 col-md-6">
+                            <div class="form-group">
+                                <label asp-for="About.Title" class=""></label>
+                                <input asp-for="About.Title" class="form-control">
+                                <span asp-validation-for="About.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="About.Topic" class=""></label>
+                                <textarea asp-for="About.Topic" class="form-control"></textarea>
+                                <span asp-validation-for="About.Topic" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="About.AboutImages"></label>
+                                <input type="file" name="files" class="form-control-file" multiple />
+                            </div>
 
+                            @* <div class="form-group">
+                            <label asp-for="About.Topic">Default Select</label>
+                            <select class="form-select form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>
+                            </div> *@
+                            @*  <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                            Agree with terms and conditions
+                            </label>
+                            </div> *@
+                        </div>
+                        <div class="col-2">
+                            @if (Model.About.AboutImages != null)
+                            {
+                                foreach (var image in Model.About.AboutImages)
+                                {
+                                    <div class="border p-1 m-2 text-center">
+                                        <img src="@image.ImageUrl" width="100%"
+                                             style="border-radius:5px; border:1px solid #bbb9b9" />
+                                        <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    @if (Model.About.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-primary ">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary ">Create</button>
+                    }
+                    <a asp-controller="About" asp-action="Index" class="btn btn-outline-primary border">
+                        Back to List
+                    </a>
+                    @*  <button class="btn btn-success">Submit</button>
+                    <button class="btn btn-danger">Cancel</button> *@
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -78,16 +152,15 @@
 
 
 
-
 @section Scripts {
-    
-   
+
+
     <script>
         $(document).ready(function () {
             $('textarea').summernote();
         });
     </script>
-    
+
     @{
 
         <partial name="_ValidationScriptsPartial" />

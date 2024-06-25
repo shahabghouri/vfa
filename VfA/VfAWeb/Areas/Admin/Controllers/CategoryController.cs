@@ -21,7 +21,12 @@ namespace VfAWeb.Areas.Admin.Controllers
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
-
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+            return Json(new { data = objCategoryList });
+        }
         public IActionResult Create()
         {
             return View();
