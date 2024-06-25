@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Products";
     var ProductList = Model.ToList();
-
 }
 <style>
     .search-container {
@@ -118,3 +117,22 @@
         }
     </div>
 </div>
+@section Scripts {
+    <script>
+        function ProductDetailsBtn(productId) {
+            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", productId);
+            window.location.href = url;
+        }
+        function ServiceDetailsBtn(serviceId) {
+            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", serviceId);
+            window.location.href = url;
+        }
+        function RequestDetailsBtn(requestId) {
+            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", requestId);
+            window.location.href = url;
+        }
+    </script>
+}

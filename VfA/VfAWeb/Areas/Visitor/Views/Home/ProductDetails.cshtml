@@ -1,7 +1,7 @@
 ﻿@model Product
 @{
     ViewData["Title"] = "Details";
-    var ImageMain = Model.ProductImages.Count != 0 ? Model.ProductImages.FirstOrDefault().ImageUrl : "";
+    var ImageMain = Model.ProductImages.Count != 0 ? Model.ProductImages.FirstOrDefault().ImageUrl : @"\images\blank-img.jpg";
 }
 <style>
     .text-bold {
@@ -119,9 +119,18 @@
                     <div class="row my-3 previews">
                         @foreach (var image in Model.ProductImages)
                         {
+                            var ImgUrl = "";
+                            if (!string.IsNullOrEmpty(image.ImageUrl))
+                            {
+                                ImgUrl = image.ImageUrl;
+                            }
+                            else
+                            {
+                                ImgUrl = @"\images\blank-img.jpg";
+                            }
                             <div class="col-md-3">
                                 <img class="w-100"
-                                     src="@image.ImageUrl"
+                                     src="@ImgUrl"
                                      alt="Sale">
                             </div>
                         }

@@ -1,11 +1,62 @@
-﻿@{
+﻿@model IEnumerable<Service>
+@{
     ViewData["Title"] = "Services";
     var ServiceList = Model.ToList();
 }
-<h1>@ViewData["Title"]</h1>
+<style>
+    .search-container {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        width: 450px;
+        border-radius: 3px;
+    }
 
-<p>this page display Services.</p>
-@model IEnumerable<Service>
+    .search-dd {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        border-radius: 3px;
+        right: 10px;
+        width: 135px;
+    }
+
+    .search-input {
+        border: 0;
+        padding: 4px;
+        width: calc(100% - 11px);
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 0;
+        right: -2px;
+        bottom: 0;
+        border: 0;
+        background: none;
+        font-size: 16px;
+        padding: 0 20px 2px 20px;
+        background: #0d6efd;
+        color: #fff;
+        transition: 0.3s;
+    }
+
+    .our-partners {
+        color: #0e0e0e;
+        margin-bottom: 20px;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .tile-img {
+        width: -webkit-fill-available !important;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
 <div class="container portfolio">
     @* <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2> *@
     <div class="row portfolio-container-2">
@@ -66,3 +117,23 @@
         </div>
     }
 </div> *@
+
+@section Scripts {
+    <script>
+        function ProductDetailsBtn(productId) {
+            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", productId);
+            window.location.href = url;
+        }
+        function ServiceDetailsBtn(serviceId) {
+            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", serviceId);
+            window.location.href = url;
+        }
+        function RequestDetailsBtn(requestId) {
+            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            url = url.replace("__Id__", requestId);
+            window.location.href = url;
+        }
+    </script>
+}

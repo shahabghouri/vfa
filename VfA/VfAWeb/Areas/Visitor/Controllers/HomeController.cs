@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using VfA.Models.ViewModels;
+using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
 
 namespace VfAWeb.Areas.Visitor.Controllers
 {
@@ -104,10 +106,59 @@ namespace VfAWeb.Areas.Visitor.Controllers
         }
         public IActionResult search(searchVM searchVm)
         {
-            //Product objProduct = _unitOfWork.Product.Get(x => x.Id == Id, includeProperties: "Category,ProductImages");
-            //Service objService = _unitOfWork.Service.Get(x => x.Id == Id, includeProperties: "Category,ServiceImages");
-            //Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
-
+            try
+            {
+                string searchKeyword = searchVm.searchkeyword.ToLower(); // Ensure search keyword is lowercase
+                searchVm.genericModellst = new List<genericModelPSR>();
+                List<Product> Products = new List<Product>();
+                List<Service> Services = new List<Service>();
+                List<Request> Requests = new List<Request>();
+                switch (searchVm.searchkeyworddd.ToLower())
+                {
+                    case "product":
+                        Products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
+                        searchVm.genericModellst = Products.Select(s => new genericModelPSR
+                        {
+                            Id = s.Id,
+                            Name = s.Name,
+                            CatName = s.Category != null ? s.Category.Name : null,
+                            ImgUrl = s.ProductImages != null && s.ProductImages.Any() ? s.ProductImages.FirstOrDefault().ImageUrl : null
+                        }).ToList();
+                        break;
+                    case "service":
+                        Services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
+                        searchVm.genericModellst = Services.Select(s => new genericModelPSR
+                        {
+                            Id = s.Id,
+                            Name = s.Name,
+                            CatName = s.Category != null ? s.Category.Name : null,
+                            ImgUrl = s.ServiceImages != null && s.ServiceImages.Any() ? s.ServiceImages.FirstOrDefault().ImageUrl : null
+                        }).ToList();
+                        break;
+                    case "request":
+                        Requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
+                        searchVm.genericModellst = Requests.Select(s => new genericModelPSR
+                        {
+                            Id = s.Id,
+                            Name = s.Name,
+                            CatName = s.Category != null ? s.Category.Name : null,
+                            ImgUrl = s.RequestImages != null && s.RequestImages.Any() ? s.RequestImages.FirstOrDefault().ImageUrl : null
+                        }).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                if (!searchVm.genericModellst.Any())
+                {
+                    return Json(new { status = "failed" });
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new { status = "failed" });
+                //throw;
+            }
+            // Now you can use listContent which will contain the filtered list based on the switch case
             return View(searchVm);
         }
     }
