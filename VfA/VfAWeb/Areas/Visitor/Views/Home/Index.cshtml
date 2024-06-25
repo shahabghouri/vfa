@@ -8,224 +8,306 @@
     var TrustiesList = Model.Trusts.ToList();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    body {
-        background: #e2eaef;
-        font-family: "Open Sans", sans-serif;
-    }
+<section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Viadct</span></h2>
+                        <p class="animate__animated animate__fadeInUp">Find the right products & services, right away</p>
+                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+                    </div>
+                </div>
+            </div>
+@* 
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+                    </div>
+                </div>
+            </div>
 
-    .h2ProfileCsarousel {
-        color: #000;
-        font-size: 26px;
-        font-weight: 300;
-        text-align: left;
-        text-transform: uppercase;
-        position: relative;
-        margin: 30px 0 15px;
-    }
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+                    </div>
+                </div>
+            </div> *@
 
-    #AddProductBtn, #AddRequestBtn, #AddServiceBtn {
-        margin: 30px 0 15px;
-    }
+        </div>
 
-    .h2ProfileCsarousel::after {
-        content: "";
-        width: 150px;
-        position: absolute;
-        margin: 0 0;
-        height: 4px;
-        border-radius: 1px;
-        background: #007bff;
-        left: 0;
-        right: 0;
-        bottom: -20px;
-    }
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
 
-    .carousel {
-        margin: 50px auto;
-        padding: 0 70px;
-    }
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
 
-        .carousel .item {
-            color: #747d89;
-            min-height: 325px;
-            text-align: center;
-            overflow: hidden;
-        }
+    </div>
+</section><!-- End Hero -->
 
-        .carousel .thumb-wrapper {
-            padding: 25px 15px;
-            background: #fff;
-            border-radius: 6px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-        }
+<main id="main">
 
-        .carousel .item .img-box {
-            height: 120px;
-            margin-bottom: 20px;
-            width: 100%;
-            position: relative;
-        }
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
 
-        .carousel .item img {
-            max-width: 100%;
-            max-height: 100%;
-            display: inline-block;
-            position: absolute;
-            bottom: 0;
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-        }
+            <div class="row content">
+                <div class="col-lg-6">
+                    <h2>Eum ipsam laborum deleniti velitena</h2>
+                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <p>
+                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+                    <ul>
+                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
+                        <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
+                    </ul>
+                    <p class="fst-italic">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                    </p>
+                </div>
+            </div>
 
-        .carousel .item h4 {
-            font-size: 18px;
-        }
+        </div>
+    </section><!-- End About Section -->
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients section-bg">
+        <div class="container">
 
-        .carousel .item h4, .carousel .item p, .carousel .item ul {
-            margin-bottom: 5px;
-        }
+            <div class="row">
+                @for (int j = 0; j < TrustiesList.Count; j++)
+                {
+                    var requestImgUrl = "";
+                    if (TrustiesList[j].TrustImages.Count > 0)
+                    {
+                        requestImgUrl = TrustiesList[j].TrustImages[0].ImageUrl;
+                    }
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="@requestImgUrl" class="img-fluid" alt="">
+                    </div>
+                }
+            </div>
 
-        .carousel .thumb-content .btn {
-            color: #007bff;
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: bold;
-            background: none;
-            border: 1px solid #007bff;
-            padding: 6px 14px;
-            margin-top: 5px;
-            line-height: 16px;
-            border-radius: 20px;
-        }
+        </div>
+    </section><!-- End Clients Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+        <div class="container">
 
-            .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
-                color: #fff;
-                background: #007bff;
-                box-shadow: none;
-            }
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="icon-box">
+                        <i class="bi bi-briefcase"></i>
+                        <h4><a href="#">Lorem Ipsum</a></h4>
+                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-card-checklist"></i>
+                        <h4><a href="#">Dolor Sitema</a></h4>
+                        <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-bar-chart"></i>
+                        <h4><a href="#">Sed ut perspiciatis</a></h4>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-binoculars"></i>
+                        <h4><a href="#">Nemo Enim</a></h4>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-brightness-high"></i>
+                        <h4><a href="#">Magni Dolore</a></h4>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="bi bi-calendar4-week"></i>
+                        <h4><a href="#">Eiusmod Tempor</a></h4>
+                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                    </div>
+                </div>
+            </div>
 
-            .carousel .thumb-content .btn i {
-                font-size: 14px;
-                font-weight: bold;
-                margin-left: 5px;
-            }
+        </div>
+    </section><!-- End Services Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
 
-        .carousel .item-price {
-            font-size: 13px;
-            padding: 2px 0;
-        }
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-app">Products</li>
+                        <li data-filter=".filter-card">Services</li>
+                        <li data-filter=".filter-web">Requests</li>
+                    </ul>
+                </div>
+            </div>
 
-            .carousel .item-price strike {
-                opacity: 0.7;
-                margin-right: 5px;
-            }
+            <div class="row portfolio-container">
 
-    .carousel-control-prev, .carousel-control-next {
-        height: 44px;
-        width: 40px;
-        background: #007bff;
-        margin: auto 0;
-        border-radius: 4px;
-        opacity: 0.8;
-    }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>App 1</h4>
+                            <p>App</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            background: #007bff;
-            opacity: 1;
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-control-prev i, .carousel-control-next i {
-            font-size: 36px;
-            position: absolute;
-            top: 50%;
-            display: inline-block;
-            margin: -19px 0 0 0;
-            z-index: 5;
-            left: 0;
-            right: 0;
-            color: #fff;
-            text-shadow: none;
-            font-weight: bold;
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>App 2</h4>
+                            <p>App</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-control-prev i {
-            margin-left: -2px;
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Card 2</h4>
+                            <p>Card</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-control-next i {
-            margin-right: -4px;
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 2</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    .carousel-indicators {
-        bottom: -50px;
-    }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>App 3</h4>
+                            <p>App</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-indicators li, .carousel-indicators li.active {
-            width: 10px;
-            height: 10px;
-            margin: 4px;
-            border-radius: 50%;
-            border: none;
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Card 1</h4>
+                            <p>Card</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        .carousel-indicators li {
-            background: rgba(0, 0, 0, 0.2);
-        }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Card 3</h4>
+                            <p>Card</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            .carousel-indicators li.active {
-                background: rgba(0, 0, 0, 0.6);
-            }
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                <a href="portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    .carousel .wish-icon {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        z-index: 99;
-        cursor: pointer;
-        font-size: 16px;
-        color: #abb0b8;
-    }
+            </div>
 
-        .carousel .wish-icon .fa-heart {
-            color: #ff6161;
-        }
+        </div>
+    </section><!-- End Portfolio Section -->
 
-    .star-rating li {
-        padding: 0;
-    }
-
-    .star-rating i {
-        font-size: 14px;
-        color: #ffc000;
-    }
-
-    .img-logo {
-        border: 2px solid black;
-        min-height: 130px;
-        min-width: 115px;
-    }
-
-    .img-box {
-        width: 100%;
-        height: 200px; /* Set desired height */
-        overflow: hidden;
-        position: relative;
-    }
-
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
-            object-position: center; /* Center the image within the container */
-        }
-
-    .fa.fa-trash {
-        color: #ec5959;
-    }
-</style>
+</main><!-- End #main -->
 <div class="container-xl">
     <div class="row">
         <div class="row">
@@ -429,122 +511,6 @@
                         <span class="carousel-control-prev-icon"></span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#requestCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="row col-6">
-            <div class="col-md-12  d-flex justify-content-start">
-                <div>
-                    <h2 class="h2ProfileCsarousel">Our Partners</h2>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div id="ourPartnersCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <!-- Carousel indicators -->
-                    <div class="carousel-indicators">
-                        @{
-                            int noOdBtnourPartnersCarousel = (int)Math.Ceiling(PartnerList.Count / 4.0);
-                        }
-                        @for (int i = 0; i < noOdBtnourPartnersCarousel; i++)
-                        {
-                            <button type="button" data-bs-target="#ourPartnersCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
-                        }
-                    </div>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                        @for (int i = 0; i < PartnerList.Count; i += 4)
-                        {
-                            <div class="item carousel-item @(i == 0 ? "active" : "")">
-                                <div class="row">
-                                    @for (int j = i; j < i + 4 && j < PartnerList.Count; j++)
-                                    {
-                                        var requestImgUrl = "";
-                                        if (PartnerList[j].PartnerImages.Count > 0)
-                                        {
-                                            requestImgUrl = PartnerList[j].PartnerImages[0].ImageUrl;
-                                        }
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="@requestImgUrl" class="img-fluid" alt="@PartnerList[j].Name">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>@PartnerList[j].Name</h4>
-                                                    @* <a href="#" class="btn btn-primary text-white">Details</a> *@
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#ourPartnersCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#ourPartnersCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row col-6">
-            <div class="col-md-12  d-flex justify-content-start">
-                <div>
-                    <h2 class="h2ProfileCsarousel">Trust Us</h2>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div id="trustUsCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <!-- Carousel indicators -->
-                    <div class="carousel-indicators">
-                        @{
-                            int noOdBtntrustUsCarousel = (int)Math.Ceiling(TrustiesList.Count / 4.0);
-                        }
-                        @for (int i = 0; i < noOdBtntrustUsCarousel; i++)
-                        {
-                            <button type="button" data-bs-target="#trustUsCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
-                        }
-                    </div>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                        @for (int i = 0; i < TrustiesList.Count; i += 4)
-                        {
-                            <div class="item carousel-item @(i == 0 ? "active" : "")">
-                                <div class="row">
-                                    @for (int j = i; j < i + 4 && j < TrustiesList.Count; j++)
-                                    {
-                                        var requestImgUrl = "";
-                                        if (TrustiesList[j].TrustImages.Count > 0)
-                                        {
-                                            requestImgUrl = TrustiesList[j].TrustImages[0].ImageUrl;
-                                        }
-                                        <div class="col-sm-3">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="@requestImgUrl" class="img-fluid" alt="@TrustiesList[j].Name">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>@Html.Raw(TrustiesList[j].Name.ToString())</h4>
-                                                    @* <a href="#" class="btn btn-primary text-white">Details</a> *@
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#trustUsCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#trustUsCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
                 </div>

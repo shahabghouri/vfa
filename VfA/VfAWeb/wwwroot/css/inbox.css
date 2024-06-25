@@ -20,21 +20,21 @@
 
 
 
-.container .left {
+.chat-container .left {
     width: 37.6%;
     height: 100%;
     border: 1px solid var(--light);
     background-color: var(--white);
 }
 
-    .container .left .top {
+    .chat-container .left .top {
         position: relative;
         width: 100%;
         height: 96px;
         padding: 29px;
     }
 
-        .container .left .top:after {
+        .chat-container .left .top:after {
             position: absolute;
             bottom: 0;
             left: 50%;
@@ -46,7 +46,7 @@
             transform: translate(-50%, 0);
         }
 
-    .container .left input {
+    .chat-container .left input {
         float: left;
         width: 80%;
         height: 42px;
@@ -58,11 +58,11 @@
         font-weight: 400;
     }
 
-        .container .left input:focus {
+        .chat-container .left input:focus {
             outline: none;
         }
 
-    .container .left a.search {
+    .chat-container .left a.search {
         display: block;
         float: left;
         width: 42px;
@@ -76,7 +76,7 @@
         border-radius: 50%;
     }
 
-    .container .left .people {
+    .chat-container .left .people {
         margin-left: -1px;
         list-style-type: none;
         border-right: 1px solid var(--light);
@@ -84,7 +84,7 @@
         width: calc(100% + 2px);
     }
 
-        .container .left .people .person {
+        .chat-container .left .people .person {
             position: relative;
             width: 100%;
             padding: 12px 10% 16px;
@@ -92,7 +92,7 @@
             background-color: var(--white);
         }
 
-            .container .left .people .person:after {
+            .chat-container .left .people .person:after {
                 position: absolute;
                 bottom: 0;
                 left: 50%;
@@ -104,7 +104,7 @@
                 transform: translate(-50%, 0);
             }
 
-            .container .left .people .person img {
+            .chat-container .left .people .person img {
                 float: left;
                 width: 40px;
                 height: 40px;
@@ -113,7 +113,7 @@
                 object-fit: cover;
             }
 
-            .container .left .people .person .name {
+            .chat-container .left .people .person .name {
                 font-size: 14px;
                 line-height: 22px;
                 color: var(--dark);
@@ -121,7 +121,7 @@
                 font-weight: 600;
             }
 
-            .container .left .people .person .time {
+            .chat-container .left .people .person .time {
                 font-size: 14px;
                 position: absolute;
                 top: 16px;
@@ -131,7 +131,7 @@
                 background-color: var(--white);
             }
 
-            .container .left .people .person .preview {
+            .chat-container .left .people .person .preview {
                 font-size: 14px;
                 display: inline-block;
                 overflow: hidden !important;
@@ -141,7 +141,7 @@
                 color: var(--grey);
             }
 
-            .container .left .people .person.active, .container .left .people .person:hover {
+            .chat-container .left .people .person.active, .chat-container .left .people .person:hover {
                 margin-top: -1px;
                 margin-left: -1px;
                 padding-top: 13px;
@@ -151,44 +151,44 @@
                 padding-left: calc(10% + 1px);
             }
 
-                .container .left .people .person.active span, .container .left .people .person:hover span {
+                .chat-container .left .people .person.active span, .chat-container .left .people .person:hover span {
                     color: var(--white);
                     background: transparent;
                 }
-                .container .left .people .person.active .preview, .container .left .people .person:hover .preview {
+                .chat-container .left .people .person.active .preview, .chat-container .left .people .person:hover .preview {
                     color: var(--white);
                     background: transparent;
                 }
 
-                .container .left .people .person.active:after, .container .left .people .person:hover:after {
+                .chat-container .left .people .person.active:after, .chat-container .left .people .person:hover:after {
                     display: none;
                 }
 
-.container .right {
+.chat-container .right {
     position: relative;
     width: 62.4%;
     min-height: 100%;
 }
 
-    .container .right .top {
+    .chat-container .right .top {
         width: 100%;
         height: 47px;
         padding: 15px 29px;
         background-color: #eceff1;
     }
 
-        .container .right .top span {
+        .chat-container .right .top span {
             font-size: 15px;
             color: var(--grey);
         }
 
-            .container .right .top span .name {
+            .chat-container .right .top span .name {
                 color: var(--dark);
                 font-family: 'Source Sans Pro', sans-serif;
                 font-weight: 600;
             }
 
-    .container .right .chat {
+    .chat-container .right .chat {
         position: relative;
         display: none;
         overflow: hidden;
@@ -200,56 +200,56 @@
         flex-direction: column;
     }
 
-        .container .right .chat.active-chat {
+        .chat-container .right .chat.active-chat {
             display: block;
             display: flex;
         }
 
-            .container .right .chat.active-chat .bubble {
+            .chat-container .right .chat.active-chat .bubble {
                 transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
             }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(1) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(1) {
                     animation-duration: 0.15s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(2) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(2) {
                     animation-duration: 0.3s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(3) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(3) {
                     animation-duration: 0.45s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(4) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(4) {
                     animation-duration: 0.6s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(5) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(5) {
                     animation-duration: 0.75s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(6) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(6) {
                     animation-duration: 0.9s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(7) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(7) {
                     animation-duration: 1.05s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(8) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(8) {
                     animation-duration: 1.2s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(9) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(9) {
                     animation-duration: 1.35s;
                 }
 
-                .container .right .chat.active-chat .bubble:nth-of-type(10) {
+                .chat-container .right .chat.active-chat .bubble:nth-of-type(10) {
                     animation-duration: 1.5s;
                 }
 
-    .container .right .write {
+    .chat-container .right .write {
         position: absolute;
         bottom: 29px;
         left: 30px;
@@ -261,7 +261,7 @@
         border-radius: 5px;
     }
 
-        .container .right .write input {
+        .chat-container .right .write input {
             font-size: 16px;
             float: left;
             width: calc(100% - 55px);
@@ -275,7 +275,7 @@
             font-weight: 400;
         }
 
-        .container .right .write .write-link.attach:before {
+        .chat-container .right .write .write-link.attach:before {
             display: inline-block;
             float: left;
             width: 20px;
@@ -286,7 +286,7 @@
             background-position: center;
         }
 
-        .container .right .write .write-link.smiley:before {
+        .chat-container .right .write .write-link.smiley:before {
             display: inline-block;
             float: left;
             width: 20px;
@@ -297,7 +297,7 @@
             background-position: center;
         }
 
-        .container .right .write .write-link.send:before {
+        .chat-container .right .write .write-link.send:before {
             display: inline-block;
             float: left;
             width: 20px;
@@ -309,7 +309,7 @@
             background-position: center;
         }
 
-    .container .right .bubble {
+    .chat-container .right .bubble {
         font-size: 16px;
         position: relative;
         display: inline-block;
@@ -320,7 +320,7 @@
         border-radius: 5px;
     }
 
-        .container .right .bubble:before {
+        .chat-container .right .bubble:before {
             position: absolute;
             top: 19px;
             display: block;
@@ -330,7 +330,7 @@
             transform: rotate(29deg) skew(-35deg);
         }
 
-        .container .right .bubble.you {
+        .chat-container .right .bubble.you {
             float: left;
             color: var(--white);
             background-color: var(--blue);
@@ -339,12 +339,12 @@
             min-width: 50px;
         }
 
-            .container .right .bubble.you:before {
+            .chat-container .right .bubble.you:before {
                 left: -3px;
                 background-color: var(--blue);
             }
 
-        .container .right .bubble.me {
+        .chat-container .right .bubble.me {
             float: right;
             color: var(--dark);
             background-color: #eceff1;
@@ -353,25 +353,25 @@
             min-width: 50px;
         }
 
-            .container .right .bubble.me:before {
+            .chat-container .right .bubble.me:before {
                 right: -3px;
                 background-color: #eceff1;
             }
 
-    .container .right .conversation-start {
+    .chat-container .right .conversation-start {
         position: relative;
         width: 100%;
         margin-bottom: 27px;
         text-align: center;
     }
 
-        .container .right .conversation-start span {
+        .chat-container .right .conversation-start span {
             font-size: 14px;
             display: inline-block;
             color: var(--grey);
         }
 
-            .container .right .conversation-start span:before, .container .right .conversation-start span:after {
+            .chat-container .right .conversation-start span:before, .chat-container .right .conversation-start span:after {
                 position: absolute;
                 top: 10px;
                 display: inline-block;
@@ -381,11 +381,11 @@
                 background-color: var(--light);
             }
 
-            .container .right .conversation-start span:before {
+            .chat-container .right .conversation-start span:before {
                 left: 0;
             }
 
-            .container .right .conversation-start span:after {
+            .chat-container .right .conversation-start span:after {
                 right: 0;
             }
 

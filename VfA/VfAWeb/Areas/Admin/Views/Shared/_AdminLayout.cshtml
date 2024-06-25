@@ -31,12 +31,12 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
-
     <!-- CSS Files -->
     @*  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" /> *@
     <link rel="stylesheet" href="~/css/kaiadmin.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/inbox.css" />
 
 </head>
 <body>
@@ -369,8 +369,7 @@
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a class="dropdown-toggle profile-pic fa fa-lg fa-solid fa-envelope"
-                                   data-bs-toggle="dropdown"
-                                   href="#"
+                                   href="/Inbox"
                                    aria-expanded="false">
                                 </a>
                             </li>
@@ -381,7 +380,7 @@
                                    aria-expanded="false">
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
-                                    <partial name="_AdminLoginPartial" />
+                                    <partial name="~/Areas/Admin/Views/Shared/_AdminLoginPartial.cshtml" />
                                 </ul>
                             </li>
                     </div>
