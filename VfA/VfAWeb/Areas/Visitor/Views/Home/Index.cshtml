@@ -55,6 +55,10 @@
         font-weight: 700;
         text-align: center;
     }
+
+    .tile-img{
+        width: -webkit-fill-available !important;
+    }
 </style>
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -221,9 +225,9 @@
     </div>
     </section> *@<!-- End Services Section -->
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio1" class="portfolio">
         <div class="container">
-            @* <div class="row">
+            <div class="row">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="portfolio-flters">
                         <li data-filter="*" class="filter-active">All</li>
@@ -232,39 +236,8 @@
                         <li data-filter=".filter-web">Requests</li>
                     </ul>
                 </div>
-            </div> *@
-            <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2>
-            <div class="row portfolio-container-2">
-                @for (int index = 0; index < ProductList.Count; index++)
-                {
-                    var item = ProductList[index];
-                    <div class="col-lg-4 col-md-6">
-                        <div class="portfolio-wrap">
-                            @{
-                                var ProductImgUrl = "";
-                                if (item.ProductImages.Count > 0)
-                                {
-                                    ProductImgUrl = item.ProductImages[0].ImageUrl;
-                                }
-                                else
-                                {
-                                    ProductImgUrl = @"\images\blank-img.jpg";
-                                }
-                            }
-                            <img src="@ProductImgUrl" class="img-fluid" alt="">
-                            <div class="portfolio-info">
-                                <h4>@item.Name</h4>
-                                <p>@item.Category.Name</p>
-                                <div class="portfolio-links">
-                                    <a href="@ProductImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
-                                    <a onclick="ProductDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
             </div>
-            @* <div class="row portfolio-container-2">
+            <div class="row portfolio-container-2">
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
                         <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
@@ -390,12 +363,48 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-            </div> *@
+    <section id="portfolio1" class="portfolio">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2>
+            <div class="row portfolio-container-2">
+                @for (int index = 0; index < ProductList.Count; index++)
+                {
+                    var item = ProductList[index];
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-wrap">
+                            @{
+                                var ProductImgUrl = "";
+                                if (item.ProductImages.Count > 0)
+                                {
+                                    ProductImgUrl = item.ProductImages[0].ImageUrl;
+                                }
+                                else
+                                {
+                                    ProductImgUrl = @"\images\blank-img.jpg";
+                                }
+                            }
+                            <img src="@ProductImgUrl" class="img-fluid tile-img" alt="">
+                            <div class="portfolio-info">
+                                <h4>@item.Name</h4>
+                                <p>@item.Category.Name</p>
+                                <div class="portfolio-links">
+                                    <a href="@ProductImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                                    <a onclick="ProductDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
 
         </div>
     </section><!-- End Portfolio Section -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio2" class="portfolio">
         <div class="container">
             <h2 class="animate__animated animate__fadeInDown our-partners">Services</h2>
             <div class="row portfolio-container-2">
@@ -415,7 +424,7 @@
                                     ServiceImgUrl = @"\images\blank-img.jpg";
                                 }
                             }
-                            <img src="@ServiceImgUrl" class="img-fluid" alt="">
+                            <img src="@ServiceImgUrl" class="img-fluid tile-img" alt="">
                             <div class="portfolio-info">
                                 <h4>@item.Name</h4>
                                 <p>@item.Category.Name</p>
@@ -430,7 +439,7 @@
             </div>
         </div>
     </section>
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio3" class="portfolio">
         <div class="container">
             <h2 class="animate__animated animate__fadeInDown our-partners">Requests</h2>
             <div class="row portfolio-container-2">
@@ -450,7 +459,7 @@
                                     RequestImgUrl = @"\images\blank-img.jpg";
                                 }
                             }
-                            <img src="@RequestImgUrl" class="img-fluid" alt="">
+                            <img src="@RequestImgUrl" class="img-fluid tile-img" alt="">
                             <div class="portfolio-info">
                                 <h4>@item.Name</h4>
                                 <p>@item.Category.Name</p>
@@ -690,8 +699,9 @@
                 url: '@Url.Action("search", "Home", new { area = "visitor" })',
                 data: data,
                 success: function (resp) {
-                    var newWindow = window.open();
+                    var newWindow = window.open(resp);
                     newWindow.document.write(resp);
+                    newWindow.document.close();
                 },
                 error: function (er) { },
             });
