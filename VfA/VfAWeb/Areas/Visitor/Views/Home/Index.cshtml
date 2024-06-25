@@ -69,7 +69,7 @@
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Viadct</span></h2>
                         <p class="animate__animated animate__fadeInUp">Find the right products & services, right away</p>
-                        <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a>
+                        @* <a href="/Identity/Account/Register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Register Now</a> *@
                         <div class="d-flex justify-content-center">
                             <div class="search-dd">
                                 <select id="search-keyword-dd" class="form-select">
@@ -126,7 +126,7 @@
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-        <div class="container">
+        <div class="container"
 
             <div class="row content">
                 <div class="col-lg-6">
@@ -225,7 +225,7 @@
     </div>
     </section> *@<!-- End Services Section -->
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio1" class="portfolio">
+    @* <section id="portfolio1" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 d-flex justify-content-center">
@@ -366,7 +366,7 @@
             </div>
         </div>
     </section>
-
+ *@
     <section id="portfolio1" class="portfolio">
         <div class="container">
             <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2>
@@ -374,7 +374,7 @@
                 @for (int index = 0; index < ProductList.Count; index++)
                 {
                     var item = ProductList[index];
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="portfolio-wrap">
                             @{
                                 var ProductImgUrl = "";
@@ -400,8 +400,6 @@
                     </div>
                 }
             </div>
-
-
         </div>
     </section><!-- End Portfolio Section -->
     <section id="portfolio2" class="portfolio">
@@ -411,7 +409,7 @@
                 @for (int index = 0; index < ServiceList.Count; index++)
                 {
                     var item = ServiceList[index];
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="portfolio-wrap">
                             @{
                                 var ServiceImgUrl = "";
@@ -446,7 +444,7 @@
                 @for (int index = 0; index < RequestList.Count; index++)
                 {
                     var item = RequestList[index];
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="portfolio-wrap">
                             @{
                                 var RequestImgUrl = "";

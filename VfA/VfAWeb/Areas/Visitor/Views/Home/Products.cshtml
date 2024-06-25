@@ -1,24 +1,78 @@
-﻿@{
+﻿@model IEnumerable<Product>
+@{
     ViewData["Title"] = "Products";
+    var ProductList = Model.ToList();
+
 }
+<style>
+    .search-container {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        width: 450px;
+        border-radius: 3px;
+    }
+
+    .search-dd {
+        margin-top: 30px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        border-radius: 3px;
+        right: 10px;
+        width: 135px;
+    }
+
+    .search-input {
+        border: 0;
+        padding: 4px;
+        width: calc(100% - 11px);
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 0;
+        right: -2px;
+        bottom: 0;
+        border: 0;
+        background: none;
+        font-size: 16px;
+        padding: 0 20px 2px 20px;
+        background: #0d6efd;
+        color: #fff;
+        transition: 0.3s;
+    }
+
+    .our-partners {
+        color: #0e0e0e;
+        margin-bottom: 20px;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .tile-img {
+        width: -webkit-fill-available !important;
+    }
+</style>
 <h1>@ViewData["Title"]</h1>
-
-@model IEnumerable<Product>
-
-<div class="row pb-3">
+@* <div class="row pb-3">
     @foreach (var product1 in Model)
     {
         <div class="col-lg-3 col-sm-6">
             <div class="row p-2">
                 <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow  border-top border-5 rounded"> 
-                        @if(product1.ProductImages!=null && product1.ProductImages.Count() > 0) {
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+                        @if (product1.ProductImages != null && product1.ProductImages.Count() > 0)
+                        {
                             <img src="@product1.ProductImages.FirstOrDefault().ImageUrl" class="card-img-top rounded" />
                         }
-                        else {
-                            <img src="/images/logo.png" style="width:500*600"  class="card-img-top rounded" />
+                        else
+                        {
+                            <img src="/images/logo.png" style="width:500*600" class="card-img-top rounded" />
                         }
-                        
+
                         <div class="card-body pb-0">
                             <div class="pl-1">
                                 <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product1.Name</p>
@@ -30,4 +84,37 @@
             </div>
         </div>
     }
+</div> *@
+<div class="container portfolio">
+    @* <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2> *@
+    <div class="row portfolio-container-2">
+        @for (int index = 0; index < ProductList.Count; index++)
+        {
+            var item = ProductList[index];
+            <div class="col-lg-3 col-md-6">
+                <div class="portfolio-wrap">
+                    @{
+                        var ProductImgUrl = "";
+                        if (item.ProductImages.Count > 0)
+                        {
+                            ProductImgUrl = item.ProductImages[0].ImageUrl;
+                        }
+                        else
+                        {
+                            ProductImgUrl = @"\images\blank-img.jpg";
+                        }
+                    }
+                    <img src="@ProductImgUrl" class="img-fluid tile-img" alt="">
+                    <div class="portfolio-info">
+                        <h4>@item.Name</h4>
+                        <p>@item.Category.Name</p>
+                        <div class="portfolio-links">
+                            <a href="@ProductImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                            <a onclick="ProductDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

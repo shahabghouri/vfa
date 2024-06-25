@@ -1,12 +1,46 @@
 ﻿@{
     ViewData["Title"] = "Services";
+    var ServiceList = Model.ToList();
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>this page display Services.</p>
 @model IEnumerable<Service>
+<div class="container portfolio">
+    @* <h2 class="animate__animated animate__fadeInDown our-partners">Products</h2> *@
+    <div class="row portfolio-container-2">
+        @for (int index = 0; index < ServiceList.Count; index++)
+        {
+            var item = ServiceList[index];
+            <div class="col-lg-3 col-md-6">
+                <div class="portfolio-wrap">
+                    @{
+                        var ServiceImgUrl = "";
+                        if (item.ServiceImages.Count > 0)
+                        {
+                            ServiceImgUrl = item.ServiceImages[0].ImageUrl;
+                        }
+                        else
+                        {
+                            ServiceImgUrl = @"\images\blank-img.jpg";
+                        }
+                    }
+                    <img src="@ServiceImgUrl" class="img-fluid tile-img" alt="">
+                    <div class="portfolio-info">
+                        <h4>@item.Name</h4>
+                        <p>@item.Category.Name</p>
+                        <div class="portfolio-links">
+                            <a href="@ServiceImgUrl" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@item.Name"><i class="bx bx-plus"></i></a>
+                            <a onclick="ServiceDetailsBtn(@item.Id)" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-<div class="row pb-3">
+@* <div class="row pb-3">
     @foreach (var service in Model)
     {
         <div class="col-lg-3 col-sm-6">
@@ -31,4 +65,4 @@
             </div>
         </div>
     }
-</div>
+</div> *@

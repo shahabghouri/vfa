@@ -104,6 +104,10 @@ namespace VfAWeb.Areas.Visitor.Controllers
         }
         public IActionResult search(searchVM searchVm)
         {
+            //Product objProduct = _unitOfWork.Product.Get(x => x.Id == Id, includeProperties: "Category,ProductImages");
+            //Service objService = _unitOfWork.Service.Get(x => x.Id == Id, includeProperties: "Category,ServiceImages");
+            //Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
+
             return View(searchVm);
         }
     }
