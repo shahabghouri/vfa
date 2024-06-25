@@ -12,7 +12,6 @@ function displayStep(stepNumber) {
 }
 
 $(document).ready(function () {
-
     $('#multi-step-form').find('.step').slice(1).hide();
 
     $(".next-step").click(function () {
@@ -61,6 +60,7 @@ $("#importerBtn").click(function () {
     $("#formContainer").show();
     //$("#btnContainer").hide();
 });
+$("#importerBtn").click();
 function SetImporterFieldsNull() {
     $('#Input_StateProvinceId').val('0');
     $('#Input_CompanyCountryId').val('0');
