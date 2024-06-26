@@ -7,7 +7,7 @@
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="~/css/kaiadmin.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <style>
     body {
         background: #e2eaef;
@@ -273,7 +273,7 @@
     }
 
     .card-desc {
-        margin-left: 3.5rem;
+        margin-left: 1.5rem;
         y: 1;
         color: var(--bs-secondary-color) !important;
     }
@@ -305,11 +305,32 @@
         min-width: 100%;
         min-height: 250px;
     }
+
+    .card-body-d {
+        padding: 1rem 2rem;
+    }
+
+    .card-body-spacing {
+        padding: 2rem 0rem;
+    }
+
+    .card-title-d {
+        margin: 0;
+        color: #2a2f5b;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .company-table th {
+        padding: 1rem 2rem;
+    }
 </style>
 
 <div class="container-xl">
     <div class="row">
         <div class="col-md-4 col-xl-3 Profile">
+
             <div class="card mb-3">
                 <div class="card-body text-center">
                     <img src="~/images/blank-img.jpg" alt="company-name" class="company-logo mb-2" width="128" height="128">
@@ -317,18 +338,34 @@
                     <div class="text-muted mb-2">Activity</div>
                 </div>
                 <hr class="my-0">
-                <div class="card-body-c d-flex">
-                    <h5 class="h6 card-title">CEO :</h5>
-                    <h4 class="h6 card-desc">Saad Javed</h4>
+                <div class="card-body-spacing d-flex">
                 </div>
-                <div class="card-body-c d-flex">
-                    <h5 class="h6 card-title">Category</h5>
-                    <h5 class="h6 card-desc">Software Development</h5>
-                </div>
-                <div class="card-body-c d-flex">
-                    <h5 class="h6 card-title">Country</h5>
-                    <h4 class="h6 card-desc">United States</h4>
-                </div>
+                <table class="company-table">
+                    <tr>
+                        <th>CEO</th>
+                        <td>Saad Javed</td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td>Software Development</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>United States</td>
+                    </tr>
+                    <tr>
+                        <th>CEO</th>
+                        <td>Saad Javed</td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td>Software Development</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>United States</td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -361,7 +398,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-icon">
                                             <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fa  fa-circle-s"></i>
+                                                <i class="fa fa-wrench"></i>
                                             </div>
                                         </div>
                                         <div class="col col-stats ms-3 ms-sm-0">
@@ -394,461 +431,571 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Basic</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
-                                                        <thead>
-                                                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
-                                                        </thead>
-                                                        <tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            <tr role="row" class="odd">
-                                                                <td class="sorting_1">Airi Satou</td>
-                                                                <td>Accountant</td>
-                                                                <td>Tokyo</td>
-                                                                <td>33</td>
-                                                                <td>2008/11/28</td>
-                                                                <td>$162,700</td>
-                                                            </tr>
-                                                            <tr role="row" class="even">
-                                                                <td class="sorting_1">Angelica Ramos</td>
-                                                                <td>Chief Executive Officer (CEO)</td>
-                                                                <td>London</td>
-                                                                <td>47</td>
-                                                                <td>2009/10/09</td>
-                                                                <td>$1,200,000</td>
-                                                            </tr>
-                                                            <tr role="row" class="odd">
-                                                                <td class="sorting_1">Ashton Cox</td>
-                                                                <td>Junior Technical Author</td>
-                                                                <td>San Francisco</td>
-                                                                <td>66</td>
-                                                                <td>2009/01/12</td>
-                                                                <td>$86,000</td>
-                                                            </tr>
-                                                            <tr role="row" class="even">
-                                                                <td class="sorting_1">Bradley Greer</td>
-                                                                <td>Software Engineer</td>
-                                                                <td>London</td>
-                                                                <td>41</td>
-                                                                <td>2012/10/13</td>
-                                                                <td>$132,000</td>
-                                                            </tr>
-                                                            <tr role="row" class="odd">
-                                                                <td class="sorting_1">Brenden Wagner</td>
-                                                                <td>Software Engineer</td>
-                                                                <td>San Francisco</td>
-                                                                <td>28</td>
-                                                                <td>2011/06/07</td>
-                                                                <td>$206,850</td>
-                                                            </tr>
-                                                            <tr role="row" class="even">
-                                                                <td class="sorting_1">Brielle Williamson</td>
-                                                                <td>Integration Specialist</td>
-                                                                <td>New York</td>
-                                                                <td>61</td>
-                                                                <td>2012/12/02</td>
-                                                                <td>$372,000</td>
-                                                            </tr>
-                                                            <tr role="row" class="odd">
-                                                                <td class="sorting_1">Bruno Nash</td>
-                                                                <td>Software Engineer</td>
-                                                                <td>London</td>
-                                                                <td>38</td>
-                                                                <td>2011/05/03</td>
-                                                                <td>$163,500</td>
-                                                            </tr>
-                                                            <tr role="row" class="even">
-                                                                <td class="sorting_1">Caesar Vance</td>
-                                                                <td>Pre-Sales Support</td>
-                                                                <td>New York</td>
-                                                                <td>21</td>
-                                                                <td>2011/12/12</td>
-                                                                <td>$106,450</td>
-                                                            </tr>
-                                                            <tr role="row" class="odd">
-                                                                <td class="sorting_1">Cara Stevens</td>
-                                                                <td>Sales Assistant</td>
-                                                                <td>New York</td>
-                                                                <td>46</td>
-                                                                <td>2011/12/06</td>
-                                                                <td>$145,600</td>
-                                                            </tr>
-                                                            <tr role="row" class="even">
-                                                                <td class="sorting_1">Cedric Kelly</td>
-                                                                <td>Senior Javascript Developer</td>
-                                                                <td>Edinburgh</td>
-                                                                <td>22</td>
-                                                                <td>2012/03/29</td>
-                                                                <td>$433,060</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                        <div>
+                            <ul class="nav nav-pills mb-3 justify-content-center">
+                                <li class="col-4">
+                                    <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Products</a>
+                                </li>
+                                <li class="col-4">
+                                    <a class="nav-link" data-bs-toggle="pill" href="#tab2">Services</a>
+                                </li>
+                                <li class="col-4">
+                                    <a class="nav-link" data-bs-toggle="pill" href="#tab3">Requests</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--End Tabs  Tab Content-->
+                        <div class="tab-content">
+                            <div class="tab-pane fade aos-init aos-animate active show" id="tab1">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Products</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                    <thead>
+                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Airi Satou</td>
+                                                                            <td>Accountant</td>
+                                                                            <td>Tokyo</td>
+                                                                            <td>33</td>
+                                                                            <td>2008/11/28</td>
+                                                                            <td>$162,700</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Angelica Ramos</td>
+                                                                            <td>Chief Executive Officer (CEO)</td>
+                                                                            <td>London</td>
+                                                                            <td>47</td>
+                                                                            <td>2009/10/09</td>
+                                                                            <td>$1,200,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Ashton Cox</td>
+                                                                            <td>Junior Technical Author</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>66</td>
+                                                                            <td>2009/01/12</td>
+                                                                            <td>$86,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Bradley Greer</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>41</td>
+                                                                            <td>2012/10/13</td>
+                                                                            <td>$132,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Brenden Wagner</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>28</td>
+                                                                            <td>2011/06/07</td>
+                                                                            <td>$206,850</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Brielle Williamson</td>
+                                                                            <td>Integration Specialist</td>
+                                                                            <td>New York</td>
+                                                                            <td>61</td>
+                                                                            <td>2012/12/02</td>
+                                                                            <td>$372,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Bruno Nash</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>38</td>
+                                                                            <td>2011/05/03</td>
+                                                                            <td>$163,500</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!--End Tab 1 Content-->
+                            <div class="tab-pane fade aos-init aos-animate" id="tab2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Services</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                    <thead>
+                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Airi Satou</td>
+                                                                            <td>Accountant</td>
+                                                                            <td>Tokyo</td>
+                                                                            <td>33</td>
+                                                                            <td>2008/11/28</td>
+                                                                            <td>$162,700</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Angelica Ramos</td>
+                                                                            <td>Chief Executive Officer (CEO)</td>
+                                                                            <td>London</td>
+                                                                            <td>47</td>
+                                                                            <td>2009/10/09</td>
+                                                                            <td>$1,200,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Ashton Cox</td>
+                                                                            <td>Junior Technical Author</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>66</td>
+                                                                            <td>2009/01/12</td>
+                                                                            <td>$86,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Bradley Greer</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>41</td>
+                                                                            <td>2012/10/13</td>
+                                                                            <td>$132,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Brenden Wagner</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>28</td>
+                                                                            <td>2011/06/07</td>
+                                                                            <td>$206,850</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Brielle Williamson</td>
+                                                                            <td>Integration Specialist</td>
+                                                                            <td>New York</td>
+                                                                            <td>61</td>
+                                                                            <td>2012/12/02</td>
+                                                                            <td>$372,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Bruno Nash</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>38</td>
+                                                                            <td>2011/05/03</td>
+                                                                            <td>$163,500</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Tab 2 Content-->
+                            <div class="tab-pane fade aos-init aos-animate" id="tab3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Request</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                    <thead>
+                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Airi Satou</td>
+                                                                            <td>Accountant</td>
+                                                                            <td>Tokyo</td>
+                                                                            <td>33</td>
+                                                                            <td>2008/11/28</td>
+                                                                            <td>$162,700</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Angelica Ramos</td>
+                                                                            <td>Chief Executive Officer (CEO)</td>
+                                                                            <td>London</td>
+                                                                            <td>47</td>
+                                                                            <td>2009/10/09</td>
+                                                                            <td>$1,200,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Ashton Cox</td>
+                                                                            <td>Junior Technical Author</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>66</td>
+                                                                            <td>2009/01/12</td>
+                                                                            <td>$86,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Bradley Greer</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>41</td>
+                                                                            <td>2012/10/13</td>
+                                                                            <td>$132,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Brenden Wagner</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>San Francisco</td>
+                                                                            <td>28</td>
+                                                                            <td>2011/06/07</td>
+                                                                            <td>$206,850</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">Brielle Williamson</td>
+                                                                            <td>Integration Specialist</td>
+                                                                            <td>New York</td>
+                                                                            <td>61</td>
+                                                                            <td>2012/12/02</td>
+                                                                            <td>$372,000</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">Bruno Nash</td>
+                                                                            <td>Software Engineer</td>
+                                                                            <td>London</td>
+                                                                            <td>38</td>
+                                                                            <td>2011/05/03</td>
+                                                                            <td>$163,500</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Tab 3 Content-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-xl d-none">
-    <div class="row">
-        <div class="col-md-2 img-box2">
-            <img src="@Model.CompnayLogo" class="" alt="logo-here" />
-        </div>
-        <div class="col-md-10">
-            <div><input class="my-2" placeholder="company Name" value="@Model.CompnayName" /></div>
-            @if (Model.UserType == "Importer")
-            {
-                <div><input class="my-2" placeholder="Country" value="@Model.CountryName" /></div>
-            }
+    <div class="container-xl d-none">
+        <div class="row">
+            <div class="col-md-2 img-box2">
+                <img src="@Model.CompnayLogo" class="" alt="logo-here" />
+            </div>
+            <div class="col-md-10">
+                <div><input class="my-2" placeholder="company Name" value="@Model.CompnayName" /></div>
+                @if (Model.UserType == "Importer")
+                {
+                    <div><input class="my-2" placeholder="Country" value="@Model.CountryName" /></div>
+                }
+                @if (Model.UserType == "Exporter")
+                {
+                    <div><input class="my-2" placeholder="Wilaya" value="@Model.WilayaName" /></div>
+                }
+                <div><input class="my-2" placeholder="Activity" value="@Model.ActivityName" /></div>
+            </div>
             @if (Model.UserType == "Exporter")
             {
-                <div><input class="my-2" placeholder="Wilaya" value="@Model.WilayaName" /></div>
+                <div class="row">
+                    <div class="col-md-12  d-flex justify-content-between">
+                        <div>
+                            <h2 class="h2ProfileCsarousel">Products</h2>
+                        </div>
+                        <div>
+                            <button id="AddProductBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <div class="carousel-indicators">
+                                @{
+                                    int noOdBtnProductCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
+                                }
+                                @for (int i = 0; i < noOdBtnProductCarousel; i++)
+                                {
+                                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                                }
+                            </div>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < ProductList.Count; i += 4)
+                                {
+                                    <div class="item carousel-item @(i == 0 ? "active" : "")">
+                                        <div class="row">
+                                            @for (int j = i; j < i + 4 && j < ProductList.Count; j++)
+                                            {
+                                                var productImgUrl = "";
+                                                if (ProductList[j].ProductImages.Count > 0)
+                                                {
+                                                    productImgUrl = ProductList[j].ProductImages[0].ImageUrl;
+                                                }
+                                                <div class="col-sm-3">
+                                                    <div class="thumb-wrapper">
+                                                        <span class="wish-icon">
+                                                            <i data-product-id="@ProductList[j].Id" class=" EditProductBtn fa fa-solid fa-pencil mr-2"></i>
+                                                            <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
+                                                        </span>
+                                                        <div class="img-box">
+                                                            <img src="@productImgUrl" class="img-fluid" alt="@ProductList[j].Name">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>@ProductList[j].Name</h4>
+                                                            <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
+                                                            <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!-- Carousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12  d-flex justify-content-between">
+                        <div>
+                            <h2 class="h2ProfileCsarousel">Services</h2>
+                        </div>
+                        <div>
+                            <button id="AddServiceBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <div class="carousel-indicators">
+                                @{
+                                    int noOdBtnServiceCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
+                                }
+                                @for (int i = 0; i < noOdBtnServiceCarousel; i++)
+                                {
+                                    <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                                }
+                            </div>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < ServiceList.Count; i += 4)
+                                {
+                                    <div class="item carousel-item @(i == 0 ? "active" : "")">
+                                        <div class="row">
+                                            @for (int j = i; j < i + 4 && j < ServiceList.Count; j++)
+                                            {
+                                                var serviceImgUrl = "";
+                                                if (ServiceList[j].ServiceImages.Count > 0)
+                                                {
+                                                    serviceImgUrl = ServiceList[j].ServiceImages[0].ImageUrl;
+                                                }
+                                                <div class="col-sm-3">
+                                                    <div class="thumb-wrapper">
+                                                        <span class="wish-icon">
+                                                            <i data-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
+                                                            <a class="fa fa-trash" onClick=Delete('/admin/service/delete/@ServiceList[j].Id')></a>
+                                                        </span>
+                                                        <div class="img-box">
+                                                            <img src="@serviceImgUrl" class="img-fluid" alt="@ServiceList[j].Name">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>@ServiceList[j].Name</h4>
+                                                            <p class="card-title text-warning text-center">Category <b>@ServiceList[j].Category.Name</b></p>
+                                                            <a onclick="ServiceDetailsBtn(@ServiceList[j].Id)" class="btn btn-primary">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!-- Carousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             }
-            <div><input class="my-2" placeholder="Activity" value="@Model.ActivityName" /></div>
+            @if (Model.UserType == "Importer" || Model.UserType == "Exporter")
+            {
+                <div class="row">
+                    <div class="col-md-12  d-flex justify-content-between">
+                        <div>
+                            <h2 class="h2ProfileCsarousel">Requests</h2>
+                        </div>
+                        <div>
+                            <button id="AddRequestBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="requestCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <div class="carousel-indicators">
+                                @{
+                                    int noOdBtnRequestCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
+                                }
+                                @for (int i = 0; i < noOdBtnRequestCarousel; i++)
+                                {
+                                    <button type="button" data-bs-target="#requestCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                                }
+                            </div>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < RequestList.Count; i += 4)
+                                {
+                                    <div class="item carousel-item @(i == 0 ? "active" : "")">
+                                        <div class="row">
+                                            @for (int j = i; j < i + 4 && j < RequestList.Count; j++)
+                                            {
+                                                var requestImgUrl = "";
+                                                if (RequestList[j].RequestImages.Count > 0)
+                                                {
+                                                    requestImgUrl = RequestList[j].RequestImages[0].ImageUrl;
+                                                }
+                                                <div class="col-sm-3">
+                                                    <div class="thumb-wrapper">
+                                                        <span class="wish-icon">
+                                                            <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
+                                                            <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
+                                                        </span>
+                                                        <div class="img-box">
+                                                            <img src="@requestImgUrl" class="img-fluid" alt="@RequestList[j].Name">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>@RequestList[j].Name</h4>
+                                                            <p class="card-title text-warning text-center">Category <b>@RequestList[j].Category.Name</b></p>
+                                                            <a onclick="RequestDetailsBtn(@RequestList[j].Id)" class="btn btn-primary">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!-- Left and right controls/icons -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#requestCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#requestCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-        @if (Model.UserType == "Exporter")
-        {
-            <div class="row">
-                <div class="col-md-12  d-flex justify-content-between">
-                    <div>
-                        <h2 class="h2ProfileCsarousel">Products</h2>
-                    </div>
-                    <div>
-                        <button id="AddProductBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <!-- Carousel indicators -->
-                        <div class="carousel-indicators">
-                            @{
-                                int noOdBtnProductCarousel = (int)Math.Ceiling(ProductList.Count / 4.0);
-                            }
-                            @for (int i = 0; i < noOdBtnProductCarousel; i++)
-                            {
-                                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
-                            }
-                        </div>
-                        <!-- Wrapper for carousel items -->
-                        <div class="carousel-inner">
-                            @for (int i = 0; i < ProductList.Count; i += 4)
-                            {
-                                <div class="item carousel-item @(i == 0 ? "active" : "")">
-                                    <div class="row">
-                                        @for (int j = i; j < i + 4 && j < ProductList.Count; j++)
-                                        {
-                                            var productImgUrl = "";
-                                            if (ProductList[j].ProductImages.Count > 0)
-                                            {
-                                                productImgUrl = ProductList[j].ProductImages[0].ImageUrl;
-                                            }
-                                            <div class="col-sm-3">
-                                                <div class="thumb-wrapper">
-                                                    <span class="wish-icon">
-                                                        <i data-product-id="@ProductList[j].Id" class=" EditProductBtn fa fa-solid fa-pencil mr-2"></i>
-                                                        <a class="fa fa-trash" onClick=Delete('/admin/product/delete/@ProductList[j].Id')></a>
-                                                    </span>
-                                                    <div class="img-box">
-                                                        <img src="@productImgUrl" class="img-fluid" alt="@ProductList[j].Name">
-                                                    </div>
-                                                    <div class="thumb-content">
-                                                        <h4>@ProductList[j].Name</h4>
-                                                        <p class="card-title text-warning text-center">Category <b>@ProductList[j].Category.Name</b></p>
-                                                        <a onclick="ProductDetailsBtn(@ProductList[j].Id)" class="btn btn-primary">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <!-- Carousel controls -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12  d-flex justify-content-between">
-                    <div>
-                        <h2 class="h2ProfileCsarousel">Services</h2>
-                    </div>
-                    <div>
-                        <button id="AddServiceBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <!-- Carousel indicators -->
-                        <div class="carousel-indicators">
-                            @{
-                                int noOdBtnServiceCarousel = (int)Math.Ceiling(ServiceList.Count / 4.0);
-                            }
-                            @for (int i = 0; i < noOdBtnServiceCarousel; i++)
-                            {
-                                <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
-                            }
-                        </div>
-                        <!-- Wrapper for carousel items -->
-                        <div class="carousel-inner">
-                            @for (int i = 0; i < ServiceList.Count; i += 4)
-                            {
-                                <div class="item carousel-item @(i == 0 ? "active" : "")">
-                                    <div class="row">
-                                        @for (int j = i; j < i + 4 && j < ServiceList.Count; j++)
-                                        {
-                                            var serviceImgUrl = "";
-                                            if (ServiceList[j].ServiceImages.Count > 0)
-                                            {
-                                                serviceImgUrl = ServiceList[j].ServiceImages[0].ImageUrl;
-                                            }
-                                            <div class="col-sm-3">
-                                                <div class="thumb-wrapper">
-                                                    <span class="wish-icon">
-                                                        <i data-service-id="@ServiceList[j].Id" class="EditServiceBtn fa fa-solid fa-pencil mr-2"></i>
-                                                        <a class="fa fa-trash" onClick=Delete('/admin/service/delete/@ServiceList[j].Id')></a>
-                                                    </span>
-                                                    <div class="img-box">
-                                                        <img src="@serviceImgUrl" class="img-fluid" alt="@ServiceList[j].Name">
-                                                    </div>
-                                                    <div class="thumb-content">
-                                                        <h4>@ServiceList[j].Name</h4>
-                                                        <p class="card-title text-warning text-center">Category <b>@ServiceList[j].Category.Name</b></p>
-                                                        <a onclick="ServiceDetailsBtn(@ServiceList[j].Id)" class="btn btn-primary">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <!-- Carousel controls -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        }
-        @if (Model.UserType == "Importer" || Model.UserType == "Exporter")
-        {
-            <div class="row">
-                <div class="col-md-12  d-flex justify-content-between">
-                    <div>
-                        <h2 class="h2ProfileCsarousel">Requests</h2>
-                    </div>
-                    <div>
-                        <button id="AddRequestBtn" class="btn btn-light border-dark me-1">Add <span class="fa fa-solid fa-plus"></span></button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="requestCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <!-- Carousel indicators -->
-                        <div class="carousel-indicators">
-                            @{
-                                int noOdBtnRequestCarousel = (int)Math.Ceiling(RequestList.Count / 4.0);
-                            }
-                            @for (int i = 0; i < noOdBtnRequestCarousel; i++)
-                            {
-                                <button type="button" data-bs-target="#requestCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
-                            }
-                        </div>
-                        <!-- Wrapper for carousel items -->
-                        <div class="carousel-inner">
-                            @for (int i = 0; i < RequestList.Count; i += 4)
-                            {
-                                <div class="item carousel-item @(i == 0 ? "active" : "")">
-                                    <div class="row">
-                                        @for (int j = i; j < i + 4 && j < RequestList.Count; j++)
-                                        {
-                                            var requestImgUrl = "";
-                                            if (RequestList[j].RequestImages.Count > 0)
-                                            {
-                                                requestImgUrl = RequestList[j].RequestImages[0].ImageUrl;
-                                            }
-                                            <div class="col-sm-3">
-                                                <div class="thumb-wrapper">
-                                                    <span class="wish-icon">
-                                                        <i data-request-id="@RequestList[j].Id" class="EditRequestBtn fa fa-solid fa-pencil mr-2"></i>
-                                                        <a class="fa fa-trash" onClick=Delete('/admin/request/delete/@RequestList[j].Id')></a>
-                                                    </span>
-                                                    <div class="img-box">
-                                                        <img src="@requestImgUrl" class="img-fluid" alt="@RequestList[j].Name">
-                                                    </div>
-                                                    <div class="thumb-content">
-                                                        <h4>@RequestList[j].Name</h4>
-                                                        <p class="card-title text-warning text-center">Category <b>@RequestList[j].Category.Name</b></p>
-                                                        <a onclick="RequestDetailsBtn(@RequestList[j].Id)" class="btn btn-primary">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <!-- Left and right controls/icons -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#requestCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#requestCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        }
     </div>
-</div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            // $(".wish-icon i").click(function () {
-            //     $(this).toggleClass("fa-heart fa-heart-o");
-            // });
-            $('#AddProductBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor" })';
-            });
-            $('#AddServiceBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor" })';
-            });
-            $('#AddRequestBtn').on('click', function () {
-                window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor" })';
-            });
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                // $(".wish-icon i").click(function () {
+                //     $(this).toggleClass("fa-heart fa-heart-o");
+                // });
+                $('#AddProductBtn').on('click', function () {
+                    window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor" })';
+                });
+                $('#AddServiceBtn').on('click', function () {
+                    window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor" })';
+                });
+                $('#AddRequestBtn').on('click', function () {
+                    window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor" })';
+                });
 
-            $('.EditProductBtn').on('click', function () {
-                var productId = $(this).data('product-id');
-                window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor", id = "__id__" })'.replace('__id__', productId);
+                $('.EditProductBtn').on('click', function () {
+                    var productId = $(this).data('product-id');
+                    window.location.href = '@Url.Action("Upsert", "Product", new { area = "visitor", id = "__id__" })'.replace('__id__', productId);
+                });
+                $('.EditServiceBtn').on('click', function () {
+                    var serviceId = $(this).data('service-id');
+                    window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor", id = "__id__" })'.replace('__id__', serviceId);
+                });
+                $('.EditRequestBtn').on('click', function () {
+                    var requestId = $(this).data('request-id');
+                    window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor", id = "__id__" })'.replace('__id__', requestId);
+                });
             });
-            $('.EditServiceBtn').on('click', function () {
-                var serviceId = $(this).data('service-id');
-                window.location.href = '@Url.Action("Upsert", "Service", new { area = "visitor", id = "__id__" })'.replace('__id__', serviceId);
-            });
-            $('.EditRequestBtn').on('click', function () {
-                var requestId = $(this).data('request-id');
-                window.location.href = '@Url.Action("Upsert", "Request", new { area = "visitor", id = "__id__" })'.replace('__id__', requestId);
-            });
-        });
-        function Delete(url) {
-            debugger;
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        type: 'DELETE',
-                        success: function (data) {
-                            toastr.success(data.message);
-                            window.location.reload();
-                        }
-                    })
-                }
-            })
-        }
-        function ProductDetailsBtn(productId) {
-            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
-            url = url.replace("__Id__", productId);
-            window.location.href = url;
-        }
-        function ServiceDetailsBtn(serviceId) {
-            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
-            url = url.replace("__Id__", serviceId);
-            window.location.href = url;
-        }
-        function RequestDetailsBtn(requestId) {
-            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
-            url = url.replace("__Id__", requestId);
-            window.location.href = url;
-        }
-    </script>
-}
+            function Delete(url) {
+                debugger;
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            success: function (data) {
+                                toastr.success(data.message);
+                                window.location.reload();
+                            }
+                        })
+                    }
+                })
+            }
+            function ProductDetailsBtn(productId) {
+                var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+                url = url.replace("__Id__", productId);
+                window.location.href = url;
+            }
+            function ServiceDetailsBtn(serviceId) {
+                var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+                url = url.replace("__Id__", serviceId);
+                window.location.href = url;
+            }
+            function RequestDetailsBtn(requestId) {
+                var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+                url = url.replace("__Id__", requestId);
+                window.location.href = url;
+            }
+        </script>
+    }
