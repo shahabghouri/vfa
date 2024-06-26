@@ -4,8 +4,8 @@ namespace VfAWeb.Utilities
 {
     public class SatimPayment
     {
-        private readonly string userName = "vfa.dz01@gmail.com";
-        private readonly string password = "Salmirafif2728@";
+        private readonly string userName = "SAT2406200949";
+        private readonly string password = "satim120";
         readonly HttpClient _httpClient;
         public SatimPayment()
         {
@@ -27,8 +27,8 @@ namespace VfAWeb.Utilities
                 language = "en",
                 jsonParams = new
                 {
-                    force_terminal_id = "E005005097",
-                    udf1 = "2018105301346"
+                    force_terminal_id = "E010901182",
+                    udf1 = DateTime.Now.Ticks
                 }
             };
             var result = await _httpClient.PostAsJsonAsync("register.do", parameters);

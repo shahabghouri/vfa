@@ -62,7 +62,7 @@ namespace VfAWeb.Controllers
                     var response = await _satimPayment.Subscribe(amount, orderNumber, subscriptionPlan+" for "+ months+ " months");
                     if (response != null)
                     {
-                        if (response.errorCode != 0)
+                        if (response.errorCode == 0)
                         {
                             var paymentOrder = new PaymentOrder()
                             {
