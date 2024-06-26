@@ -1,12 +1,35 @@
 ﻿@model PaymentViewModel
 @{
     ViewData["Title"] = "Pricing";
-    long currentPlanId = 0;
-    long currentUserType = 1;
+    long currentPlanId = Model.ApplicationUser.SubscribedPlanId ?? 0;
+    long currentUserType = Model.ApplicationUser.IsImporter ? 1 : 2;
     string[] colors = ["#ae003d", "red", "blue", "green", "orange"];
     int i = 0;
 }
 <style>
+    .payment-method {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        transition: box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+        .payment-method:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .payment-logo {
+        max-width: 100px;
+        margin-bottom: 10px;
+    }
+
+    .payment-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
     .demo {
         padding: 30px 0
     }
@@ -160,8 +183,8 @@
                             <ul class="pricing-content">
                                 @if (plan.PlanType == 0 || currentUserType == 1)
                                 {
-                                    <li><b>@plan.NumberOfProducts</b> Products with @plan.NumberOfImagesForProducts images</li>
-                                    <li><b>@plan.NumberOfServices</b> Services with @plan.NumberOfImagesForServices images</li>
+                                    <li><b>@(plan.NumberOfProducts == -1 ? "Unlimited" : plan.NumberOfProducts)</b> Products with @plan.NumberOfImagesForProducts images</li>
+                                    <li><b>@(plan.NumberOfServices == -1 ? "Unlimited" : plan.NumberOfServices)</b> Services with @plan.NumberOfImagesForServices images</li>
                                 }
                                 <li>
                                     <b>
@@ -178,7 +201,7 @@
                             }
                             else
                             {
-                                <button onclick="Subscribe(@plan.Id)" class="pricingTable-signup">Subscribe Now</button>
+                                <button onclick="Subscribe(@plan.Id,'@plan.Name', @plan.MonthlyAmount, @plan._3MonthAmount,@plan._6MonthAmount,@plan._12MonthAmount)" class="pricingTable-signup">Subscribe Now</button>
                             }
                         </div>
                     </div>
@@ -207,29 +230,175 @@
                             <option value="12">12 Months (-30% Discount)</option>
                         </select>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <h5>Payment Plan</h5>
+                        </div>
+                        <div class="col-6 text-end d-flex">
+                            <h5 ><span id="payment-plan"></span><span id="payment-plan-months"></span></h5>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <h5>Total Payment</h5>
+                        </div>
+                        <div class="col-6 text-end d-flex">
+                            <h5 style="font-family: sans-serif !important">@(currentUserType == 1 ? "DA" : "USD") <span id="totalAmount"></span></h5>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            @if (currentUserType == 1)
+                            {
+                                <div class="col-12 d-flex">
+                                    <div class="payment-method m-auto border-0">
+                                        <div class="payment-title">Payment Powered By</div>
+                                        <img src="~/images/satim-logo.jpg" alt="CIB Satim Logo" style="max-width:180px;" class="payment-logo">
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex mt-3">
+                                    <div class="g-recaptcha m-auto" data-sitekey="6LdlSAEqAAAAAGnAqohQ9_zzToce9WGC54TV_Oj1"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <div class="payment-method">
+                                        <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal Logo" class="payment-logo">
+                                        <div class="payment-title">PayPal</div>
+                                    </div>
+                                </div>
+
+                                <div id="paypal-container" style="display:none;" class="col-12 py-2">
+                                    <div class="text-center">
+                                        <div id="paypal-button-container"></div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-12">
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="termsCheck">
+                                    <label class="form-check-label" for="termsCheck">
+                                        I agree to the <a href="/Terms">terms and conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveChangesBtn">Subscribe</button>
+                <div id="error-message" class="text-danger"></div>
+                <button type="button" disabled class="btn btn-primary" id="subscribe-btn">Subscribe</button>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=@Model.PaypalClientId"></script>
     <script>
-        var selectedPlanId = 0;
-        // Open modal using jQuery
-        function Subscribe(subscriptionPlanId) {
-            $('#subscriptionModal').modal('show');
-            selectedPlanId = subscriptionPlanId;
-        };
-
-        // Handle save changes button click
-        $('#saveChangesBtn').on('click', function () {
-            var months = $('#subscriptionSelect').val();
-            window.location.href = '/Payment/ChargeClient?months=' + months + "&subscriptionPlanId=" + selectedPlanId;
+        $(document).ready(function () {
+            $('#termsCheck').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#subscribe-btn').prop('disabled', false);
+                } else {
+                    $('#subscribe-btn').prop('disabled', true);
+                }
+            });
         });
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'silver',
+                tagline: 'false'
+            },
+            createOrder: (data, actions) => {
+                var months = $('#subscriptionSelect').val();
+                return fetch("/Paypal/Order?months=" + months + "&subscriptionPlanId=" + selectedPlanId, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    return response.json();
+                }).then((order) => order.id)
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                debugger
+                return fetch(`/Paypal/Capture?orderId=${data.orderID}`, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+
+                    window.location.href = "/Payment/Success";
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
+    </script>
+    <script>
+        var selectedPaymentMethod = @currentUserType;
+        var selectedPlanId = 0;
+        var _monthlyAmount, _3Amount, _6Amount, _12Amount;
+        // Open modal using jQuery
+        function Subscribe(subscriptionPlanId, plan, _1monthAmount, _3monthAmount, _6monthAmount, _12monthAmount) {
+            $('#subscriptionModal').modal('show');
+            $('#subscriptionSelect').val('1');
+            selectedPlanId = subscriptionPlanId;
+            _monthlyAmount = _1monthAmount;
+            _3Amount = _3monthAmount;
+            _6Amount = _6monthAmount;
+            _12Amount = _12monthAmount;
+            $('#totalAmount').text(_monthlyAmount);
+            $('#payment-plan').text(plan);
+            $('#payment-plan-months').text(' - 1 Month');
+        };
+        $('#subscriptionSelect').on('change', function () {
+            var months = $(this).val();
+            if (months == 1) {
+                $('#totalAmount').text(_monthlyAmount);
+                $('#payment-plan-months').text(' - 1 Month');
+            }
+            else if (months == 3) {
+                $('#totalAmount').text(_3Amount);
+                $('#payment-plan-months').text(' - 3 Months');
+            }
+            else if (months == 6) {
+                $('#totalAmount').text(_6Amount);
+                $('#payment-plan-months').text(' - 6 Months');
+            }
+            else if (months == 12) {
+                $('#totalAmount').text(_12Amount);
+                $('#payment-plan-months').text(' - 12 Months');
+            }
+        })
+        // Handle save changes button click
+        $('#subscribe-btn').on('click', function () {
+            var response = grecaptcha.getResponse();
+            if (response.length == 0) {
+                $('#error-message').text('reCaptcha not validated!');
+            }
+            else {
+                var months = $('#subscriptionSelect').val();
+                $('.loader-wrapper').fadeIn('slow');
+                window.location.href = '/Payment/ChargeClient?months=' + months + "&subscriptionPlanId=" + selectedPlanId;
+            }
+        });
+        // function paymentMethodSelect(element, paymentMethod) {
+        //     // $('.payment-method').removeClass('bg-primary text-white');
+        //     // $(element).addClass('bg-primary text-white');
+        //     // selectedPaymentMethod = paymentMethod;
+        //     // if (selectedPaymentMethod == 2) {
+        //     //     $('#paypal-container').show();
+        //     // }
+        //     // else {
+        //     //     $('#paypal-container').hide();
+        //     // }
+        // }
     </script>
 }

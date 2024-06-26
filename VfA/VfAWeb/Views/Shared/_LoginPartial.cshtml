@@ -8,21 +8,32 @@
 @if (User.Identity?.IsAuthenticated == true)
 {
     var _user = userClaimsService.GetUserClaims();
-    <li class="nav-item">
-        <a id="inbox" class="nav-link " href="/Inbox" title="Manage">Inbox</a>
-    </li>
-    <li class="dropdown">
-        <a href="#"><span>Hello @_user.Name</span> <i class="bi bi-chevron-down"></i></a>
-        <ul>
-            <li><a href="/Payment">Payment Settings</a></li>
-            <li><a asp-area="Identity" asp-page="/Account/Manage/Index" >Manage</a></li>
-            <li>
-                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <a id="logout" href="javascript:logoutUser();" class="nav-link btn btn-link border-0">Logout</a>
-                </form>
-            </li>
-        </ul>
-    </li>
+    if (User.IsInRole(SD.Role_Admin))
+    {
+        <li class="nav-item">
+            <a id="inbox" class="nav-link " href="/Admin/Category" title="Manage">Go To Admin Portal</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a id="inbox" class="nav-link " href="/Inbox" title="Manage">Inbox</a>
+        </li>
+        <li class="dropdown">
+            <a href="#"><span>Hello @_user.Name</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a href="/Payment">Payment Settings</a></li>
+                <li><a href="/Visitor/Profile">My Profile</a></li>
+                <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Manage</a></li>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <a id="logout" href="javascript:logoutUser();" class="nav-link btn btn-link border-0">Logout</a>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    
 }
 else
 {

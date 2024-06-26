@@ -1,6 +1,8 @@
 ﻿using Humanizer.Localisation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
+using VfA.DataAccess.Migrations;
 using VfA.DataAccess.Repository;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
@@ -14,13 +16,16 @@ namespace VfAWeb.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly SatimPayment _satimPayment;
+        private readonly PaypalClient _paypalClient;
+
         //ApplicationUser _user;
         UserClaimsVM _user;
-        public PaymentController(IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
+        public PaymentController(PaypalClient paypalClient, IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
             _unitOfWork = unitOfWork;
             _satimPayment = new();
             _user = userClaimsService.GetUserClaims();
+            this._paypalClient = paypalClient;
         }
         public IActionResult Index()
         {
@@ -34,10 +39,12 @@ namespace VfAWeb.Controllers
         public IActionResult Pricing()
         {
             var viewModel = new PaymentViewModel();
+            viewModel.PaypalClientId = _paypalClient.ClientId;
             viewModel.SubscriptionPlans = _unitOfWork.SubscriptionPlan.GetAll();
+            viewModel.ApplicationUser = _unitOfWork.ApplicationUser.Get(x => x.Id == _user.Id);
             return View(viewModel);
         }
-        public async Task<IActionResult> ChargeClient(long subscriptionPlanId, int months)
+        public async Task<IActionResult> ChargeClient(long subscriptionPlanId, int months, int paymentMethod)
         {
             var subscriptionPlan = _unitOfWork.SubscriptionPlan.Get(x => x.Id == subscriptionPlanId);
             if (subscriptionPlan != null)
@@ -65,7 +72,7 @@ namespace VfAWeb.Controllers
                                 SubscriptionPlanId = subscriptionPlanId,
                                 Months = months,
                                 Status = "Created",
-                                IsConfirmed= true,
+                                IsConfirmed= false,
                                 OrderNumber = orderNumber,
                                 UserId = currentUserId
                             };
@@ -81,10 +88,10 @@ namespace VfAWeb.Controllers
                 }
                 catch (Exception e)
                 {
-                    return RedirectToAction("Fail","Payment", new { error = e.Message });
+                    return Redirect("Fail?error="+e.Message);
                 }
             }
-            return RedirectToAction("Fail", new { error = "Subscription Plan not found!" });
+            return RedirectToAction("Fail?error=Subscription Plan not found!");
         }
         public async Task<IActionResult> Success(int orderNumber)
         {
@@ -120,16 +127,16 @@ namespace VfAWeb.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Fail", new { error = response.errorMessage });
+                        return RedirectToAction("Fail?error="+response.errorMessage);
                     }
 
                 }
             }
-            return RedirectToAction("Fail", new { error = "Payment Order not found." });
+            return RedirectToAction("Fail?error=Payment Order not found.");
         }
         public IActionResult Fail(string? error)
         {
-            return View("Fail",error);
+            return View("Fail", error);
         }
     }
 }

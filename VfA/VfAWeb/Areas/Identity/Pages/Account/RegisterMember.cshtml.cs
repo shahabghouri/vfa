@@ -275,6 +275,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                 user.City = Input.City;
                 user.StateProvinceId = Input.StateProvinceId;
                 user.PostalCode = Input.PostalCode;
+                user.SubscribedPlanId = 0;
 
                 //Other Properties Start Here
                 //personal-info

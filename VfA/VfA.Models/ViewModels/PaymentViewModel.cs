@@ -12,5 +12,6 @@ namespace VfA.Models.ViewModels
         public List<PaymentHistory> PaymentHistory { get; set; }
         public SubscriptionPlan SubscriptionPlan { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+        public string PaypalClientId { get; set; }
     }
 }
