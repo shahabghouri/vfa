@@ -125,9 +125,10 @@ function StartConversation() {
     if (userId != -1) {
         currentChatUserId = userId;
         if ($('#person-' + currentChatUserId).length != 0) {
-            $('#person-' + currentChatUserId).click();
+            $('#person-' + currentChatUserId).mousedown();
             $('#subscriptionModal').modal('hide');
             $('#users-select').val('-1');
+            setActiveChat($('#person-' + currentChatUserId)[0])
             return;
         }
         var userName = $('#users-select option:selected').data('username');
@@ -140,7 +141,7 @@ function StartConversation() {
             '</div>' +
             '</li>')
         friends.all = document.querySelectorAll('.left .person');
-        $('#person-' + currentChatUserId).click();
+        $('#person-' + currentChatUserId).mousedown();
         $('#subscriptionModal').modal('hide');
         $('#users-select').val('-1');
     }

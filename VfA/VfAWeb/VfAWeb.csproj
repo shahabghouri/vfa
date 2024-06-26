@@ -93,6 +93,7 @@
 
   <ItemGroup>
     <None Include="Views\Home\search.cshtml" />
+    <None Include="wwwroot\lib\summernote\font\summernote.woff2" />
   </ItemGroup>
 
 </Project>

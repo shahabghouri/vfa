@@ -237,17 +237,17 @@
         </div>
         <div class="col-md-10">
             <div><input class="my-2" placeholder="company Name" value="@Model.CompnayName" /></div>
-            @if (Model.UserType.ToLower() == "impoter")
+            @if (Model.UserType.ToLower() == "importer")
             {
                 <div><input class="my-2" placeholder="Country" value="@Model.CountryName" /></div>
             }
-            @if (Model.UserType.ToLower() == "expoter")
+            @if (Model.UserType.ToLower() == "exporter")
             {
                 <div><input class="my-2" placeholder="Wilaya" value="@Model.WilayaName" /></div>
             }
             <div><input class="my-2" placeholder="Activity" value="@Model.ActivityName" /></div>
         </div>
-        @if (Model.UserType.ToLower() == "expoter")
+        @if (Model.UserType.ToLower() == "exporter")
         {
             <div class="row">
                 <div class="col-md-12  d-flex justify-content-between">
@@ -380,7 +380,7 @@
                 </div>
             </div>
         }
-        @if (Model.UserType.ToLower() == "impoter" || Model.UserType.ToLower() == "expoter")
+        @if (Model.UserType.ToLower() == "importer" || Model.UserType.ToLower() == "exporter")
         {
             <div class="row">
                 <div class="col-md-12  d-flex justify-content-between">

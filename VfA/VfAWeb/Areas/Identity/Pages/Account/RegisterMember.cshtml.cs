@@ -337,7 +337,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
                     }
                     if (user.IsExporter)
                     {
-                        identityRole = _roleManager.Roles.ToList().Where(x => x.Name.Trim().ToLower() == "expoter").FirstOrDefault();
+                        identityRole = _roleManager.Roles.ToList().Where(x => x.Name.Trim().ToLower() == "exporter").FirstOrDefault();
                     }
                     await _userManager.AddToRoleAsync(user, identityRole.ToString());
                     #endregion

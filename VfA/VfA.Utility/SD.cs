@@ -16,7 +16,7 @@ namespace VfA.Utility
         public const string Role_Silver = "Silver";
         public const string Role_Basic = "Basic";
         public const string Role_Importer = "Importer";
-        public const string Role_Exporter = "Expoter";
+        public const string Role_Exporter = "Exporter";
         
 
         public const string StatusPending = "Pending";
