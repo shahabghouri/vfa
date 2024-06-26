@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace VfA.Models.ViewModels
 {
-    public class searchVM
+    public class SearchVM
     {
-        public string searchkeyworddd { get; set; }
+        public string SearchKeyword { get; set; }
         public string searchkeyword { get; set; }
         //pblic IEnumerable<object>? list { get; set; }
-        public IEnumerable<genericModelPSR>? genericModellst { get; set; }
+        public IEnumerable<GenericModelPSR>? GenericModelList { get; set; }
     }
-    public class genericModelPSR
+    public class GenericModelPSR
     {
         public int Id { get; set; }
         public string Name { get; set; }

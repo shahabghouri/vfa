@@ -16,6 +16,34 @@
     var today = DateTime.Now;
     var yesterday = DateTime.Now.AddDays(-1);
 }
+<div class="modal fade" id="subscriptionModal" tabindex="-1" aria-labelledby="subscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="subscriptionModalLabel">Select Subscription Plan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="users-select" class="form-label">Select User to Start Conversation</label>
+                    <select class="form-select" id="users-select" aria-label="Users select">
+                        <option value="-1">Select User</option>
+                        @foreach (var user in Model.Chats)
+                        {
+
+                            <option value="@user.Id" data-username="@user.Name">@user.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="error-message" class="text-danger"></div>
+                <button type="button" class="btn btn-primary" onclick="StartConversation()">Start Conversation</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="chat-container">
     <div class="wrapper">
         <div class="d-flex h-100">
@@ -23,17 +51,21 @@
                 <div class="top d-flex justify-content-between">
                     <h4>Chats</h4>
                     @* <input type="text" placeholder="Search" class="w-100" />*@
-                    <a href="javascript:;" class="search"></a>
+                    <a href="javascript:OpenUsersModal();" class="search"></a>
                 </div>
                 <ul class="people p-0">
                     @foreach (var chat in chatUsers)
                     {
+                        if (chat.LastMessage == null)
+                        {
+                            continue;
+                        }
                         var msg = chat.LastMessage == null ? "" : chat.LastMessage.Content;
                         msg = msg.Length > 25 ? msg.Substring(0, 25)+"..." : msg;
                         var lastMessageTime = chat.LastMessage == null ? "" :
                         chat.LastMessage.Timestamp.Date == today.Date ?
                         chat.LastMessage.Timestamp.ToString("hh:mm tt") : chat.LastMessage.Timestamp.Date == yesterday.Date ? "Yesterday" : chat.LastMessage.Timestamp.ToString("dd MM yy");
-                        <li class="person d-flex" data-chat="@chat.UserId" data-chatUser="@chat.Name">
+                        <li id="person-@chat.UserId" class="person d-flex" data-chat="@chat.UserId" data-chatUser="@chat.Name">
                             <img src="/images/user.png" alt="" />
                             <div>
                                 <div class="name">@chat.Name</div>
@@ -83,7 +115,7 @@
                 <div class="write">
                     @* <a href="javascript:;" class="write-link attach"></a> *@
                     <input id="message-box" autocomplete="off" type="text" />
-                    <a href="javascript:;" class="write-link smiley"></a>
+                    @* <a href="javascript:;" class="write-link smiley"></a> *@
                     <a href="javascript:SendMessage();" class="write-link send"></a>
                 </div>
             </div>
@@ -93,4 +125,7 @@
 </div>
 @section Scripts {
     <script src="~/js/inbox.js"></script>
+    <script>
+        
+    </script>
 }

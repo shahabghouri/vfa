@@ -10,9 +10,8 @@ using VfA.Models.ViewModels;
 using System.Collections.Generic;
 using Microsoft.IdentityModel.Tokens;
 
-namespace VfAWeb.Areas.Visitor.Controllers
+namespace VfAWeb.Controllers
 {
-    [Area("Visitor")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -76,6 +75,10 @@ namespace VfAWeb.Areas.Visitor.Controllers
         {
             return View();
         }
+        public IActionResult Terms()
+        {
+            return View();
+        }
         public IActionResult Partner()
         {
             return View();
@@ -104,20 +107,20 @@ namespace VfAWeb.Areas.Visitor.Controllers
             Request objRequest = _unitOfWork.Request.Get(x => x.Id == Id, includeProperties: "Category,RequestImages");
             return View(objRequest);
         }
-        public IActionResult search(searchVM searchVm)
+        public IActionResult search(SearchVM searchVm)
         {
             try
             {
                 string searchKeyword = searchVm.searchkeyword.ToLower(); // Ensure search keyword is lowercase
-                searchVm.genericModellst = new List<genericModelPSR>();
+                searchVm.GenericModelList = new List<GenericModelPSR>();
                 List<Product> Products = new List<Product>();
                 List<Service> Services = new List<Service>();
                 List<Request> Requests = new List<Request>();
-                switch (searchVm.searchkeyworddd.ToLower())
+                switch (searchVm.SearchKeyword.ToLower())
                 {
                     case "product":
                         Products = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
-                        searchVm.genericModellst = Products.Select(s => new genericModelPSR
+                        searchVm.GenericModelList = Products.Select(s => new GenericModelPSR
                         {
                             Id = s.Id,
                             Name = s.Name,
@@ -127,7 +130,7 @@ namespace VfAWeb.Areas.Visitor.Controllers
                         break;
                     case "service":
                         Services = _unitOfWork.Service.GetAll(includeProperties: "Category,ServiceImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
-                        searchVm.genericModellst = Services.Select(s => new genericModelPSR
+                        searchVm.GenericModelList = Services.Select(s => new GenericModelPSR
                         {
                             Id = s.Id,
                             Name = s.Name,
@@ -137,7 +140,7 @@ namespace VfAWeb.Areas.Visitor.Controllers
                         break;
                     case "request":
                         Requests = _unitOfWork.Request.GetAll(includeProperties: "Category,RequestImages").Where(x => x.Name.ToLower().Contains(searchKeyword)).ToList();
-                        searchVm.genericModellst = Requests.Select(s => new genericModelPSR
+                        searchVm.GenericModelList = Requests.Select(s => new GenericModelPSR
                         {
                             Id = s.Id,
                             Name = s.Name,
@@ -148,7 +151,7 @@ namespace VfAWeb.Areas.Visitor.Controllers
                     default:
                         break;
                 }
-                if (!searchVm.genericModellst.Any())
+                if (!searchVm.GenericModelList.Any())
                 {
                     return Json(new { status = "failed" });
                 }

@@ -18,10 +18,17 @@ friends.all.forEach(f => {
         f.classList.contains('active') || setActiveChat(f)
     })
 });
-setActiveChat($('.person:first')[0])
+if (friends.all.length != 0) {
+    setActiveChat($('.person:first')[0])
+}
 
 function setActiveChat(f) {
-    friends.list.querySelector('.active').classList.remove('active')
+    if (friends.all.length == 0) {
+        return;
+    }
+    if (friends.all.length > 1) {
+        friends.list.querySelector('.active').classList.remove('active')
+    }
     f.classList.add('active')
     chat.current = chat.container.querySelector('.active-chat')
     chat.person = f.getAttribute('data-chat')
@@ -32,7 +39,7 @@ function setActiveChat(f) {
     currentChatUserId = chat.person;
     //GetMessages();
     var $target = $('.chat-container');
-    $target.animate({ scrollTop: $target.height()+1000 }, 1000);
+    $target.animate({ scrollTop: $target.height() + 1000 }, 1000);
 }
 function GetMessages() {
     $.ajax({
@@ -75,7 +82,7 @@ function SendMessage() {
             let today = new Date();
             $('.active-chat').append('<div class="bubble me mb-3">' +
                 msg +
-                '<p class="message-time">' + formatTime(today) +'</div></div > ');
+                '<p class="message-time">' + formatTime(today) + '</div></div > ');
             $('#message-box').val('');
             msg = msg.length > 30 ? msg.slice(0, 25) + "..." : msg;
             $('.person.active .preview').html(msg);
@@ -108,4 +115,33 @@ function formatTime(d) {
     var month = months[d.getMonth()];
     var year = d.getFullYear();
     return hr + ":" + min + " " + ampm.toUpperCase();
+}
+
+function OpenUsersModal() {
+    $('#subscriptionModal').modal('show');
+}
+function StartConversation() {
+    var userId = $('#users-select').val();
+    if (userId != -1) {
+        currentChatUserId = userId;
+        if ($('#person-' + currentChatUserId).length != 0) {
+            $('#person-' + currentChatUserId).click();
+            $('#subscriptionModal').modal('hide');
+            $('#users-select').val('-1');
+            return;
+        }
+        var userName = $('#users-select option:selected').data('username');
+        $('.people').prepend('<li id="person-' + currentChatUserId + '" onmousedown="setActiveChat(this)" class="person d-flex " data-chat="' + currentChatUserId + '" data-chatUser="' + userName + '">' +
+            '<img src="/images/user.png" alt="" />' +
+            '<div>' +
+            '   <div class="name">' + userName + '</div>' +
+            '<div class="preview">...</div>' +
+            '<span class="time">---</span>' +
+            '</div>' +
+            '</li>')
+        friends.all = document.querySelectorAll('.left .person');
+        $('#person-' + currentChatUserId).click();
+        $('#subscriptionModal').modal('hide');
+        $('#users-select').val('-1');
+    }
 }

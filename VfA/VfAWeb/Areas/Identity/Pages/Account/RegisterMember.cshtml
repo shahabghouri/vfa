@@ -7,10 +7,13 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            var isFormContinue = @Html.Raw(Model.IsFormContinue.ToString().ToLower());
+            var isFormContinue = @Html.Raw((Model.IsFormContinue ?? false).ToString().ToLower());
+            var stateId = @Html.Raw(Model.Input.StateProvinceId.ToString().ToLower());
             if (isFormContinue) {
                 $("#formContainer").show();
                 $("#btnContainer").hide();
+                var country = $('#Input_CompanyCountryId').val();
+                loadStates(country);
             }
             $('#Input_Role').change(function () {
                 var selection = $('#Input_Role Option:Selected').text();
@@ -34,6 +37,7 @@
                     $.each(data, function (index, state) {
                         stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
                     });
+                    $('#Input_StateProvinceId').val(stateId);
                 },
                 error: function () {
                     alert('Error retrieving states.');
@@ -208,6 +212,8 @@
                         <form id="multi-step-form" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                             <input asp-for="Input.IsImporter" type="hidden" value="false" />
                             <input asp-for="Input.IsExporter" type="hidden" value="false" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
                             <div class="step step-1">
                                 <!-- Step 1 form fields here -->
                                 @* <h3>Step 1</h3> *@
@@ -276,7 +282,7 @@
                                     <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
-                                    <label asp-for="Input.CompanyCEOName" class="form-label">Company CEO (Cheif Executive Officer)</label>
+                                    <label asp-for="Input.CompanyCEOName" class="form-label">Company CEO (Cheif Executive Officer) <span class="text-primary">*</span></label>
                                     <input asp-for="Input.CompanyCEOName" type="text" class="form-control"  >
                                     <span asp-validation-for="Input.CompanyCEOName" class="text-danger"></span>
                                 </div>
@@ -368,10 +374,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <input type="checkbox" asp-for="Input.AggreeToTermsAndConditions"  required>
-                                    <label>I agree to the terms and conditions and the privacy policy</label>
+                                    <label>I agree to the <a href="/Home/Terms" target="_blank">terms and conditions</a>@*  and the <a href="/Home/Privacy" target="_blank">privacy policy</a> *@</label>
                                     </br><span asp-validation-for="Input.AggreeToTermsAndConditions" class="text-danger"></span>
                                 </div>
-                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                                 <button type="button" class="btn  border-warning text-warning prev-step"> <- Back </button>
                                 <button type="submit" class="btn btn-warning text-light">Submit</button>
                                 <button type="button" class="btn border-warning text-warning btn-reset">Reset</button>

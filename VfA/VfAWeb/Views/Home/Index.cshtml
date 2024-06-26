@@ -94,7 +94,7 @@
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+            <div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg)">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Viadct</span></h2>
@@ -700,17 +700,17 @@
 @section Scripts {
     <script>
         function ProductDetailsBtn(productId) {
-            var url = '@Url.Action("ProductDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            var url = '@Url.Action("ProductDetails", "Home", new { Id = "__Id__" })';
             url = url.replace("__Id__", productId);
             window.location.href = url;
         }
         function ServiceDetailsBtn(serviceId) {
-            var url = '@Url.Action("ServiceDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            var url = '@Url.Action("ServiceDetails", "Home", new { Id = "__Id__" })';
             url = url.replace("__Id__", serviceId);
             window.location.href = url;
         }
         function RequestDetailsBtn(requestId) {
-            var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
+            var url = '@Url.Action("RequestDetails", "Home", new { Id = "__Id__" })';
             url = url.replace("__Id__", requestId);
             window.location.href = url;
         }

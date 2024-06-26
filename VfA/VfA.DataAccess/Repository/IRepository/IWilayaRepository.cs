@@ -7,8 +7,7 @@ using VfA.Models;
 
 namespace VfA.DataAccess.Repository.IRepository
 {
-    public interface IWilayaRepository
+    public interface IWilayaRepository : IRepository<Wilaya>
     {
-        List<Wilaya> GetAll();
     }
 }

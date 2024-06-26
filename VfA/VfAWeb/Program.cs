@@ -30,7 +30,8 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddRoles<IdentityRole>()
@@ -126,7 +127,7 @@ SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "area-route",
-    pattern: "{area=Visitor}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

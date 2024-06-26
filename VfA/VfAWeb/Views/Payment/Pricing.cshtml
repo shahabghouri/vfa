@@ -174,9 +174,8 @@
                                         s27.202-37.185,46.917-8.488c19.715,28.693,38.687,13.116,46.502,4.832c7.817-8.282,27.386-15.906,41.405,6.294V0H0.48
                                         L0.732,193.75z"></path>
                             </g>
-                            <text transform="matrix(1 0 0 1 69.7256 116.2686)" fill="#fff" font-size="78.4489">$@integarPart</text>
-                            <text transform="matrix(0.9566 0 0 1 197.3096 83.9121)" fill="#fff" font-size="29.0829">.@decimalPart</text>
-                            <text transform="matrix(1 0 0 1 233.9629 115.5303)" fill="#fff" font-size="15.4128">/Month</text>
+                            <text transform="matrix(1 0 0 1 69.7256 116.2686)" fill="#fff" font-size="50">DZD @plan._3MonthAmount</text>
+                            <text transform="matrix(1 0 0 1 233.9629 115.5303)" fill="#fff" font-size="15.4128"></text>
                         </svg>
                         <div class="pricing-content">
                             <h3 class="title">@plan.Name</h3>
@@ -201,7 +200,7 @@
                             }
                             else
                             {
-                                <button onclick="Subscribe(@plan.Id,'@plan.Name', @plan.MonthlyAmount, @plan._3MonthAmount,@plan._6MonthAmount,@plan._12MonthAmount)" class="pricingTable-signup">Subscribe Now</button>
+                                <button onclick="Subscribe(@plan.Id,'@plan.Name', @plan._3MonthAmount,@plan._6MonthAmount,@plan._12MonthAmount)" class="pricingTable-signup">Subscribe Now</button>
                             }
                         </div>
                     </div>
@@ -224,7 +223,6 @@
                     <div class="mb-3">
                         <label for="subscriptionSelect" class="form-label">Subscription Plan</label>
                         <select class="form-select" id="subscriptionSelect" aria-label="Subscription select">
-                            <option value="1">Monthly Subscription</option>
                             <option value="3">3 Months (-10% Discount)</option>
                             <option value="6">6 Months (-20% Discount)</option>
                             <option value="12">12 Months (-30% Discount)</option>
@@ -262,14 +260,7 @@
                             }
                             else
                             {
-                                <div class="col-md-6">
-                                    <div class="payment-method">
-                                        <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal Logo" class="payment-logo">
-                                        <div class="payment-title">PayPal</div>
-                                    </div>
-                                </div>
-
-                                <div id="paypal-container" style="display:none;" class="col-12 py-2">
+                                <div id="paypal-container" class="col-12 py-2">
                                     <div class="text-center">
                                         <div id="paypal-button-container"></div>
                                     </div>
@@ -279,7 +270,7 @@
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" value="" id="termsCheck">
                                     <label class="form-check-label" for="termsCheck">
-                                        I agree to the <a href="/Terms">terms and conditions</a>
+                                        I agree to the <a href="/Home/Terms" target="_blank">terms and conditions</a>
                                     </label>
                                 </div>
                             </div>
@@ -344,17 +335,16 @@
     <script>
         var selectedPaymentMethod = @currentUserType;
         var selectedPlanId = 0;
-        var _monthlyAmount, _3Amount, _6Amount, _12Amount;
+        var  _3Amount, _6Amount, _12Amount;
         // Open modal using jQuery
-        function Subscribe(subscriptionPlanId, plan, _1monthAmount, _3monthAmount, _6monthAmount, _12monthAmount) {
+        function Subscribe(subscriptionPlanId, plan, _3monthAmount, _6monthAmount, _12monthAmount) {
             $('#subscriptionModal').modal('show');
             $('#subscriptionSelect').val('1');
             selectedPlanId = subscriptionPlanId;
-            _monthlyAmount = _1monthAmount;
             _3Amount = _3monthAmount;
             _6Amount = _6monthAmount;
             _12Amount = _12monthAmount;
-            $('#totalAmount').text(_monthlyAmount);
+            $('#totalAmount').text(_3monthAmount);
             $('#payment-plan').text(plan);
             $('#payment-plan-months').text(' - 1 Month');
         };

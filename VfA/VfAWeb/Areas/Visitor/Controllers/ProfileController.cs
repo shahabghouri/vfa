@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics.Metrics;
 using System.Text.Json;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
@@ -34,27 +35,31 @@ namespace VfAWeb.Areas.Visitor.Controllers
                     profileViewModel.Products = products;
                     profileViewModel.Services = services;
                     profileViewModel.Requests = requests;
-                    Company company = new Company();
-                    company = _unitOfWork.Company.GetAll(includeProperties: "CompanyImages").Where(x => x.Id == _user.CompanyId).FirstOrDefault();
+                    var company = _unitOfWork.Company.Get(x => x.Id == _user.CompanyId,includeProperties: "CompanyImages");
                     if (company != null)
                     {
                         profileViewModel.CompnayName = company.Name;
-                        var Logo = company.CompanyImages.FirstOrDefault();
-                        if (Logo != null)
+                        if (company.CompanyImages != null && company.CompanyImages.Count != 0)
                         {
-                            profileViewModel.CompnayLogo = Logo.ImageUrl;
+                            var logo = company.CompanyImages.FirstOrDefault();
+                            if (logo != null)
+                            {
+                                profileViewModel.CompnayLogo = logo.ImageUrl;
+                            }
                         }
-
                         if (_user.IsImporter)
                         {
-                            profileViewModel.CountryName = _unitOfWork.Country.GetAll().Where(x => x.Id == company.CountryId).FirstOrDefault().Name;
+                            var country = _unitOfWork.Country.Get(x => x.Id == company.CountryId);
+                            profileViewModel.CountryName = country != null ? country.Name : ""; 
                         }
                         if (_user.IsExporter)
                         {
-                            profileViewModel.WilayaName = _unitOfWork.Wilaya.GetAll().Where(x => x.Id == company.WilayaId).FirstOrDefault().Name;
+                            var wilaya = _unitOfWork.Wilaya.Get(x => x.Id == company.WilayaId);
+                            profileViewModel.WilayaName = wilaya != null ? wilaya.Name : "";
                         }
-                        profileViewModel.ActivityName = _unitOfWork.CompanyActivity.GetAll().Where(x => x.Id == company.CompanyActivityId).FirstOrDefault().Name;
-                        profileViewModel.UserType = _user.IsImporter ? "Impoter" : _user.IsExporter ? "Expoter" : "";
+                        var companyActivity = _unitOfWork.CompanyActivity.Get(x => x.Id == company.CompanyActivityId);
+                        profileViewModel.ActivityName = companyActivity != null ? companyActivity.Name : "";
+                        profileViewModel.UserType = _user.IsImporter ? "Importer" : _user.IsExporter ? "Exporter" : "";
                     }
                 }
             }

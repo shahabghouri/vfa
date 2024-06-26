@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using VfA.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using System.ComponentModel;
 
 namespace VfAWeb.Areas.Identity.Pages.Account
 {
@@ -112,8 +113,8 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$",
-                ErrorMessage = "Password must contain at least one number, one uppercase letter, and one special character (@, $, !, %, *, ?, &).")]
+            [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$",
+                ErrorMessage = "Must contain atleast 1 uppercase, 1 lowercase, 1 digit.")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -137,11 +138,13 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [Required]
             public string Name { get; set; }
             [Required]
+            [DisplayName("Last Name")]
             public string? LastName { get; set; }
             [AllowNull]
             public string? MiddleName { get; set; }
             [Required]
             public string? Gender { get; set; }
+            [DisplayName("Country")]
             [Required]
             public int? CountryId { get; set; }
             [ValidateNever]
@@ -150,6 +153,7 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             [Required]
             public string? Job { get; set; }
 
+            [DisplayName("Phone Number")]
             [Required]
             public string? PhoneNumber { get; set; }
             public int? CompanyId { get; set; }
@@ -157,13 +161,17 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public IEnumerable<SelectListItem> CompanyList { get; set; }
             //CompanyInformation
             [Required]
+            [DisplayName("Company Name")]
             public string? CompanyName { get; set; }
             [Required]
+            [DisplayName("CEO")]
             public string? CompanyCEOName { get; set; }
+            [DisplayName("Company Activity")]
             [Required]
             public int? CompanyActivityId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyActivityList { get; set; }
+            [DisplayName("Company Country")]
             [Required]
             public int CompanyCountryId { get; set; }
             [ValidateNever]
@@ -171,16 +179,20 @@ namespace VfAWeb.Areas.Identity.Pages.Account
             public IEnumerable<SelectListItem> WiliyaList { get; set; }
             [Required]
             public int WilayaID { get; set; }
+            [DisplayName("Street Address")]
             [Required]
             public string? StreetAddress { get; set; }
             [Required]
             public string? City { get; set; }
+            [DisplayName("State Province")]
             [Required]
             public int StateProvinceId { get; set; }
             public string State { get; set; }
             [Required]
+            [DisplayName("Postal Code")]
             public string? PostalCode { get; set; }
             [Required]
+            [DisplayName("Category")]
             public int? CompanyCategoryId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> Categories { get; set; }
