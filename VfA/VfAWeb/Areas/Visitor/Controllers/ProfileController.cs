@@ -59,7 +59,7 @@ namespace VfAWeb.Areas.Visitor.Controllers
                         }
                         var companyActivity = _unitOfWork.CompanyActivity.Get(x => x.Id == company.CompanyActivityId);
                         profileViewModel.ActivityName = companyActivity != null ? companyActivity.Name : "";
-                        profileViewModel.UserType = _user.IsImporter ? "Importer" : _user.IsExporter ? "Exporter" : "";
+                        profileViewModel.UserType = _user.IsImporter ? "Importer" : "Exporter";
                     }
                 }
             }

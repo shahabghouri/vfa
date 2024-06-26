@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Pricing";
     long currentPlanId = Model.ApplicationUser.SubscribedPlanId ?? 0;
-    long currentUserType = Model.ApplicationUser.IsImporter ? 1 : 2;
+    long currentUserType = Model.ApplicationUser.IsImporter ? 2 : 1;
     string[] colors = ["#ae003d", "red", "blue", "green", "orange"];
     int i = 0;
 }
@@ -163,8 +163,6 @@
             {
                 var color = colors[i];
                 i++;
-                var integarPart = @plan.MonthlyAmount.ToString().Split(".")[0];
-                var decimalPart = @plan.MonthlyAmount.ToString().Split(".")[1];
                 <div class="col-md-4 col-sm-6">
                     <div class="pricingTable @color">
                         <svg x="0" y="0" viewBox="0 0 360 220">
@@ -339,7 +337,7 @@
         // Open modal using jQuery
         function Subscribe(subscriptionPlanId, plan, _3monthAmount, _6monthAmount, _12monthAmount) {
             $('#subscriptionModal').modal('show');
-            $('#subscriptionSelect').val('1');
+            $('#subscriptionSelect').val('3');
             selectedPlanId = subscriptionPlanId;
             _3Amount = _3monthAmount;
             _6Amount = _6monthAmount;
