@@ -6,6 +6,8 @@
     var RequestList = Model.Requests.ToList();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/css/kaiadmin.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 <style>
     body {
         background: #e2eaef;
@@ -214,23 +216,353 @@
     }
 
     .img-box2 {
-       
         height: 200px; /* Set desired height */
         overflow: hidden;
         position: relative;
     }
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
-            object-position: center; /* Center the image within the container */
-        }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
+        object-position: center; /* Center the image within the container */
+    }
 
     .fa.fa-trash {
         color: #ec5959;
     }
+
+    .card {
+        --bs-card-spacer-y: 30px;
+        --bs-card-spacer-x: 30px;
+        --bs-card-title-spacer-y: 0.5rem;
+        --bs-card-title-color: #2A3547;
+        --bs-card-subtitle-color: #2A3547;
+        --bs-card-border-width: 0px;
+        --bs-card-border-color: #ebf1f6;
+        --bs-card-border-radius: 7px;
+        --bs-card-box-shadow: rgba(145,158,171,0.2) 0px 0px 2px 0px, rgba(145,158,171,0.12) 0px 12px 24px -4px;
+        --bs-card-inner-border-radius: 7px;
+        --bs-card-cap-padding-y: 15px;
+        --bs-card-cap-padding-x: 30px;
+        --bs-card-cap-bg: rgba(var(--bs-body-color-rgb),0.03);
+        --bs-card-cap-color:;
+        --bs-card-height:;
+        --bs-card-color:;
+        --bs-card-bg: var(--bs-body-bg);
+        --bs-card-img-overlay-padding: 1rem;
+        --bs-card-group-margin: 12px;
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        height: var(--bs-card-height);
+        color: var(--bs-body-color);
+        word-wrap: break-word;
+        background-color: var(--bs-card-bg);
+        background-clip: border-box;
+        border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+        border-radius: var(--bs-card-border-radius);
+        -webkit-box-shadow: var(--bs-card-box-shadow);
+        box-shadow: var(--bs-card-box-shadow);
+    }
+
+    .card-desc {
+        margin-left: 3.5rem;
+        y: 1;
+        color: var(--bs-secondary-color) !important;
+    }
+
+    .card-body-c {
+        flex: 1 1 auto;
+        color: var(--bs-card-color);
+        padding: 1rem 2.5rem;
+    }
+
+    .card-title-kpi {
+        font-size: 18px;
+    }
+
+    .fw-semibold {
+        font-weight: 600 !important;
+    }
+
+    .mb-9 {
+        margin-bottom: 20px !important;
+    }
+
+    .apexcharts-canvas {
+        position: relative;
+        user-select: none;
+    }
+
+    .company-logo {
+        min-width: 100%;
+        min-height: 250px;
+    }
 </style>
+
 <div class="container-xl">
+    <div class="row">
+        <div class="col-md-4 col-xl-3 Profile">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <img src="~/images/blank-img.jpg" alt="company-name" class="company-logo mb-2" width="128" height="128">
+                    <h5 class="card-title mb-0">Company Name</h5>
+                    <div class="text-muted mb-2">Activity</div>
+                </div>
+                <hr class="my-0">
+                <div class="card-body-c d-flex">
+                    <h5 class="h6 card-title">CEO :</h5>
+                    <h4 class="h6 card-desc">Saad Javed</h4>
+                </div>
+                <div class="card-body-c d-flex">
+                    <h5 class="h6 card-title">Category</h5>
+                    <h5 class="h6 card-desc">Software Development</h5>
+                </div>
+                <div class="card-body-c d-flex">
+                    <h5 class="h6 card-title">Country</h5>
+                    <h4 class="h6 card-desc">United States</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-xl-9 Activities">
+            <div class="card">
+                <div class="card-body h-100">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                                <i class="fa fa-product-hunt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Products</p>
+                                                <h4 class="card-title">1,294</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-info bubble-shadow-small">
+                                                <i class="fa  fa-circle-s"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Services</p>
+                                                <h4 class="card-title">1303</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-icon">
+                                            <div class="icon-big text-center icon-success bubble-shadow-small">
+                                                <i class="fa fa-registered"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col col-stats ms-3 ms-sm-0">
+                                            <div class="numbers">
+                                                <p class="card-category">Requests</p>
+                                                <h4 class="card-title">1,345</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Basic</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                        <thead>
+                                                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            <tr role="row" class="odd">
+                                                                <td class="sorting_1">Airi Satou</td>
+                                                                <td>Accountant</td>
+                                                                <td>Tokyo</td>
+                                                                <td>33</td>
+                                                                <td>2008/11/28</td>
+                                                                <td>$162,700</td>
+                                                            </tr>
+                                                            <tr role="row" class="even">
+                                                                <td class="sorting_1">Angelica Ramos</td>
+                                                                <td>Chief Executive Officer (CEO)</td>
+                                                                <td>London</td>
+                                                                <td>47</td>
+                                                                <td>2009/10/09</td>
+                                                                <td>$1,200,000</td>
+                                                            </tr>
+                                                            <tr role="row" class="odd">
+                                                                <td class="sorting_1">Ashton Cox</td>
+                                                                <td>Junior Technical Author</td>
+                                                                <td>San Francisco</td>
+                                                                <td>66</td>
+                                                                <td>2009/01/12</td>
+                                                                <td>$86,000</td>
+                                                            </tr>
+                                                            <tr role="row" class="even">
+                                                                <td class="sorting_1">Bradley Greer</td>
+                                                                <td>Software Engineer</td>
+                                                                <td>London</td>
+                                                                <td>41</td>
+                                                                <td>2012/10/13</td>
+                                                                <td>$132,000</td>
+                                                            </tr>
+                                                            <tr role="row" class="odd">
+                                                                <td class="sorting_1">Brenden Wagner</td>
+                                                                <td>Software Engineer</td>
+                                                                <td>San Francisco</td>
+                                                                <td>28</td>
+                                                                <td>2011/06/07</td>
+                                                                <td>$206,850</td>
+                                                            </tr>
+                                                            <tr role="row" class="even">
+                                                                <td class="sorting_1">Brielle Williamson</td>
+                                                                <td>Integration Specialist</td>
+                                                                <td>New York</td>
+                                                                <td>61</td>
+                                                                <td>2012/12/02</td>
+                                                                <td>$372,000</td>
+                                                            </tr>
+                                                            <tr role="row" class="odd">
+                                                                <td class="sorting_1">Bruno Nash</td>
+                                                                <td>Software Engineer</td>
+                                                                <td>London</td>
+                                                                <td>38</td>
+                                                                <td>2011/05/03</td>
+                                                                <td>$163,500</td>
+                                                            </tr>
+                                                            <tr role="row" class="even">
+                                                                <td class="sorting_1">Caesar Vance</td>
+                                                                <td>Pre-Sales Support</td>
+                                                                <td>New York</td>
+                                                                <td>21</td>
+                                                                <td>2011/12/12</td>
+                                                                <td>$106,450</td>
+                                                            </tr>
+                                                            <tr role="row" class="odd">
+                                                                <td class="sorting_1">Cara Stevens</td>
+                                                                <td>Sales Assistant</td>
+                                                                <td>New York</td>
+                                                                <td>46</td>
+                                                                <td>2011/12/06</td>
+                                                                <td>$145,600</td>
+                                                            </tr>
+                                                            <tr role="row" class="even">
+                                                                <td class="sorting_1">Cedric Kelly</td>
+                                                                <td>Senior Javascript Developer</td>
+                                                                <td>Edinburgh</td>
+                                                                <td>22</td>
+                                                                <td>2012/03/29</td>
+                                                                <td>$433,060</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-xl d-none">
     <div class="row">
         <div class="col-md-2 img-box2">
             <img src="@Model.CompnayLogo" class="" alt="logo-here" />
@@ -259,7 +591,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" >
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                         <!-- Carousel indicators -->
                         <div class="carousel-indicators">
                             @{
@@ -324,7 +656,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel" >
+                    <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel">
                         <!-- Carousel indicators -->
                         <div class="carousel-indicators">
                             @{
