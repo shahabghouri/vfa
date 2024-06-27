@@ -17,5 +17,6 @@ namespace VfA.Models.ViewModels
         public IEnumerable<Service>? Services { get; set; }
         public IEnumerable<Request>? Requests { get; set; }
         public string? CompnayLogo { get; set; }
+        public Company? Company { get; set; }
     }
 }

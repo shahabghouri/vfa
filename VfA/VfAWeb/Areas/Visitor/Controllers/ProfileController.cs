@@ -35,7 +35,8 @@ namespace VfAWeb.Areas.Visitor.Controllers
                     profileViewModel.Products = products;
                     profileViewModel.Services = services;
                     profileViewModel.Requests = requests;
-                    var company = _unitOfWork.Company.Get(x => x.Id == _user.CompanyId,includeProperties: "CompanyImages");
+                    var company = _unitOfWork.Company.Get(x => x.Id == _user.CompanyId,includeProperties: "CompanyActivity,Category,CompanyImages");
+                    profileViewModel.Company = company;
                     if (company != null)
                     {
                         profileViewModel.CompnayName = company.Name;

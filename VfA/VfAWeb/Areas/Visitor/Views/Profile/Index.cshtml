@@ -4,6 +4,19 @@
     var ProductList = Model.Products.ToList();
     var ServiceList = Model.Services.ToList();
     var RequestList = Model.Requests.ToList();
+    var companyLogo = "";
+    if (Model.Company.CompanyImages.Any())
+    {
+        companyLogo = Model.Company.CompanyImages.FirstOrDefault().ImageUrl;
+    }
+    else
+    {
+        companyLogo = @"../images/blank-img.jpg";
+    }
+    int ProductCount, ServicesCount, RequestCount = 0;
+    ProductCount = Model.Products.Count();
+    ServicesCount = Model.Services.Count();
+    RequestCount = Model.Requests.Count();
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="~/css/kaiadmin.min.css" rel="stylesheet" />
@@ -323,7 +336,7 @@
     }
 
     .company-table th {
-        padding: 1rem 2rem;
+        padding: 1rem 1.5rem;
     }
 </style>
 
@@ -333,9 +346,9 @@
 
             <div class="card mb-3">
                 <div class="card-body text-center">
-                    <img src="~/images/blank-img.jpg" alt="company-name" class="company-logo mb-2" width="128" height="128">
-                    <h5 class="card-title mb-0">Company Name</h5>
-                    <div class="text-muted mb-2">Activity</div>
+                    <img src=@companyLogo alt="@Model.Company.Name" class="company-logo mb-2" width="128" height="128">
+                    <h5 class="card-title mb-0">@Model.Company.Name</h5>
+                    <div class="text-muted mb-2">@Model.Company.CompanyActivity.Name</div>
                 </div>
                 <hr class="my-0">
                 <div class="card-body-spacing d-flex">
@@ -343,27 +356,27 @@
                 <table class="company-table">
                     <tr>
                         <th>CEO</th>
-                        <td>Saad Javed</td>
+                        <td>@Model.Company.CEOName</td>
                     </tr>
                     <tr>
                         <th>Category</th>
-                        <td>Software Development</td>
+                        <td>@Model.Company.Category.Name</td>
                     </tr>
                     <tr>
                         <th>Country</th>
-                        <td>United States</td>
+                        <td>@Model.Company.Country</td>
                     </tr>
                     <tr>
-                        <th>CEO</th>
-                        <td>Saad Javed</td>
+                        <th>City</th>
+                        <td>@Model.Company.City</td>
                     </tr>
                     <tr>
-                        <th>Category</th>
-                        <td>Software Development</td>
+                        <th>Address</th>
+                        <td>@Model.Company.StreetAddress</td>
                     </tr>
                     <tr>
-                        <th>Country</th>
-                        <td>United States</td>
+                        <th>Postal Code</th>
+                        <td>@Model.Company.PostalCode</td>
                     </tr>
                 </table>
             </div>
@@ -385,7 +398,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
                                                 <p class="card-category">Products</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">@ProductCount</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -404,7 +417,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
                                                 <p class="card-category">Services</p>
-                                                <h4 class="card-title">1303</h4>
+                                                <h4 class="card-title">@ServicesCount</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -423,7 +436,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
                                                 <p class="card-category">Requests</p>
-                                                <h4 class="card-title">1,345</h4>
+                                                <h4 class="card-title">@RequestCount</h4>
                                             </div>
                                         </div>
                                     </div>
