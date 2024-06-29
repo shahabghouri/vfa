@@ -338,12 +338,15 @@
     .company-table th {
         padding: 1rem 1.5rem;
     }
+    table{
+        width: 100% !important;
+    }
 </style>
 
 <div class="container-xl">
     <div class="row">
+        @* Company Details Start's*@
         <div class="col-md-4 col-xl-3 Profile">
-
             <div class="card mb-3">
                 <div class="card-body text-center">
                     <img src=@companyLogo alt="@Model.Company.Name" class="company-logo mb-2" width="128" height="128">
@@ -381,10 +384,12 @@
                 </table>
             </div>
         </div>
+        @* Company Details End's*@
 
         <div class="col-md-8 col-xl-9 Activities">
             <div class="card">
                 <div class="card-body h-100">
+                    @* Kpi Start's*@
                     <div class="row">
                         <div class="col-sm-6 col-md-4">
                             <div class="card card-stats card-round">
@@ -444,7 +449,8 @@
                             </div>
                         </div>
                     </div>
-
+                    @* Kpi End's*@
+                    @* Tables Start's *@
                     <div class="row">
                         <div>
                             <ul class="nav nav-pills mb-3 justify-content-center">
@@ -459,7 +465,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--End Tabs  Tab Content-->
+                        <!--End Tabs Tab Content-->
                         <div class="tab-content">
                             <div class="tab-pane fade aos-init aos-animate active show" id="tab1">
                                 <div class="row">
@@ -473,68 +479,17 @@
                                                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                <table id="tblDataProd" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                                                                     <thead>
-                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                        <tr role="row">
+                                                                            <th>Name</th>
+                                                                            <th>Production Capacity</th>
+                                                                            <th>Capacity Unit</th>
+                                                                            <th>Description</th>
+                                                                            <th>Category</th>
+                                                                            <th></th>
+                                                                        </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Airi Satou</td>
-                                                                            <td>Accountant</td>
-                                                                            <td>Tokyo</td>
-                                                                            <td>33</td>
-                                                                            <td>2008/11/28</td>
-                                                                            <td>$162,700</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Angelica Ramos</td>
-                                                                            <td>Chief Executive Officer (CEO)</td>
-                                                                            <td>London</td>
-                                                                            <td>47</td>
-                                                                            <td>2009/10/09</td>
-                                                                            <td>$1,200,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Ashton Cox</td>
-                                                                            <td>Junior Technical Author</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>66</td>
-                                                                            <td>2009/01/12</td>
-                                                                            <td>$86,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Bradley Greer</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>41</td>
-                                                                            <td>2012/10/13</td>
-                                                                            <td>$132,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Brenden Wagner</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>28</td>
-                                                                            <td>2011/06/07</td>
-                                                                            <td>$206,850</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Brielle Williamson</td>
-                                                                            <td>Integration Specialist</td>
-                                                                            <td>New York</td>
-                                                                            <td>61</td>
-                                                                            <td>2012/12/02</td>
-                                                                            <td>$372,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Bruno Nash</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>38</td>
-                                                                            <td>2011/05/03</td>
-                                                                            <td>$163,500</td>
-                                                                        </tr>
-                                                                    </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -558,68 +513,14 @@
                                                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                <table id="tblDataServ" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                                                                     <thead>
-                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                        <tr role="row">
+                                                                            <th>Name</th>
+                                                                            <th>Category</th>
+                                                                            <th></th>
+                                                                        </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Airi Satou</td>
-                                                                            <td>Accountant</td>
-                                                                            <td>Tokyo</td>
-                                                                            <td>33</td>
-                                                                            <td>2008/11/28</td>
-                                                                            <td>$162,700</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Angelica Ramos</td>
-                                                                            <td>Chief Executive Officer (CEO)</td>
-                                                                            <td>London</td>
-                                                                            <td>47</td>
-                                                                            <td>2009/10/09</td>
-                                                                            <td>$1,200,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Ashton Cox</td>
-                                                                            <td>Junior Technical Author</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>66</td>
-                                                                            <td>2009/01/12</td>
-                                                                            <td>$86,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Bradley Greer</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>41</td>
-                                                                            <td>2012/10/13</td>
-                                                                            <td>$132,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Brenden Wagner</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>28</td>
-                                                                            <td>2011/06/07</td>
-                                                                            <td>$206,850</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Brielle Williamson</td>
-                                                                            <td>Integration Specialist</td>
-                                                                            <td>New York</td>
-                                                                            <td>61</td>
-                                                                            <td>2012/12/02</td>
-                                                                            <td>$372,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Bruno Nash</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>38</td>
-                                                                            <td>2011/05/03</td>
-                                                                            <td>$163,500</td>
-                                                                        </tr>
-                                                                    </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -643,68 +544,14 @@
                                                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
+                                                                <table id="tblDataReq" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                                                                     <thead>
-                                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 168.962px;">Name</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 261.438px;">Position</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 127.912px;">Office</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50.875px;">Age</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 125.312px;">Start date</th><th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 104.5px;">Salary</th></tr>
+                                                                        <tr role="row">
+                                                                            <th>Name</th>
+                                                                            <th>Category</th>
+                                                                            <th></th>
+                                                                        </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Airi Satou</td>
-                                                                            <td>Accountant</td>
-                                                                            <td>Tokyo</td>
-                                                                            <td>33</td>
-                                                                            <td>2008/11/28</td>
-                                                                            <td>$162,700</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Angelica Ramos</td>
-                                                                            <td>Chief Executive Officer (CEO)</td>
-                                                                            <td>London</td>
-                                                                            <td>47</td>
-                                                                            <td>2009/10/09</td>
-                                                                            <td>$1,200,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Ashton Cox</td>
-                                                                            <td>Junior Technical Author</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>66</td>
-                                                                            <td>2009/01/12</td>
-                                                                            <td>$86,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Bradley Greer</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>41</td>
-                                                                            <td>2012/10/13</td>
-                                                                            <td>$132,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Brenden Wagner</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>San Francisco</td>
-                                                                            <td>28</td>
-                                                                            <td>2011/06/07</td>
-                                                                            <td>$206,850</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">Brielle Williamson</td>
-                                                                            <td>Integration Specialist</td>
-                                                                            <td>New York</td>
-                                                                            <td>61</td>
-                                                                            <td>2012/12/02</td>
-                                                                            <td>$372,000</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">Bruno Nash</td>
-                                                                            <td>Software Engineer</td>
-                                                                            <td>London</td>
-                                                                            <td>38</td>
-                                                                            <td>2011/05/03</td>
-                                                                            <td>$163,500</td>
-                                                                        </tr>
-                                                                    </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -718,6 +565,7 @@
                             <!--End Tab 3 Content-->
                         </div>
                     </div>
+                    @* Tables End's *@
                 </div>
             </div>
         </div>
@@ -942,10 +790,12 @@
             }
         </div>
     </div>
-
     @section Scripts {
         <script>
             $(document).ready(function () {
+                loadProductsDataTable();
+                loadServicesDataTable();
+                loadRequestDataTable();
                 // $(".wish-icon i").click(function () {
                 //     $(this).toggleClass("fa-heart fa-heart-o");
                 // });
@@ -973,7 +823,6 @@
                 });
             });
             function Delete(url) {
-                debugger;
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -1009,6 +858,77 @@
                 var url = '@Url.Action("RequestDetails", "Home", new { area = "visitor", Id = "__Id__" })';
                 url = url.replace("__Id__", requestId);
                 window.location.href = url;
+            }
+            function loadProductsDataTable() {
+                dataTable = $('#tblDataProd').DataTable({
+                    "ajax": { url: '/visitor/product/getall' },
+                    "columns": [
+                        { data: 'name', "width": "25%" },
+                        { data: 'productionCapacity', "width": "15%" },
+                        { data: 'capacityUnit', "width": "10%" },
+                        {
+                            data: 'description',
+                            "render": function (data, type, row) {
+                                // Adjust the max length and append ellipsis if the description is longer
+                                if (data.length > 20) {
+                                    return data.substr(0, 10) + '...';
+                                } else {
+                                    return data;
+                                }
+                            }
+                            , "width": "15%"
+                        },
+                        { data: 'category.name', "width": "10%" },
+                        {
+                            data: 'id',
+                            "render": function (data) {
+                                return `<div class="w-75 btn-group" role="group">
+                                             <a href="/visitor/product/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                             <a onClick=Delete('/visitor/product/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                </div>`
+                            },
+                            "width": "25%"
+                        }
+                    ]
+                });
+            }
+            function loadServicesDataTable() {
+                dataTable = $('#tblDataServ').DataTable({
+                    "ajax": { url: '/visitor/service/getall' },
+                    "columns": [
+                        { data: 'name', "width": "25%" },
+                        { data: 'category.name', "width": "10%" },
+                        {
+                            data: 'id',
+                            "render": function (data) {
+                                return `<div class="w-75 btn-group" role="group">
+                                 <a href="/visitor/service/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                 <a onClick=Delete('/visitor/service/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                </div>`
+                            },
+                            "width": "25%"
+                        }
+                    ]
+                });
+            }
+            function loadRequestDataTable() {
+                dataTable = $('#tblDataReq').DataTable({
+                    "ajax": { url: '/visitor/request/getall' },
+                    "columns": [
+                        { data: 'name', "width": "25%" },
+                        { data: 'category.name', "width": "10%" },
+                        {
+                            data: 'id',
+                            "render": function (data) {
+                                return `<div class="w-75 btn-group" role="group">
+                                 <a href="/visitor/request/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                 <a onClick=Delete('/visitor/request/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                </div>`
+                            },
+                            "width": "25%"
+                        }
+                    ]
+                });
             }
         </script>
     }
