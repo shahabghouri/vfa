@@ -1,13 +1,17 @@
 ﻿using Humanizer.Localisation;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
+using System.Security.Claims;
 using VfA.DataAccess.Migrations;
 using VfA.DataAccess.Repository;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
 using VfA.Models.ViewModels;
 using VfAWeb.Utilities;
+using Microsoft.AspNetCore.Identity;
 
 namespace VfAWeb.Controllers
 {
@@ -17,11 +21,13 @@ namespace VfAWeb.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly SatimPayment _satimPayment;
         private readonly PaypalClient _paypalClient;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         //ApplicationUser _user;
         UserClaimsVM _user;
-        public PaymentController(PaypalClient paypalClient, IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
+        public PaymentController(SignInManager<ApplicationUser> signInManager,PaypalClient paypalClient, IUnitOfWork unitOfWork, IUserClaimsService userClaimsService)
         {
+            _signInManager = signInManager;
             _unitOfWork = unitOfWork;
             _satimPayment = new();
             _user = userClaimsService.GetUserClaims();
@@ -115,6 +121,7 @@ namespace VfAWeb.Controllers
                         };
                         _unitOfWork.PaymentHistory.Add(paymentHistory);
                         var currentUser = _unitOfWork.ApplicationUser.Get(x => x.Id == currentUserId);
+                        currentUser.Tenure = paymentOrder.Months;
                         currentUser.LastPaymentDate = DateTime.Now;
                         currentUser.NextPaymentDate = DateTime.Now.AddMonths(paymentOrder.Months);
                         currentUser.SubscribedPlanId = paymentOrder.SubscriptionPlanId;
@@ -137,6 +144,19 @@ namespace VfAWeb.Controllers
         public IActionResult Fail(string? error)
         {
             return View("Fail", error);
+        }
+        public async Task<IActionResult> SubscribeToFree()
+        {
+            var currentUser = _unitOfWork.ApplicationUser.Get(x => x.Id == _user.Id);
+            currentUser.LastPaymentDate = DateTime.Now;
+            currentUser.NextPaymentDate = null;
+            currentUser.Tenure = 0;
+            currentUser.SubscribedPlanId = 0;
+            _unitOfWork.ApplicationUser.Update(currentUser);
+            _unitOfWork.Save();
+
+            await _signInManager.SignInAsync(currentUser, true);
+            return RedirectToAction("Index");
         }
     }
 }

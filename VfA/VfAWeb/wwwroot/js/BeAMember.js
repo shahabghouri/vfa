@@ -58,6 +58,7 @@ $("#importerBtn").click(function () {
     $(".ImporterFields").show();
     $(".ExporterFields").hide();
     $("#formContainer").show();
+    $('#country-container').show();
     //$("#btnContainer").hide();
 });
 $("#importerBtn").click();
@@ -79,6 +80,10 @@ $("#exporterBtn").click(function () {
     $(".ImporterFields").hide();
     $(".ExporterFields").show();
     $("#formContainer").show();
+
+    $('#Input_CountryId').val(1003);
+    $('#country-container').hide();
+
     //$("#btnContainer").hide();
 });
 function IsValidateForm() {

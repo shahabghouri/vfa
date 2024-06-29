@@ -42,7 +42,8 @@
         <div class="card ms-auto w-100">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">My Subscription</h5>
-                @if(Model.SubscriptionPlan.Id == 0){
+                @if (Model.SubscriptionPlan.Id == 0)
+                {
                     <div class="btn btn-sm btn-danger">Free</div>
                 }
                 else
@@ -52,26 +53,37 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <h5 class="fw-normal">Products</h5>
-                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfProducts</p>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h5 class="fw-normal">Services</h5>
-                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfServices</p>
-                    </div>
+                    @if (!Model.ApplicationUser.IsImporter)
+                    {
+                        <div class="col-12 col-md-4">
+                            <h5 class="fw-normal">Products</h5>
+                            <p class="fw-light">@(Model.SubscriptionPlan.NumberOfProducts == -1 ? "Unlimited" : Model.SubscriptionPlan.NumberOfProducts)</p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <h5 class="fw-normal">Services</h5>
+                            <p class="fw-light">@(Model.SubscriptionPlan.NumberOfServices == -1 ? "Unlimited" : Model.SubscriptionPlan.NumberOfServices)</p>
+                        </div>
+                    }
                     <div class="col-12 col-md-4">
                         <h5 class="fw-normal">Requests</h5>
-                        <p class="fw-light">@Model.SubscriptionPlan.NumberOfRequests</p>
+                        <p class="fw-light">@(Model.SubscriptionPlan.NumberOfRequests == -1 ? "Unlimited" : Model.SubscriptionPlan.NumberOfRequests)</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5 class="fw-normal">Price</h5>
+                        <p class="fw-light">@(Model.ApplicationUser.Tenure == 3 ? Model.SubscriptionPlan._3MonthAmount :
+                                Model.ApplicationUser.Tenure == 6 ? Model.SubscriptionPlan._6MonthAmount :
+                                Model.ApplicationUser.Tenure == 12 ? Model.SubscriptionPlan._6MonthAmount : Model.SubscriptionPlan._3MonthAmount)
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5 class="fw-normal">Tenure</h5>
+                        <p class="fw-light">@(Model.SubscriptionPlan.Id == 0 ? "---" : Model.ApplicationUser.Tenure + " Months")</p>
                     </div>
                     <div class="col-12 col-md-6">
                         <h5 class="fw-normal">Started On</h5>
                         <p class="fw-light">@(Model.ApplicationUser.LastPaymentDate != null ? Model.ApplicationUser.LastPaymentDate.Value.ToString("MMM dd, yyyy") : "---")</p>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <h5 class="fw-normal">Price</h5>
-                        <p class="fw-light">@Model.SubscriptionPlan.MonthlyAmount</p>
-                    </div>
+                    
                     <div class="col-12 col-md-6">
                         <h5 class="fw-normal">Billing Date</h5>
                         <p class="fw-light">@(Model.ApplicationUser.NextPaymentDate != null ? "Next Billing on "+Model.ApplicationUser.NextPaymentDate.Value.ToString("dd MMM yyyy") : "---")</p>
@@ -79,7 +91,14 @@
                 </div>
             </div>
             <div class="d-flex card-footer">
-                <a href="/Payment/Pricing" class="btn btn-primary ms-auto">Upgrade Now</a>
+                @if (Model.SubscriptionPlan.Id == 0)
+                {
+                    <a href="/Payment/Pricing" class="btn btn-primary ms-auto">Upgrade Now</a>
+                }
+                else
+                {
+                    <a href="/Payment/Pricing" class="btn btn-primary ms-auto">Change Plan</a>
+                }
             </div>
         </div>
     </div>

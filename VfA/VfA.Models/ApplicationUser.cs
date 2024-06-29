@@ -44,6 +44,7 @@ namespace VfA.Models
         public string Role { get; set; }
         public DateTime? LastPaymentDate { get; set; }
         public DateTime? NextPaymentDate { get; set; }
+        public int Tenure { get; set; }
     }
     
 }

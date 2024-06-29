@@ -49,7 +49,7 @@ namespace VfAWeb.Utilities
             return response;
         }
 
-        public async Task<CreateOrderResponse> CreateOrder(string value, string currency, string reference)
+        public async Task<CreateOrderResponse> CreateOrder(string price, string currency, string reference)
         {
             var auth = await Authenticate();
 
@@ -64,7 +64,7 @@ namespace VfAWeb.Utilities
                         amount = new Amount
                         {
                             currency_code = currency,
-                            value = value
+                            value = price
                         }
                     }
                 }

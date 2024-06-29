@@ -325,7 +325,7 @@
                         return response.json().then(error => { throw error; });
                     }
 
-                    window.location.href = "/Payment/Success";
+                    window.location.href = "/Paypal/Success";
                 }).catch(error => alert(error.message));
             }
         }).render('#paypal-button-container');
@@ -336,6 +336,22 @@
         var  _3Amount, _6Amount, _12Amount;
         // Open modal using jQuery
         function Subscribe(subscriptionPlanId, plan, _3monthAmount, _6monthAmount, _12monthAmount) {
+            if (subscriptionPlanId == 0) {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Subscribe!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Payment/SubscribeToFree"
+                    }
+                });
+                return;
+            }
             $('#subscriptionModal').modal('show');
             $('#subscriptionSelect').val('3');
             selectedPlanId = subscriptionPlanId;
@@ -344,7 +360,7 @@
             _12Amount = _12monthAmount;
             $('#totalAmount').text(_3monthAmount);
             $('#payment-plan').text(plan);
-            $('#payment-plan-months').text(' - 1 Month');
+            $('#payment-plan-months').text(' - 3 Month');
         };
         $('#subscriptionSelect').on('change', function () {
             var months = $(this).val();

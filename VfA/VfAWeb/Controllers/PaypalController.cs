@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using VfA.DataAccess.Repository.IRepository;
 using VfA.Models;
 using VfA.Models.ViewModels;
 using VfAWeb.Utilities;
+using Microsoft.VisualBasic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace VfAWeb.Controllers
 {
@@ -11,9 +16,11 @@ namespace VfAWeb.Controllers
         private readonly PaypalClient _paypalClient;
         private readonly IUnitOfWork _unitOfWork;
         UserClaimsVM _user;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public PaypalController(IUnitOfWork unitOfWork, PaypalClient paypalClient, IUserClaimsService userClaimsService)
+        public PaypalController(SignInManager<ApplicationUser> signInManager, IUnitOfWork unitOfWork, PaypalClient paypalClient, IUserClaimsService userClaimsService)
         {
+            _signInManager = signInManager;
             _unitOfWork = unitOfWork;
             this._paypalClient = paypalClient;
             _user = userClaimsService.GetUserClaims();
@@ -46,12 +53,11 @@ namespace VfAWeb.Controllers
                 var lastOrderNumber = _unitOfWork.PaymentOrder.GetAll().OrderByDescending(x => x.OrderNumber).FirstOrDefault()?.OrderNumber;
                 lastOrderNumber++;
                 var orderNumber = lastOrderNumber ?? 1;
-                var amount = months == 1 ? (long)(subscriptionPlan.MonthlyAmount * 100) :
-                    months == 3 ? (long)(subscriptionPlan._3MonthAmount * 100) :
-                    months == 6 ? (long)(subscriptionPlan._6MonthAmount * 100) :
-                    (long)(subscriptionPlan._12MonthAmount * 100);
+                var amount = months == 3 ? (long)subscriptionPlan._3MonthAmount :
+                    months == 6 ? (long)subscriptionPlan._6MonthAmount :
+                    (long)subscriptionPlan._12MonthAmount;
                 // set the transaction price and currency
-                var price = amount.ToString() ;
+                var price = amount.ToString();
                 var currency = "USD";
 
                 // "reference" is the transaction key
@@ -89,7 +95,7 @@ namespace VfAWeb.Controllers
         {
             try
             {
-            var currentUserId = _user.Id;
+                var currentUserId = _user.Id;
                 var response = await _paypalClient.CaptureOrder(orderId);
 
                 var reference = Convert.ToUInt32(response.purchase_units[0].reference_id);
@@ -109,6 +115,7 @@ namespace VfAWeb.Controllers
                     };
                     _unitOfWork.PaymentHistory.Add(paymentHistory);
                     var currentUser = _unitOfWork.ApplicationUser.Get(x => x.Id == currentUserId);
+                    currentUser.Tenure = paymentOrder.Months;
                     currentUser.LastPaymentDate = DateTime.Now;
                     currentUser.NextPaymentDate = DateTime.Now.AddMonths(paymentOrder.Months);
                     currentUser.SubscribedPlanId = paymentOrder.SubscriptionPlanId;
@@ -117,6 +124,9 @@ namespace VfAWeb.Controllers
                     paymentOrder.Status = "Confirmed";
                     _unitOfWork.PaymentOrder.Update(paymentOrder);
                     _unitOfWork.Save();
+
+                    await _signInManager.SignInAsync(currentUser, true);
+
                 }
                 return Ok(response);
             }

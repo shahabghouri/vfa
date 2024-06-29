@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VfA.Models;
-
 public class CustomClaimsFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
 {
     private readonly UserManager<ApplicationUser> _userManager;

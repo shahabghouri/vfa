@@ -3,50 +3,6 @@
 @{
     ViewData["Title"] = "Register Member";
 }
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        var stateId = @Html.Raw(Model.Input.StateProvinceId);
-        $(document).ready(function () {
-            var isFormContinue = @Html.Raw((Model.IsFormContinue ?? false).ToString().ToLower());
-            if (isFormContinue) {
-                $("#formContainer").show();
-                $("#btnContainer").hide();
-                var country = $('#Input_CompanyCountryId').val();
-                loadStates(country);
-            }
-            $('#Input_Role').change(function () {
-                var selection = $('#Input_Role Option:Selected').text();
-                if (selection == 'Company') {
-                    $('#Input_CompanyId').show();
-                }
-                else {
-                    $('#Input_CompanyId').hide();
-                }
-            })
-        })
-        function loadStates(countryId) {
-            $.ajax({
-                url: '@Url.Action("GetStates", "StateProvince")',
-                type: 'GET',
-                data: { countryId: countryId },
-                success: function (data) {
-                    var stateSelect = $('select[name="Input.StateProvinceId"]');
-                    stateSelect.empty();
-                    stateSelect.append('<option value="">-Select-</option>');
-                    $.each(data, function (index, state) {
-                        stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
-                    });
-                    $('#Input_StateProvinceId').val(stateId);
-                },
-                error: function () {
-                    alert('Error retrieving states.');
-                }
-            });
-        }
-    </script>
-    <script src="~/js/beamember.js"></script>
-}
 <style>
     #container {
         max-width: 550px;
@@ -191,7 +147,7 @@
         </div>
         <div id="btnContainer" class="container mt-5 text-center">
             <button id="importerBtn" class="button-59 mx-2 border-0 shadow-sm rounded">Importer</button>
-            <button id="exporterBtn" class="button-59 mx-2 border-0 shadow-sm rounded">Exporter</button>
+            <button id="exporterBtn" class="button-59 mx-2 border-0 shadow-sm rounded">Exporter / Service Providers</button>
         </div>
         <div class="card-body p-4">
             <div class="row pt-3">
@@ -251,7 +207,7 @@
                                     </div>
                                     <span asp-validation-for="Input.Gender" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
+                                <div id="country-container" class="mb-3">
                                     <label asp-for="Input.CountryId" class="form-label">Country <span class="text-primary">*</span></label>
                                     <select asp-for="Input.CountryId" asp-items="@Model.Input.CountryList" class="form-select">
                                         <option value="">-Select-</option>
@@ -388,4 +344,60 @@
             </div>
         </div>
     </div>
+
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var countryId = @Html.Raw(Model.Input.CountryId);
+        var stateId = @Html.Raw(Model.Input.StateProvinceId);
+        var wilayaId = @Html.Raw(Model.Input.WilayaID);
+        $(document).ready(function () {
+            var isFormContinue = @Html.Raw((Model.IsFormContinue ?? false).ToString().ToLower());
+            if (isFormContinue) {
+                var isImporter = @Html.Raw((Model.Input.IsImporter).ToString().ToLower());
+                $("#formContainer").show();
+                //$("#btnContainer").hide();
+                var country = $('#Input_CompanyCountryId').val();
+                loadStates(country);
+                if (isImporter == true) {
+                    $("#importerBtn").click()
+                }
+                else {
+                    $("#exporterBtn").click();
+                    $('#Input_WilayaID').val(wilayaId);
+                }
+            }
+            $('#Input_Role').change(function () {
+                var selection = $('#Input_Role Option:Selected').text();
+                if (selection == 'Company') {
+                    $('#Input_CompanyId').show();
+                }
+                else {
+                    $('#Input_CompanyId').hide();
+                }
+            })
+        })
+        function loadStates(countryId) {
+            $.ajax({
+                url: '@Url.Action("GetStates", "StateProvince")',
+                type: 'GET',
+                data: { countryId: countryId },
+                success: function (data) {
+                    var stateSelect = $('select[name="Input.StateProvinceId"]');
+                    stateSelect.empty();
+                    stateSelect.append('<option value="">-Select-</option>');
+                    $.each(data, function (index, state) {
+                        stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
+                    });
+                    $('#Input_StateProvinceId').val(stateId);
+                },
+                error: function () {
+                    alert('Error retrieving states.');
+                }
+            });
+        }
+    </script>
+    <script src="~/js/beamember.js"></script>
+}
